@@ -16,10 +16,15 @@ public class button_SendToCan : MonoBehaviour
     private bool isClick; // 클릭 중인지 판단
     private bool iseventstart;
 
+    
+    Sprite thisButtonsSprite;
+
     void Start()
     {
+        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D;
         button_value = transform.root.GetComponent<buttonPushing>();
         iseventstart = false;
+        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f));
     }
 
     public void ButtonDown()
@@ -27,7 +32,9 @@ public class button_SendToCan : MonoBehaviour
         isClick = true;
 
         iseventstart = false;
-        button_value.get_Sprite = transform.GetChild(0).GetComponent<Image>().sprite;
+
+        button_value.get_Sprite = thisButtonsSprite;
+
         
     }
 
