@@ -15,6 +15,8 @@ public class BuildingSystem : MonoBehaviour
 
     private bool isRearrangeMode = false;
 
+    public int Money = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,29 +66,37 @@ public class BuildingSystem : MonoBehaviour
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-            
-            if (Input.mousePosition.y <= 1880)
+            if(Input.touchCount== 1 && clickPos.y <= 1880) 
             {
-                gg.transform.localPosition = clickPos;
-            }
-            yield return null;
-            if (Input.GetMouseButtonUp(0))
-            {
-                isCol = b.isnotCol;
-                if (!isCol)
+                Touch tt = Input.GetTouch(0);
+                if (tt.phase == TouchPhase.Moved)
                 {
-                    Debug.Log("위치 재지정 필요");
-
+                    gg.transform.localPosition = clickPos;
                 }
-                else if (isCol)
+                if (tt.phase == TouchPhase.Ended)
                 {
-                    if (Where == 1)
+                    isCol = b.isnotCol;
+                    if (!isCol)
                     {
-                        touchUp();
+                        Debug.Log("위치 재지정 필요");
+
                     }
-                    break;
+                    else if (isCol)
+                    {
+                        if (Where == 1)
+                        {
+                            touchUp();
+                        }
+                        break;
+                    }
                 }
             }
+            //if (Input.mousePosition.y <= 1880)
+            //{
+            //    gg.transform.localPosition = clickPos;
+            //}
+            yield return null;
+            
         }
     }
 }

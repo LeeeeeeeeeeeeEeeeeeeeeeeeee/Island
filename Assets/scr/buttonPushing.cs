@@ -32,6 +32,11 @@ public class buttonPushing : MonoBehaviour
         storeUi.SetActive(false);
         go = Instantiate(emptyBuilding);
         go.transform.SetParent(BuildingSystem.build_system.transform, true);
+        if(Input.touchCount > 0) 
+        { 
+            Touch tt = Input.GetTouch(0);
+            go.transform.position = tt.position;
+        }
         go.GetComponent<SpriteRenderer> ().sprite = get_Sprite;
         co = StartCoroutine(BuildingSystem.build_system.FollowMouse(go,1));
     }
