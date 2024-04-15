@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,15 +17,34 @@ public class button_SendToCan : MonoBehaviour
     private bool isClick; // 클릭 중인지 판단
     private bool iseventstart;
 
-    
+    TextMeshProUGUI HowMuch;
     Sprite thisButtonsSprite;
 
     void Start()
     {
+        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D;
         button_value = transform.root.GetComponent<buttonPushing>();
         iseventstart = false;
         thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f));
+
+        Debug.Log(tex);
+        
+        switch (this.name)
+        {
+            case "House":
+                HowMuch.text = "집 : " + BuildingSystem.build_system.MoneyValue["House"];
+                break;
+
+            case "Cafe":
+                HowMuch.text = "카페 : " + BuildingSystem.build_system.MoneyValue["Cafe"];
+                break;
+            case "Grocery":
+                HowMuch.text = "식료품점 : " + BuildingSystem.build_system.MoneyValue["Grocery"];
+                break;
+            default:
+                break;
+        }
     }
 
     public void ButtonDown()
@@ -71,7 +91,7 @@ public class button_SendToCan : MonoBehaviour
 
     private void eventStart()
     {
-        button_value.LetsConstructor();
+        button_value.LetsConstructor(this.gameObject.name);
     }
 
 

@@ -29,7 +29,6 @@ public class Cam_TouchOBJ : MonoBehaviour
             {
                 if(clickCol.tag == "store")
                 {
-                    Debug.Log("ui·Î ¼³Á¤");
                     store_Ui.SetActive(true);
                 }else if(clickCol.tag == "Building" && clickCol != null)
                 {
