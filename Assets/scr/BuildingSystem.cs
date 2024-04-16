@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -15,11 +17,39 @@ public class BuildingSystem : MonoBehaviour
 
     private bool isRearrangeMode = false;
 
+    public int Money = 0;
+    public TextMeshProUGUI MoneyText;
+
+    public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
+    {
+        { "House", 0 },
+        { "Cafe", 100 },
+        { "Grocery", 100 }
+    };
+
+
     // Start is called before the first frame update
     void Start()
     {
+        MoneyText.text = Money.ToString();
         build_system = this;
         Store_Obj = transform.GetChild(0).gameObject;
+    }
+
+    private float timer = 0f;
+    private float interval = 3f;
+
+    void Update()
+    {
+
+        MoneyText.text = Money.ToString();
+        timer += Time.deltaTime;
+        if (timer >= interval)
+        {
+            
+            Money += 30;
+            timer = 0f;
+        }
     }
 
     public void Rearrange()
@@ -29,6 +59,8 @@ public class BuildingSystem : MonoBehaviour
 
         if (isRearrangeMode == false)
         {
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
+            
             foreach (var item in p)
             {
                 item.RearrangeNow = true;
@@ -38,6 +70,8 @@ public class BuildingSystem : MonoBehaviour
 
         else if (isRearrangeMode == true)
         {
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
             bool[] arr = { };
             foreach (var item in p)
             {
@@ -64,29 +98,37 @@ public class BuildingSystem : MonoBehaviour
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-            
-            if (Input.mousePosition.y <= 1880)
+            if(Input.touchCount== 1 && clickPos.y <= 1880) 
             {
-                gg.transform.localPosition = clickPos;
-            }
-            yield return null;
-            if (Input.GetMouseButtonUp(0))
-            {
-                isCol = b.isnotCol;
-                if (!isCol)
+                Touch tt = Input.GetTouch(0);
+                if (tt.phase == TouchPhase.Moved)
                 {
-                    Debug.Log("위치 재지정 필요");
-
+                    gg.transform.localPosition = clickPos;
                 }
-                else if (isCol)
+                if (tt.phase == TouchPhase.Ended)
                 {
-                    if (Where == 1)
+                    isCol = b.isnotCol;
+                    if (!isCol)
                     {
-                        touchUp();
+                        Debug.Log("위치 재지정 필요");
+
                     }
-                    break;
+                    else if (isCol)
+                    {
+                        if (Where == 1)
+                        {
+                            touchUp();
+                        }
+                        break;
+                    }
                 }
             }
+            //if (Input.mousePosition.y <= 1880)
+            //{
+            //    gg.transform.localPosition = clickPos;
+            //}
+            yield return null;
+
         }
     }
 }

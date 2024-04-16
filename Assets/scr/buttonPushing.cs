@@ -26,12 +26,18 @@ public class buttonPushing : MonoBehaviour
         BuildingSystem.build_system.touchUp += OK_IConstructThere;
     }
 
-    public void LetsConstructor()
+    public void LetsConstructor(String BuildName)
     {
         storeObject.GetComponent<BoxCollider2D>().enabled = false;
         storeUi.SetActive(false);
         go = Instantiate(emptyBuilding);
+        go.name = BuildName;
         go.transform.SetParent(BuildingSystem.build_system.transform, true);
+        if(Input.touchCount > 0) 
+        { 
+            Touch tt = Input.GetTouch(0);
+            go.transform.position = tt.position;
+        }
         go.GetComponent<SpriteRenderer> ().sprite = get_Sprite;
         co = StartCoroutine(BuildingSystem.build_system.FollowMouse(go,1));
     }
