@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class button_SendToCan : MonoBehaviour
@@ -16,12 +17,21 @@ public class button_SendToCan : MonoBehaviour
     public float minClickTime = 1; // 최소 클릭시간
     private bool isClick; // 클릭 중인지 판단
     private bool iseventstart;
+    private int money;
 
     TextMeshProUGUI HowMuch;
     Sprite thisButtonsSprite;
+    EventTrigger myBtn;
+    Button mybtn_2;
+    Image myImage;
+
 
     void Start()
     {
+        myBtn= GetComponent<EventTrigger>();
+        mybtn_2= GetComponent<Button>();
+        myImage= GetComponent<Image>();
+        myBtn.enabled = false;
         HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D;
         button_value = transform.root.GetComponent<buttonPushing>();
@@ -33,11 +43,13 @@ public class button_SendToCan : MonoBehaviour
         switch (this.name)
         {
             case "House":
+                myBtn.enabled = true;
                 HowMuch.text = "집 : " + BuildingSystem.build_system.MoneyValue["House"];
                 break;
 
             case "Cafe":
                 HowMuch.text = "카페 : " + BuildingSystem.build_system.MoneyValue["Cafe"];
+                
                 break;
             case "Grocery":
                 HowMuch.text = "식료품점 : " + BuildingSystem.build_system.MoneyValue["Grocery"];
@@ -54,8 +66,6 @@ public class button_SendToCan : MonoBehaviour
         iseventstart = false;
 
         button_value.get_Sprite = thisButtonsSprite;
-
-        
     }
 
     // 버튼 클릭이 끝났을 때
@@ -63,10 +73,13 @@ public class button_SendToCan : MonoBehaviour
     {
         isClick = false;
         print(clickTime);
+
+        
     }
 
     private void Update()
     {
+        MoneyUpdate_Btn();
         // 클릭 중이라면
         if (isClick)
         {
@@ -75,7 +88,20 @@ public class button_SendToCan : MonoBehaviour
 
             if (clickTime >= minClickTime && iseventstart == false)
             {
-                print("특정 기능 수행");
+                switch (this.name)
+                {
+                    case "House":
+                        break;
+
+                    case "Cafe":
+                        BuildingSystem.build_system.Money -= 100;
+                        break;
+                    case "Grocery":
+                        BuildingSystem.build_system.Money -= 100;
+                        break;
+                    default:
+                        break;
+                }
                 eventStart();
                 ButtonUp();
                 iseventstart= true;
@@ -94,5 +120,47 @@ public class button_SendToCan : MonoBehaviour
         button_value.LetsConstructor(this.gameObject.name);
     }
 
+    private void MoneyUpdate_Btn()
+    {
+        money = BuildingSystem.build_system.Money;
+        ColorBlock Block = mybtn_2.colors;
+        
+        switch (this.name)
+        {
+            case "House":
+                break;
+
+            case "Cafe":
+                if(money >= 100)
+                {
+                    myBtn.enabled= true;
+                    Block.pressedColor = new Color(0.784f,0.784f,0.784f);
+                    mybtn_2.colors = Block;
+                }
+                else
+                {
+                    myBtn.enabled= false;
+                    Block.pressedColor = Color.red;
+                    mybtn_2.colors = Block;
+                }
+                break;
+            case "Grocery":
+                if (money >= 100)
+                {
+                    myBtn.enabled = true;
+                    Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                    mybtn_2.colors = Block;
+                }
+                else
+                {
+                    myBtn.enabled = false;
+                    Block.pressedColor = Color.red;
+                    mybtn_2.colors = Block;
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
 }

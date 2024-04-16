@@ -41,11 +41,13 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
+
+        MoneyText.text = Money.ToString();
         timer += Time.deltaTime;
         if (timer >= interval)
         {
+            
             Money += 30;
-            MoneyText.text = Money.ToString();
             timer = 0f;
         }
     }
