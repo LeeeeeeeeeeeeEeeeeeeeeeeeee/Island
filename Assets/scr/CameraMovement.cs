@@ -27,7 +27,9 @@ public class CameraMovement : MonoBehaviour
     {
         Speed = 0.2f - ((10 - Camera.main.orthographicSize) / 50);
 
-        
+        if(!BuildingSystem.build_system.isConstrutMode)
+        {
+            BuildingSystem.build_system.isCameraMode = true;
             if (Input.touchCount == 1) // 손가락 1개가 눌렸을 때
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) || EventSystem.current.IsPointerOverGameObject(0))
@@ -48,7 +50,7 @@ public class CameraMovement : MonoBehaviour
                     prePos = touch.position - touch.deltaPosition;
                 }
             }
-        
+
             if (Input.touchCount > 1) // 손가락 1개가 눌렸을 때
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) || EventSystem.current.IsPointerOverGameObject(0))
@@ -68,8 +70,10 @@ public class CameraMovement : MonoBehaviour
                     Camera.main.transform.Translate(movePos);
                     prePos = touch.position - touch.deltaPosition;
                 }
-            
-        }
+            }
+
+            BuildingSystem.build_system.isCameraMode = false;
+        }  
     }
     void FixedUpdate()
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - store
   - Building
+  - Animal
   layers:
   - Default
   - TransparentFX
