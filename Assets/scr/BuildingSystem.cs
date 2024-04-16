@@ -20,6 +20,8 @@ public class BuildingSystem : MonoBehaviour
     public int Money = 0;
     public TextMeshProUGUI MoneyText;
 
+    public bool Building_is_moving = false;
+
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
         { "House", 0 },
@@ -41,6 +43,7 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Building_is_moving);
 
         MoneyText.text = Money.ToString();
         timer += Time.deltaTime;
@@ -94,6 +97,7 @@ public class BuildingSystem : MonoBehaviour
         //int 2 = 건물재배치
         gg.TryGetComponent(out Building b);
         bool isCol;
+        Building_is_moving = true;
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -130,5 +134,7 @@ public class BuildingSystem : MonoBehaviour
             yield return null;
 
         }
+        Building_is_moving = false;
+
     }
 }
