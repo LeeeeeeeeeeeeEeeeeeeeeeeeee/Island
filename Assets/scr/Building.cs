@@ -9,12 +9,14 @@ public class Building : MonoBehaviour
 
     private SpriteRenderer mySprite;
     private BoxCollider2D myCollider;
+    private Coroutine coco = null;
 
     private void Start()
     {
         isnotCol = true;
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
+        BuildingSystem.build_system.FollowStart += TurnStart;
 
         switch (this.name)
         {
@@ -51,5 +53,37 @@ public class Building : MonoBehaviour
         StartCoroutine(BuildingSystem.build_system.FollowMouse(this.gameObject,2));
     }
 
+    public void TurnStart()
+    {
+        if (coco == null)
+        {
+            coco = StartCoroutine(TurnMouseFunc());
+        }
+        else if (coco != null)
+        {
+            StopCoroutine(coco);
+            coco = null;
+        }
+    }
+
+    private IEnumerator TurnMouseFunc()
+    {
+        while (true)
+        {
+
+            Debug.Log("ds");
+            if (Input.GetKey(KeyCode.Space) || Input.touchCount > 1) 
+            { 
+                if (mySprite.flipX == true)
+                {
+                    mySprite.flipX = false;
+                }else if(mySprite.flipX == false)
+                {
+                    mySprite.flipX = true;
+                }    
+            }
+            yield return null;  
+        }
+    }
 }
 

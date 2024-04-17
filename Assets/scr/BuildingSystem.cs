@@ -12,6 +12,7 @@ public class BuildingSystem : MonoBehaviour
     public static BuildingSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
+    public event Action FollowStart;
 
     [HideInInspector] public GameObject Store_Obj;
 
@@ -43,8 +44,6 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Building_is_moving);
-
         MoneyText.text = Money.ToString();
         timer += Time.deltaTime;
         if (timer >= interval)
@@ -98,6 +97,10 @@ public class BuildingSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         bool isCol;
         Building_is_moving = true;
+        if (Where == 2)
+        {
+            FollowStart();
+        }
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -128,13 +131,16 @@ public class BuildingSystem : MonoBehaviour
                 }
             }
             //if (Input.mousePosition.y <= 1880)
-            //{
+            //{ gj
             //    gg.transform.localPosition = clickPos;
             //}
             yield return null;
 
         }
         Building_is_moving = false;
-
+        if (Where == 2)
+        {
+            FollowStart();
+        }
     }
 }
