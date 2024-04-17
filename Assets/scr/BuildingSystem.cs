@@ -15,10 +15,14 @@ public class BuildingSystem : MonoBehaviour
 
     [HideInInspector] public GameObject Store_Obj;
 
+    public bool isCameraMode = false;
+    public bool isConstrutMode = false;
     private bool isRearrangeMode = false;
 
     public int Money = 0;
+    public int MoneyOutput = 0;
     public TextMeshProUGUI MoneyText;
+    public TextMeshProUGUI MoneyText2;
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
@@ -41,13 +45,13 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-
         MoneyText.text = Money.ToString();
+        MoneyText2.text = Money.ToString();
+
         timer += Time.deltaTime;
         if (timer >= interval)
         {
-            
-            Money += 30;
+            Money += MoneyOutput;
             timer = 0f;
         }
     }
@@ -94,6 +98,7 @@ public class BuildingSystem : MonoBehaviour
         //int 2 = 건물재배치
         gg.TryGetComponent(out Building b);
         bool isCol;
+        isConstrutMode = true;
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -130,5 +135,6 @@ public class BuildingSystem : MonoBehaviour
             yield return null;
 
         }
+        isConstrutMode = false;
     }
 }

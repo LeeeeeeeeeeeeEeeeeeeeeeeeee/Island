@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cam_TouchOBJ : MonoBehaviour
 {
+    public GameObject Particle;
+
     private GameObject store_Ui;
 
     // Start is called before the first frame update
@@ -25,17 +27,27 @@ public class Cam_TouchOBJ : MonoBehaviour
             Collider2D clickCol = Physics2D.OverlapPoint(clickPos);
             #endregion
 
-            if (toto.phase == TouchPhase.Began && clickCol != null && Input.mousePosition.y <= 1880)
+            if (BuildingSystem.build_system.isCameraMode == false)
             {
-                if(clickCol.tag == "store")
+                if (toto.phase == TouchPhase.Began && clickCol != null && Input.mousePosition.y <= 1880)
                 {
-                    store_Ui.SetActive(true);
-                }else if(clickCol.tag == "Building" && clickCol != null)
-                {
-                    if(clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow ==true)
+                    if (clickCol.tag == "store")
                     {
-                        Debug.Log("재배치모드");
-                        bb.BuildingMove();
+                        store_Ui.SetActive(true);
+                    }
+                    else if (clickCol.tag == "Building" && clickCol != null)
+                    {
+                        if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                        {
+                            Debug.Log("재배치모드");
+                            bb.BuildingMove();
+                        }
+                    }
+                    else if(clickCol.tag == "Animal")
+                    {
+                        Instantiate(Particle, clickCol.transform.position, Particle.transform.rotation);
+
+                        BuildingSystem.build_system.Money += 1;
                     }
                 }
             }

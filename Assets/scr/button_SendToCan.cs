@@ -44,15 +44,15 @@ public class button_SendToCan : MonoBehaviour
         {
             case "House":
                 myBtn.enabled = true;
-                HowMuch.text = "집 : " + BuildingSystem.build_system.MoneyValue["House"];
+                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["House"].ToString();
                 break;
 
             case "Cafe":
-                HowMuch.text = "카페 : " + BuildingSystem.build_system.MoneyValue["Cafe"];
+                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Cafe"].ToString();
                 
                 break;
             case "Grocery":
-                HowMuch.text = "식료품점 : " + BuildingSystem.build_system.MoneyValue["Grocery"];
+                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Grocery"].ToString();
                 break;
             default:
                 break;
