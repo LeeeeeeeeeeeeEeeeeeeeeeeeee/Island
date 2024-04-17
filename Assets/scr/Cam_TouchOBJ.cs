@@ -46,6 +46,8 @@ public class Cam_TouchOBJ : MonoBehaviour
                     else if(clickCol.tag == "Animal")
                     {
                         Instantiate(Particle, clickCol.transform.position, Particle.transform.rotation);
+
+                        BuildingSystem.build_system.Money += 1;
                     }
                 }
             }

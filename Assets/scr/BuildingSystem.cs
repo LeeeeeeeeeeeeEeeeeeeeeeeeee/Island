@@ -20,6 +20,7 @@ public class BuildingSystem : MonoBehaviour
     private bool isRearrangeMode = false;
 
     public int Money = 0;
+    public int MoneyOutput = 0;
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
 
@@ -50,6 +51,7 @@ public class BuildingSystem : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= interval)
         {
+            Money += MoneyOutput;
             timer = 0f;
         }
     }

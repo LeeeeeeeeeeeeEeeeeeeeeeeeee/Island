@@ -34,6 +34,28 @@ public class Building : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (gameObject.tag == "Building")
+        {
+            switch (this.name)
+            {
+                case "House":
+                    BuildingSystem.build_system.MoneyOutput = 30;
+                    break;
+
+                case "Cafe":
+                    BuildingSystem.build_system.MoneyOutput = 50;
+                    break;
+                case "Grocery":
+                    BuildingSystem.build_system.MoneyOutput = 100;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         isnotCol = true;
