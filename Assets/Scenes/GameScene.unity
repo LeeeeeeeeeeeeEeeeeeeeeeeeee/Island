@@ -2449,6 +2449,7 @@ MonoBehaviour:
   isCameraMode: 0
   isConstrutMode: 0
   Money: 0
+  MoneyOutput: 0
   MoneyText: {fileID: 1198879067}
   MoneyText2: {fileID: 549537509}
 --- !u!61 &234263870
@@ -2458,7 +2459,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234263867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
