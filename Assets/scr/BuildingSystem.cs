@@ -12,17 +12,21 @@ public class BuildingSystem : MonoBehaviour
     public static BuildingSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
+    public event Action touchUp2;
+
+    public GameObject Building_BtnObj;
 
     [HideInInspector] public GameObject Store_Obj;
 
     public bool isCameraMode = false;
     public bool isConstrutMode = false;
-    private bool isRearrangeMode = false;
+    public bool isRearrangeMode = false;
 
     public int Money = 0;
     public int MoneyOutput = 0;
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
+    public GameObject CurrentSelectedBuilding;
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
@@ -47,6 +51,7 @@ public class BuildingSystem : MonoBehaviour
     {
         MoneyText.text = Money.ToString();
         MoneyText2.text = Money.ToString();
+
 
         timer += Time.deltaTime;
         if (timer >= interval)
@@ -99,11 +104,12 @@ public class BuildingSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         bool isCol;
         isConstrutMode = true;
+        CurrentSelectedBuilding = gg;
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-            if(Input.touchCount== 1 && clickPos.y <= 1880) 
+            if(Input.touchCount== 1) 
             {
                 Touch tt = Input.GetTouch(0);
                 if (tt.phase == TouchPhase.Moved)
@@ -124,17 +130,16 @@ public class BuildingSystem : MonoBehaviour
                         {
                             touchUp();
                         }
-                        break;
+                        else if (Where == 2)
+                        {
+                            touchUp2();
+                        }
                     }
                 }
             }
-            //if (Input.mousePosition.y <= 1880)
-            //{
-            //    gg.transform.localPosition = clickPos;
-            //}
             yield return null;
 
         }
-        isConstrutMode = false;
+        //isConstrutMode = false;
     }
 }

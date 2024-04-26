@@ -16,6 +16,7 @@ public class buttonPushing : MonoBehaviour
     
     
     Coroutine co;
+    Coroutine co2;
     GameObject go;
     public bool isColliding;
 
@@ -34,7 +35,7 @@ public class buttonPushing : MonoBehaviour
         go.name = BuildName;
         go.transform.SetParent(BuildingSystem.build_system.transform, true);
         if(Input.touchCount > 0) 
-        { 
+        {
             Touch tt = Input.GetTouch(0);
             go.transform.position = tt.position;
         }
@@ -45,12 +46,95 @@ public class buttonPushing : MonoBehaviour
     public void OK_IConstructThere()
     {
         go.tag = "Building";
-        StopCoroutine(co);
-        co= null;
-        go = null;
-        get_Sprite = null;
+
+        BuildingSystem.build_system.Building_BtnObj.SetActive(true);
+        co2 = StartCoroutine(FollowBuilding_btn());
+    }
+
+    private IEnumerator FollowBuilding_btn()
+    {
+        Transform btnObj = BuildingSystem.build_system.Building_BtnObj.transform;
+        Transform CrtBuilding = BuildingSystem.build_system.CurrentSelectedBuilding.transform;
+        while (true)
+        {
+            Debug.Log("SDa");
+            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
+            yield return null;
+        }
+    }
+
+    public void btn_OK()
+    {
+        //StopCoroutine(co);
+        //StopCoroutine(co2);
+       
+
+        if(BuildingSystem.build_system.isRearrangeMode == true)
+        {
+            BuildingSystem.build_system.CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
+        }
+        else
+        {
+            StopAllCoroutines();
+            co = null;
+            co2 = null;
+
+            go = null;
+            get_Sprite = null;
+        }
+        
         storeObject.GetComponent<BoxCollider2D>().enabled = true;
+        
+        
+        BuildingSystem.build_system.isConstrutMode= false;
+
+        BuildingSystem.build_system.Building_BtnObj.SetActive(false);
+    }
+
+    public void btn_Flip()
+    {
+        GameObject g = BuildingSystem.build_system.CurrentSelectedBuilding;
+        if(g.TryGetComponent(out SpriteRenderer ren))
+        {
+            if(ren.flipX == true)
+            {
+                ren.flipX = false;
+            }else if(ren.flipX==false)
+            {
+                ren.flipX = true; 
+            }
+        }
+    }
+
+    public void btn_Cancle()
+    {
+        Destroy(BuildingSystem.build_system.CurrentSelectedBuilding);
+        //StopCoroutine(co);
+        //StopCoroutine(co2);
+        if (BuildingSystem.build_system.isRearrangeMode == true)
+        {
+            BuildingSystem.build_system.CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
+        }
+        else
+        {
+            StopAllCoroutines();
+            co = null;
+            co2 = null;
+
+            go = null;
+            get_Sprite = null;
+        }
+
+        storeObject.GetComponent<BoxCollider2D>().enabled = true;
+        
+        BuildingSystem.build_system.isConstrutMode = false;
+
+
+        BuildingSystem.build_system.Building_BtnObj.SetActive(false);
 
     }
+
+
+
 
 }
