@@ -7,6 +7,7 @@ TagManager:
   - store
   - Building
   - Animal
+  - Cook
   layers:
   - Default
   - TransparentFX

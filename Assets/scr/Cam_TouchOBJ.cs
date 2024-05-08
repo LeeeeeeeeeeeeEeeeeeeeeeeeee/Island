@@ -39,7 +39,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
                         {
-                            Debug.Log("Àç¹èÄ¡¸ðµå");
+                            Debug.Log("ì„¤ì¹˜");
                             bb.BuildingMove();
                         }
                     }
@@ -48,6 +48,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                         Instantiate(Particle, clickCol.transform.position, Particle.transform.rotation);
 
                         BuildingSystem.build_system.Money += 1;
+                    }
+                    else if (clickCol.tag == "Cook")
+                    {
+
                     }
                 }
             }
