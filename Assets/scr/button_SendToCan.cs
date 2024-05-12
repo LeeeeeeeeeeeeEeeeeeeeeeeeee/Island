@@ -19,7 +19,7 @@ public class button_SendToCan : MonoBehaviour
     private bool iseventstart;
     private int money;
 
-    TextMeshProUGUI HowMuch;
+    public TextMeshProUGUI HowMuch;
     Sprite thisButtonsSprite;
     EventTrigger myBtn;
     Button mybtn_2;
@@ -38,24 +38,25 @@ public class button_SendToCan : MonoBehaviour
         iseventstart = false;
         thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //현재 건물 스프라이트 받아오기2
         
-        switch (this.name)
-        {
-            case "House":
-                myBtn.enabled = true;
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["House"].ToString();
-                break;
+        //switch (this.name)
+        //{
+        //    case "House":
+        //        myBtn.enabled = true;
+        //        //HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["House"].ToString();
+        //        break;
 
-            case "Cafe":
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Cafe"].ToString();
+        //    case "Cafe":
+        //        //HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Cafe"].ToString();
                 
-                break;
-            case "Grocery":
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Grocery"].ToString();
-                break;
-            default:
-                break;
-                //가격표 입력
-        }
+        //        break;
+        //    case "Grocery":
+        //        // HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Grocery"].ToString();
+        //        break;
+        //    default:
+        //        break;
+        //        //가격표 입력
+        //          재사용해야함
+        //}
     }
 
     public void ButtonDown()

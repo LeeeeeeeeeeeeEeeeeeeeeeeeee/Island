@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -38,6 +39,8 @@ public class BuildingSystem : MonoBehaviour
     };
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,9 +49,16 @@ public class BuildingSystem : MonoBehaviour
         Store_Obj = transform.GetChild(0).gameObject;
         touchUp += OK_IConstructThere;
 
-        ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetChild(0).GetChild(0).GetComponentsInChildren<button_SendToCan>());
-       
-
+        ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
+        #region 가격표 표기
+        Invoke("_Set", 2f);
+        #endregion
+    }
+    public void _Set()
+    {
+        ButtonList[0].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
+        ButtonList[1].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
+        ButtonList[2].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
     }
 
     private float timer = 0f;
