@@ -23,22 +23,20 @@ public class button_SendToCan : MonoBehaviour
     Sprite thisButtonsSprite;
     EventTrigger myBtn;
     Button mybtn_2;
-    Image myImage;
+    //Image myImage;
 
 
     void Start()
     {
-        myBtn= GetComponent<EventTrigger>();
-        mybtn_2= GetComponent<Button>();
-        myImage= GetComponent<Image>();
+        //button_value = transform.root.GetComponent<buttonPushing>();   추후 삭제 가능
+        myBtn = GetComponent<EventTrigger>(); //real버튼
+        mybtn_2= GetComponent<Button>(); // 버튼 색상 변경을 위한 컴포넌트
         myBtn.enabled = false;
-        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D;
-        button_value = transform.root.GetComponent<buttonPushing>();
+        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //가격표
+        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D; //현재 건물 스프라이트 받아오기
+        
         iseventstart = false;
-        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f));
-
-        Debug.Log(tex);
+        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //현재 건물 스프라이트 받아오기2
         
         switch (this.name)
         {
@@ -56,6 +54,7 @@ public class button_SendToCan : MonoBehaviour
                 break;
             default:
                 break;
+                //가격표 입력
         }
     }
 
@@ -65,7 +64,6 @@ public class button_SendToCan : MonoBehaviour
 
         iseventstart = false;
 
-        button_value.get_Sprite = thisButtonsSprite;
     }
 
     // 버튼 클릭이 끝났을 때
@@ -101,6 +99,7 @@ public class button_SendToCan : MonoBehaviour
                         break;
                     default:
                         break;
+                        //실질적 구매창
                 }
                 eventStart();
                 ButtonUp();
@@ -117,7 +116,8 @@ public class button_SendToCan : MonoBehaviour
 
     private void eventStart()
     {
-        button_value.LetsConstructor(this.gameObject.name);
+        BuildingSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
+
     }
 
     private void MoneyUpdate_Btn()
@@ -159,7 +159,7 @@ public class button_SendToCan : MonoBehaviour
                 }
                 break;
             default:
-                break;
+                break; //구매 불가시 색상변경 코드
         }
     }
 

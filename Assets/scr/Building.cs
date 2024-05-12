@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Building : Building_basicSCR
 {
-    public bool isnotCol;
-    public bool RearrangeNow = false;
+
 
     private SpriteRenderer mySprite;
     private BoxCollider2D myCollider;
@@ -15,6 +14,8 @@ public class Building : MonoBehaviour
         isnotCol = true;
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
+
+        WhoAmI("House");
 
         switch (this.name)
         {
@@ -41,7 +42,7 @@ public class Building : MonoBehaviour
             switch (this.name)
             {
                 case "House":
-                    BuildingSystem.build_system.MoneyOutput = 30;
+                    //BuildingSystem.build_system.MoneyOutput = 30;
                     break;
 
                 case "Cafe":
@@ -72,6 +73,6 @@ public class Building : MonoBehaviour
     {
         StartCoroutine(BuildingSystem.build_system.FollowMouse(this.gameObject,2));
     }
-
+    
 }
 
