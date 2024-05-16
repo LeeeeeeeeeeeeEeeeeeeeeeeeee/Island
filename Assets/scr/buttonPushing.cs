@@ -56,5 +56,4 @@ public class buttonPushing : MonoBehaviour
     //    storeObject.GetComponent<BoxCollider2D>().enabled = true;
 
     //}
-
 }

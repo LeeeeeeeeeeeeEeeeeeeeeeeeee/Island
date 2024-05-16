@@ -50,16 +50,17 @@ public class BuildingSystem : MonoBehaviour
         touchUp += OK_IConstructThere;
 
         ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
-        #region 가격표 표기
-        Invoke("_Set", 2f);
-        #endregion
+
     }
-    public void _Set()
-    {
-        ButtonList[0].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
-        ButtonList[1].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
-        ButtonList[2].HowMuch.text = "  <sprite=7> " + MoneyValue["House"].ToString();
-    }
+    //public void Pricetag()
+    //{
+    //    for (int i = 0; i < ButtonList.Count; i++)
+    //    {
+    //        ButtonList[i].HowMuch.text = "  <sprite=7> " + MoneyValue.ElementAt(i).ToString();
+    //    }
+    //    //ButtonList[1].HowMuch.text = "  <sprite=7> " + MoneyValue["Cafe"].ToString();
+    //    //ButtonList[2].HowMuch.text = "  <sprite=7> " + MoneyValue["Grocery"].ToString();
+    //}
 
     private float timer = 0f;
     private float interval = 3f;

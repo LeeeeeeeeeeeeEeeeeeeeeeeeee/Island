@@ -11,6 +11,7 @@ public class TimeManager : MonoBehaviour
         DateTime startTime = Convert.ToDateTime(timeStr);
 
         double offlineTime = (DateTime.Now - startTime).TotalMinutes;
+        Debug.Log(DateTime.Now - startTime);
         Debug.Log("시작" + offlineTime);
     }
 

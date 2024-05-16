@@ -2455,6 +2455,8 @@ MonoBehaviour:
   MoneyOutput: 0
   MoneyText: {fileID: 1198879067}
   MoneyText2: {fileID: 549537509}
+  ButtonList: []
+  emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
 --- !u!61 &234263870
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2498,7 +2500,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.0492144, y: 1.8992081}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &253960746
 GameObject:
@@ -14326,10 +14328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128b8b0f318f7314684a8d83549e706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  get_Sprite: {fileID: 0}
-  emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
-  RearrangeExitbtn: {fileID: 902514126}
-  isColliding: 0
 --- !u!1 &1389325304
 GameObject:
   m_ObjectHideFlags: 0
@@ -14679,6 +14677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minClickTime: 1
+  HowMuch: {fileID: 0}
 --- !u!114 &1411922640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18496,6 +18495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minClickTime: 1
+  HowMuch: {fileID: 0}
 --- !u!114 &1722313877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19627,6 +19627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minClickTime: 1
+  HowMuch: {fileID: 0}
 --- !u!1 &1797734229
 GameObject:
   m_ObjectHideFlags: 0

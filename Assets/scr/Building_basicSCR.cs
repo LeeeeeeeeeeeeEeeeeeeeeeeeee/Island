@@ -8,8 +8,8 @@ public abstract class Building_basicSCR : MonoBehaviour
     public bool isnotCol;
     public bool RearrangeNow = false;
 
-    //public SpriteRenderer mySprite;
-    //public BoxCollider2D myCollider;
+    public SpriteRenderer mySprite;
+    public BoxCollider2D myCollider;
 
     public void WhoAmI(string name)
     {
@@ -20,9 +20,11 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "Cafe":
+                gameObject.AddComponent<Cafe>();
                 break;
 
             case "Grocery":
+                gameObject.AddComponent<Grocery>();
                 break;
 
             default:
