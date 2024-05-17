@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Building_basicSCR : MonoBehaviour
 {
-    public BuildingSystem _System = BuildingSystem.build_system;
+    public ArchitectureSystem _System = ArchitectureSystem.build_system;
     public bool isnotCol;
     public bool RearrangeNow = false;
 

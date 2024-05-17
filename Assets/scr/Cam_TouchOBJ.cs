@@ -11,7 +11,7 @@ public class Cam_TouchOBJ : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        store_Ui = BuildingSystem.build_system.Store_Ui;
+        store_Ui = ArchitectureSystem.build_system.Store_Ui;
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class Cam_TouchOBJ : MonoBehaviour
             Collider2D clickCol = Physics2D.OverlapPoint(clickPos);
             #endregion
 
-            if (BuildingSystem.build_system.isCameraMode == false)
+            if (ArchitectureSystem.build_system.isCameraMode == false)
             {
                 if (toto.phase == TouchPhase.Began && clickCol != null && Input.mousePosition.y <= 1880)
                 {
@@ -47,7 +47,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         Instantiate(Particle, clickCol.transform.position, Particle.transform.rotation);
 
-                        BuildingSystem.build_system.Money += 1;
+                        ArchitectureSystem.build_system.Money += 1;
                     }
                     else if (clickCol.tag == "Cook")
                     {

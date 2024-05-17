@@ -13,6 +13,6 @@ public class Cafe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BuildingSystem.build_system.MoneyOutput = 50;
+        ArchitectureSystem.build_system.MoneyOutput = 50;
     }
 }

@@ -13,6 +13,6 @@ public class Grocery : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BuildingSystem.build_system.MoneyOutput = 100;
+        ArchitectureSystem.build_system.MoneyOutput = 100;
     }
 }

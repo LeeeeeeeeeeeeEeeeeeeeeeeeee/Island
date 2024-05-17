@@ -64,7 +64,7 @@ public class button_SendToCan : MonoBehaviour
     private void Update()
     {
         SwitchSyntaxBundle("ButtonUpdate");
-        money = BuildingSystem.build_system.Money;
+        money = ArchitectureSystem.build_system.Money;
         // 클릭 중이라면
 
         if (isClick)
@@ -90,7 +90,7 @@ public class button_SendToCan : MonoBehaviour
 
     private void eventStart()
     {
-        BuildingSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
+        ArchitectureSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
     }
 
     //private void MoneyUpdate_Btn()더미데이터. 삭제가능
@@ -158,7 +158,7 @@ public class button_SendToCan : MonoBehaviour
                 if(ForWhatValue == 1)
                 {
                     myBtn.enabled = true;
-                    HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["House"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["House"].ToString();
                 }
                 else if(ForWhatValue == 2)
                 {
@@ -173,11 +173,11 @@ public class button_SendToCan : MonoBehaviour
             case "Cafe":
                 if (ForWhatValue == 1)
                 {
-                    HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Cafe"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Cafe"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {
-                    BuildingSystem.build_system.Money -= 100;
+                    ArchitectureSystem.build_system.Money -= 100;
                 }
                 else if (ForWhatValue == 3)
                 {
@@ -199,11 +199,11 @@ public class button_SendToCan : MonoBehaviour
             case "Grocery":
                 if (ForWhatValue == 1)
                 {
-                    HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Grocery"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Grocery"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {
-                    BuildingSystem.build_system.Money -= 100;
+                    ArchitectureSystem.build_system.Money -= 100;
                 }
                 else if (ForWhatValue == 3)
                 {

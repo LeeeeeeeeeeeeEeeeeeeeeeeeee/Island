@@ -8,10 +8,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class BuildingSystem : MonoBehaviour
+public class ArchitectureSystem : MonoBehaviour
 {
     //건물 설치를 위한 스크립트
-    public static BuildingSystem build_system;
+    public static ArchitectureSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
 
@@ -52,15 +52,6 @@ public class BuildingSystem : MonoBehaviour
         ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
 
     }
-    //public void Pricetag()
-    //{
-    //    for (int i = 0; i < ButtonList.Count; i++)
-    //    {
-    //        ButtonList[i].HowMuch.text = "  <sprite=7> " + MoneyValue.ElementAt(i).ToString();
-    //    }
-    //    //ButtonList[1].HowMuch.text = "  <sprite=7> " + MoneyValue["Cafe"].ToString();
-    //    //ButtonList[2].HowMuch.text = "  <sprite=7> " + MoneyValue["Grocery"].ToString();
-    //}
 
     private float timer = 0f;
     private float interval = 3f;
