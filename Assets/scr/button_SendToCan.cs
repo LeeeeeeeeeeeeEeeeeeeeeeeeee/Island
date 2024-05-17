@@ -71,10 +71,7 @@ public class button_SendToCan : MonoBehaviour
     // 버튼 클릭이 끝났을 때
     public void ButtonUp()
     {
-        isClick = false;
-        print(clickTime);
-
-        
+        isClick = false;        
     }
 
     private void Update()
