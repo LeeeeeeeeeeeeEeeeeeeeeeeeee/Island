@@ -10,14 +10,11 @@ public class Building : MonoBehaviour
     private SpriteRenderer mySprite;
     private BoxCollider2D myCollider;
 
-    public Coroutine co;
-
     private void Start()
     {
         isnotCol = true;
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
-        BuildingSystem.build_system.touchUp2 += btn_active;
 
         switch (this.name)
         {
@@ -73,27 +70,8 @@ public class Building : MonoBehaviour
 
     public void BuildingMove()
     {
-        co = StartCoroutine(BuildingSystem.build_system.FollowMouse(this.gameObject,2));
+        StartCoroutine(BuildingSystem.build_system.FollowMouse(this.gameObject,2));
     }
-
-    private void btn_active()
-    {
-        BuildingSystem.build_system.Building_BtnObj.SetActive(true);
-        StartCoroutine(FollowBuilding_btn());
-    }
-
-    private IEnumerator FollowBuilding_btn()
-    {
-        Transform btnObj = BuildingSystem.build_system.Building_BtnObj.transform;
-        Transform CrtBuilding = BuildingSystem.build_system.CurrentSelectedBuilding.transform;
-        while (true)
-        {
-            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
-            yield return null;
-        }
-    }
-
-
 
 }
 
