@@ -6,6 +6,8 @@ public class Cam_TouchOBJ : MonoBehaviour
 {
     public GameObject Particle;
 
+    public GameObject cook_Ui;
+
     private GameObject store_Ui;
 
     // Start is called before the first frame update
@@ -51,7 +53,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     }
                     else if (clickCol.tag == "Cook")
                     {
-
+                        cook_Ui.SetActive(true);
                     }
                 }
             }
