@@ -19,44 +19,31 @@ public class button_SendToCan : MonoBehaviour
     private bool iseventstart;
     private int money;
 
-    TextMeshProUGUI HowMuch;
+    public TextMeshProUGUI HowMuch;
     Sprite thisButtonsSprite;
     EventTrigger myBtn;
     Button mybtn_2;
-    Image myImage;
+    readonly Dictionary<string, int> Value = new Dictionary<string, int>()
+    {
+        { "PriceTag", 1 },
+        { "Purchase", 2 },
+        { "ButtonUpdate", 3 }
+    };
 
 
     void Start()
     {
-        myBtn= GetComponent<EventTrigger>();
-        mybtn_2= GetComponent<Button>();
-        myImage= GetComponent<Image>();
+        //button_value = transform.root.GetComponent<buttonPushing>();   추후 삭제 가능
+        myBtn = GetComponent<EventTrigger>(); //real버튼
+        mybtn_2= GetComponent<Button>(); // 버튼 색상 변경을 위한 컴포넌트
         myBtn.enabled = false;
-        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D;
-        button_value = transform.root.GetComponent<buttonPushing>();
-        iseventstart = false;
-        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f));
-
-        Debug.Log(tex);
-        
-        switch (this.name)
-        {
-            case "House":
-                myBtn.enabled = true;
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["House"].ToString();
-                break;
-
-            case "Cafe":
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Cafe"].ToString();
+        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //가격표
+        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D; //현재 건물 스프라이트 받아오기
                 
-                break;
-            case "Grocery":
-                HowMuch.text = "  <sprite=7> " + BuildingSystem.build_system.MoneyValue["Grocery"].ToString();
-                break;
-            default:
-                break;
-        }
+        iseventstart = false;
+        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //현재 건물 스프라이트 받아오기2
+        SwitchSyntaxBundle("PriceTag");
+
     }
 
     public void ButtonDown()
@@ -64,8 +51,6 @@ public class button_SendToCan : MonoBehaviour
         isClick = true;
 
         iseventstart = false;
-
-        button_value.get_Sprite = thisButtonsSprite;
     }
 
     // 버튼 클릭이 끝났을 때
@@ -74,13 +59,14 @@ public class button_SendToCan : MonoBehaviour
         isClick = false;
         print(clickTime);
 
-        
     }
 
     private void Update()
     {
-        MoneyUpdate_Btn();
+        SwitchSyntaxBundle("ButtonUpdate");
+        money = ArchitectureSystem.build_system.Money;
         // 클릭 중이라면
+
         if (isClick)
         {
             // 클릭시간 측정
@@ -88,20 +74,7 @@ public class button_SendToCan : MonoBehaviour
 
             if (clickTime >= minClickTime && iseventstart == false)
             {
-                switch (this.name)
-                {
-                    case "House":
-                        break;
-
-                    case "Cafe":
-                        BuildingSystem.build_system.Money -= 100;
-                        break;
-                    case "Grocery":
-                        BuildingSystem.build_system.Money -= 100;
-                        break;
-                    default:
-                        break;
-                }
+                SwitchSyntaxBundle("Purchase");
                 eventStart();
                 ButtonUp();
                 iseventstart= true;
@@ -117,49 +90,140 @@ public class button_SendToCan : MonoBehaviour
 
     private void eventStart()
     {
-        button_value.LetsConstructor(this.gameObject.name);
+        ArchitectureSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
     }
 
-    private void MoneyUpdate_Btn()
+    //private void MoneyUpdate_Btn()더미데이터. 삭제가능
+    //{  
+
+    //    ColorBlock Block = mybtn_2.colors;
+
+    //    switch (this.name)
+    //    {
+    //        case "House":
+    //            break;
+
+    //        case "Cafe":
+    //            if(money >= 100)
+    //            {
+    //                myBtn.enabled= true;
+    //                Block.pressedColor = new Color(0.784f,0.784f,0.784f);
+    //                mybtn_2.colors = Block;
+    //            }
+    //            else
+    //            {
+    //                myBtn.enabled= false;
+    //                Block.pressedColor = Color.red;
+    //                mybtn_2.colors = Block;
+    //            }
+    //            break;
+
+    //        case "Grocery":
+    //            if (money >= 100)
+    //            {
+    //                myBtn.enabled = true;
+    //                Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+    //                mybtn_2.colors = Block;
+    //            }
+    //            else
+    //            {
+    //                myBtn.enabled = false;
+    //                Block.pressedColor = Color.red;
+    //                mybtn_2.colors = Block;
+    //            }
+    //            break;
+    //        default:
+    //            break; //구매 불가시 색상변경 코드
+    //    }
+    //}
+
+    private void SwitchSyntaxBundle(string ForWhat)
     {
-        money = BuildingSystem.build_system.Money;
+        int ForWhatValue = Value[ForWhat];
         ColorBlock Block = mybtn_2.colors;
-        
+
+        /*Switch구문 묶음 함수
+         * 
+        딕셔너리 'Value' 사용
+        함수 선언하고 사용할 기능을 매개변수로 전달
+        Switch구문 안에서 if를 사용해 기능 구별
+
+        ***건물 추가 시 실질적으로 추가해야 하는 곳
+        */
+
         switch (this.name)
         {
+
             case "House":
+                if(ForWhatValue == 1)
+                {
+                    myBtn.enabled = true;
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["House"].ToString();
+                }
+                else if(ForWhatValue == 2)
+                {
+
+                }
+                else if(ForWhatValue == 3)
+                {
+
+                }
                 break;
 
             case "Cafe":
-                if(money >= 100)
+                if (ForWhatValue == 1)
                 {
-                    myBtn.enabled= true;
-                    Block.pressedColor = new Color(0.784f,0.784f,0.784f);
-                    mybtn_2.colors = Block;
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Cafe"].ToString();
                 }
-                else
+                else if (ForWhatValue == 2)
                 {
-                    myBtn.enabled= false;
-                    Block.pressedColor = Color.red;
-                    mybtn_2.colors = Block;
+                    ArchitectureSystem.build_system.Money -= 100;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 100)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
                 }
                 break;
+
             case "Grocery":
-                if (money >= 100)
+                if (ForWhatValue == 1)
                 {
-                    myBtn.enabled = true;
-                    Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
-                    mybtn_2.colors = Block;
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Grocery"].ToString();
                 }
-                else
+                else if (ForWhatValue == 2)
                 {
-                    myBtn.enabled = false;
-                    Block.pressedColor = Color.red;
-                    mybtn_2.colors = Block;
+                    ArchitectureSystem.build_system.Money -= 100;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 100)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
                 }
                 break;
+
             default:
-                break;
+                break; 
         }
     }
 

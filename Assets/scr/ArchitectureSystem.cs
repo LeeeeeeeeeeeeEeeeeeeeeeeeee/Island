@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class BuildingSystem : MonoBehaviour
+public class ArchitectureSystem : MonoBehaviour
 {
-    public static BuildingSystem build_system;
+    //건물 설치를 위한 스크립트
+    public static ArchitectureSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
 
@@ -23,13 +25,20 @@ public class BuildingSystem : MonoBehaviour
     public int MoneyOutput = 0;
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
+    public List<button_SendToCan> ButtonList;
+
+    
+
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
         { "House", 0 },
         { "Cafe", 100 },
         { "Grocery", 100 }
+        //가격표
     };
+
+
 
 
     // Start is called before the first frame update
@@ -38,6 +47,10 @@ public class BuildingSystem : MonoBehaviour
         MoneyText.text = Money.ToString();
         build_system = this;
         Store_Obj = transform.GetChild(0).gameObject;
+        touchUp += OK_IConstructThere;
+
+        ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
+
     }
 
     private float timer = 0f;
@@ -137,4 +150,39 @@ public class BuildingSystem : MonoBehaviour
         }
         isConstrutMode = false;
     }
+
+
+    #region purchase and construction
+    Coroutine co;
+    GameObject go;
+    public GameObject emptyBuilding;
+
+    public void LetsConstructor(String BuildName , Sprite Get_Sprite)
+    {
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
+        Store_Ui.SetActive(false);
+        go = Instantiate(emptyBuilding);
+        go.name = BuildName;
+        go.transform.SetParent(transform, true);
+        if (Input.touchCount > 0)
+        {
+            Touch tt = Input.GetTouch(0);
+            go.transform.position = tt.position;
+        }
+        go.GetComponent<SpriteRenderer>().sprite = Get_Sprite;
+        co = StartCoroutine(FollowMouse(go, 1));
+        //상점오브젝트/상점ui 비활성화 및 빈 건물 생성 후 스프라이트와 이름 설정
+        //터치위치로 따라가는 코루틴 시작
+    }
+
+    public void OK_IConstructThere()
+    {
+        go.tag = "Building";
+        StopCoroutine(co);
+        co = null;
+        go = null;
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+        //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
+    }
+    #endregion
 }
