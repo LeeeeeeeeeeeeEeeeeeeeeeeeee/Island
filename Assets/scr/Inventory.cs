@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
 
     public List<string> Recipe = new List<string>();
 
+    public GameObject CookPanel;
+
     public Image CookImg;
 
     public TextMeshProUGUI CookText;
@@ -27,6 +29,8 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        ResetRecipe();
     }
 
     private void Update()
@@ -78,6 +82,8 @@ public class Inventory : MonoBehaviour
             {
                 item.GetComponent<Food>().Count -= item.GetComponent<Food>().TempCount;
             }
+
+            CookPanel.SetActive(true);
 
             if(Recipe.FindAll(n => n == "쌀").Count == 1)
             {
