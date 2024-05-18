@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,16 +15,15 @@ public class Inventory : MonoBehaviour
 
     public GameObject CookPanel;
 
+    public GameObject FoodStorage;
+    public GameObject FoodPrefab;
+
     public Image CookImg;
-
     public TextMeshProUGUI CookText;
-
     public string Cook;
-
     public List<GameObject> CookUI = new List<GameObject>();
-
     public List<GameObject> InvenUI = new List<GameObject>();
-
+    public List<String> InvenNames = new List<string>();
     public List<GameObject> inventory = new List<GameObject>();
 
     private void Awake()
