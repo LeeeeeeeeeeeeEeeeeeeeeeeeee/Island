@@ -8,6 +8,7 @@ TagManager:
   - Building
   - Animal
   - Cook
+  - Food_Generator
   layers:
   - Default
   - TransparentFX

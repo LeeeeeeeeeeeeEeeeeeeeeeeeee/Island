@@ -55,6 +55,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         cook_Ui.SetActive(true);
                     }
+                    else if(clickCol.tag == "Food_Generator")
+                    {
+                        clickCol.GetComponent<Food_Generator>().Get_Food();
+                    }
                 }
             }
         }
