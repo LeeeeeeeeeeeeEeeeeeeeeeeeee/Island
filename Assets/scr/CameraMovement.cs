@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float Speed; // Ä«¸Þ¶ó ÀÌµ¿ ¼Óµµ
+    public float Speed; // Ä«ï¿½Þ¶ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
     private Vector2 nowPos, prePos;
     private Vector3 movePos;
 
@@ -30,19 +30,19 @@ public class CameraMovement : MonoBehaviour
         if(!ArchitectureSystem.build_system.isConstrutMode)
         {
             ArchitectureSystem.build_system.isCameraMode = true;
-            if (Input.touchCount == 1) // ¼Õ°¡¶ô 1°³°¡ ´­·ÈÀ» ¶§
+            if (Input.touchCount == 1) // ï¿½Õ°ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) || EventSystem.current.IsPointerOverGameObject(0))
                 {
                     return;
                 }
 
-                Touch touch = Input.GetTouch(0); // Ã¹¹øÂ° ¼Õ°¡¶ô ÅÍÄ¡¸¦ ÀúÀå
-                if (touch.phase == TouchPhase.Began) // ¼Õ°¡¶ôÀÌ È­¸é¿¡ ÅÍÄ¡µÆÀ» ¶§
+                Touch touch = Input.GetTouch(0); // Ã¹ï¿½ï¿½Â° ï¿½Õ°ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                if (touch.phase == TouchPhase.Began) // ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                 {
-                    prePos = touch.position - touch.deltaPosition; // ÀÌÀü À§Ä¡ ÀúÀå
+                    prePos = touch.position - touch.deltaPosition; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
                 }
-                else if (touch.phase == TouchPhase.Moved) // ÅÍÄ¡µÈ »óÅÂ¿¡¼­ ¿òÁ÷¿´À» ¶§
+                else if (touch.phase == TouchPhase.Moved) // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                 {
                     nowPos = touch.position - touch.deltaPosition;
                     movePos = (Vector3)(prePos - nowPos) * Time.deltaTime * Speed;
@@ -51,19 +51,19 @@ public class CameraMovement : MonoBehaviour
                 }
             }
 
-            if (Input.touchCount > 1) // ¼Õ°¡¶ô 1°³°¡ ´­·ÈÀ» ¶§
+            if (Input.touchCount > 1) // ï¿½Õ°ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) || EventSystem.current.IsPointerOverGameObject(0))
                 {
                     return;
                 }
 
-                Touch touch = Input.GetTouch(0); // Ã¹¹øÂ° ¼Õ°¡¶ô ÅÍÄ¡¸¦ ÀúÀå
-                if (touch.phase == TouchPhase.Began) // ¼Õ°¡¶ôÀÌ È­¸é¿¡ ÅÍÄ¡µÆÀ» ¶§
+                Touch touch = Input.GetTouch(0); // Ã¹ï¿½ï¿½Â° ï¿½Õ°ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                if (touch.phase == TouchPhase.Began) // ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                 {
-                    prePos = touch.position - touch.deltaPosition; // ÀÌÀü À§Ä¡ ÀúÀå
+                    prePos = touch.position - touch.deltaPosition; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
                 }
-                else if (touch.phase == TouchPhase.Moved) // ÅÍÄ¡µÈ »óÅÂ¿¡¼­ ¿òÁ÷¿´À» ¶§
+                else if (touch.phase == TouchPhase.Moved) // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                 {
                     nowPos = touch.position - touch.deltaPosition;
                     movePos = (Vector3)(prePos - nowPos) * Time.deltaTime * Speed;
@@ -82,7 +82,7 @@ public class CameraMovement : MonoBehaviour
 
     void LimitCameraArea()
     {
-            if (transform.position.x > 4.5f || transform.position.x < -4.5f || transform.position.y > 4.5f || transform.position.y < -4.5f)
+            if (transform.position.x > 7f || transform.position.x < -7f || transform.position.y > 13f || transform.position.y < -13f)
             {
                 transform.position = Vector3.Lerp(transform.position,
                                               movePos,

@@ -29,5 +29,32 @@ public class Food : MonoBehaviour
 
             Inventory.Instance.SelectButton.SetActive(true);
         }
+        else if(Count - TempCount > 0)
+        {
+            if (Inventory.Instance.CookUI[0].activeSelf == false)
+            {
+                Inventory.Instance.CookUI[0].GetComponent<Image>().sprite = FoodImage;
+
+                Inventory.Instance.CookUI[0].SetActive(true);
+            }
+            else if (Inventory.Instance.CookUI[1].activeSelf == false)
+            {
+                Inventory.Instance.CookUI[1].GetComponent<Image>().sprite = FoodImage;
+
+                Inventory.Instance.CookUI[1].SetActive(true);
+            }
+            else if (Inventory.Instance.CookUI[2].activeSelf == false)
+            {
+                Inventory.Instance.CookUI[2].GetComponent<Image>().sprite = FoodImage;
+
+                Inventory.Instance.CookUI[2].SetActive(true);
+            }
+            else if (Inventory.Instance.CookUI[3].activeSelf == false)
+            {
+                Inventory.Instance.CookUI[3].GetComponent<Image>().sprite = FoodImage;
+
+                Inventory.Instance.CookUI[3].SetActive(true);
+            }
+        }
     }
 }
