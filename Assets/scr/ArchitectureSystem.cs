@@ -26,9 +26,8 @@ public class ArchitectureSystem : MonoBehaviour
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
     public List<button_SendToCan> ButtonList;
-
+    public List<GameObject> BuildingList;
     
-
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
@@ -178,6 +177,7 @@ public class ArchitectureSystem : MonoBehaviour
     public void OK_IConstructThere()
     {
         go.tag = "Building";
+        BuildingList.Add(go);
         StopCoroutine(co);
         co = null;
         go = null;

@@ -11,6 +11,7 @@ public abstract class Building_basicSCR : MonoBehaviour
     public SpriteRenderer mySprite;
     public BoxCollider2D myCollider;
 
+
     public void WhoAmI(string name)
     {
         switch (name)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grocery : MonoBehaviour
+public class Grocery : Building_basicSCR
 {
     // Start is called before the first frame update
     void Start()
