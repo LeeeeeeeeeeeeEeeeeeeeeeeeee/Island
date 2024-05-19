@@ -35,6 +35,7 @@ public abstract class Building_basicSCR : MonoBehaviour
         }
 
         gameObject.GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
+        gameObject.GetComponent<Food_Generator>().init();
     }
     
 }

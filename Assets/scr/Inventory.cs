@@ -26,6 +26,8 @@ public class Inventory : MonoBehaviour
     public List<String> InvenNames = new List<string>();
     public List<GameObject> inventory = new List<GameObject>();
 
+    public List<GameObject> Generated_Foods = new List<GameObject>();
+
     private void Awake()
     {
         Instance = this;
