@@ -10,7 +10,7 @@ using UnityEngine.SocialPlatforms;
 
 public class ArchitectureSystem : MonoBehaviour
 {
-    //°Ç¹° ¼³Ä¡¸¦ À§ÇÑ ½ºÅ©¸³Æ®
+    //ï¿½Ç¹ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
     public static ArchitectureSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
@@ -32,10 +32,11 @@ public class ArchitectureSystem : MonoBehaviour
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
-        { "House", 0 },
+        { "ë¹¨ê°„ ì„¤íƒ• ìœ ë¦¬ ê½ƒ", 0 },
         { "Cafe", 100 },
-        { "Grocery", 100 }
-        //°¡°ÝÇ¥
+        { "Grocery", 100 },
+        { "ë”¸ê¸°ìš°ìœ  ì—°ëª»", 0 }
+        //ï¿½ï¿½ï¿½ï¿½Ç¥
     };
 
 
@@ -107,8 +108,8 @@ public class ArchitectureSystem : MonoBehaviour
 
     public IEnumerator FollowMouse(GameObject gg, int Where)
     {
-        //int 1 = °Ç¹°¼³Ä¡
-        //int 2 = °Ç¹°Àç¹èÄ¡
+        //int 1 = ï¿½Ç¹ï¿½ï¿½ï¿½Ä¡
+        //int 2 = ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½Ä¡
         gg.TryGetComponent(out Building b);
         bool isCol;
         isConstrutMode = true;
@@ -128,7 +129,7 @@ public class ArchitectureSystem : MonoBehaviour
                     isCol = b.isnotCol;
                     if (!isCol)
                     {
-                        Debug.Log("À§Ä¡ ÀçÁöÁ¤ ÇÊ¿ä");
+                        Debug.Log("ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½");
 
                     }
                     else if (isCol)
@@ -171,8 +172,8 @@ public class ArchitectureSystem : MonoBehaviour
         }
         go.GetComponent<SpriteRenderer>().sprite = Get_Sprite;
         co = StartCoroutine(FollowMouse(go, 1));
-        //»óÁ¡¿ÀºêÁ§Æ®/»óÁ¡ui ºñÈ°¼ºÈ­ ¹× ºó °Ç¹° »ý¼º ÈÄ ½ºÇÁ¶óÀÌÆ®¿Í ÀÌ¸§ ¼³Á¤
-        //ÅÍÄ¡À§Ä¡·Î µû¶ó°¡´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®/ï¿½ï¿½ï¿½ï¿½ui ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
     }
 
     public void OK_IConstructThere()
@@ -182,7 +183,7 @@ public class ArchitectureSystem : MonoBehaviour
         co = null;
         go = null;
         Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
-        //ÅÂ±× º¯°æ ¹× ÅÍÄ¡À§Ä¡ µû¶ó°¡±â ÄÚ·çÆ¾ Á¤Áö ¹× ÄÚ·çÆ¾º¯¼ö,ºó°Ç¹°º¯¼ö null°ª, »óÁ¡¿ÀºêÁ§Æ® È°¼ºÈ­
+        //ï¿½Â±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ó°¡±ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
     }
     #endregion
 }

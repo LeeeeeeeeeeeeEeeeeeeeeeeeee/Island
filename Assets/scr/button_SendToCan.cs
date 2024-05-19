@@ -11,16 +11,14 @@ public class button_SendToCan : MonoBehaviour
 {
     private buttonPushing button_value;
 
-    
-
-    private float clickTime; // Å¬¸¯ ÁßÀÎ ½Ã°£
-    public float minClickTime = 1; // ÃÖ¼Ò Å¬¸¯½Ã°£
-    private bool isClick; // Å¬¸¯ ÁßÀÎÁö ÆÇ´Ü
+    private float clickTime; // Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    public float minClickTime = 1; // ï¿½Ö¼ï¿½ Å¬ï¿½ï¿½ï¿½Ã°ï¿½
+    private bool isClick; // Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
     private bool iseventstart;
     private int money;
 
     public TextMeshProUGUI HowMuch;
-    Sprite thisButtonsSprite;
+    public Sprite thisButtonsSprite;
     EventTrigger myBtn;
     Button mybtn_2;
     readonly Dictionary<string, int> Value = new Dictionary<string, int>()
@@ -33,15 +31,15 @@ public class button_SendToCan : MonoBehaviour
 
     void Start()
     {
-        //button_value = transform.root.GetComponent<buttonPushing>();   ÃßÈÄ »èÁ¦ °¡´É
-        myBtn = GetComponent<EventTrigger>(); //real¹öÆ°
-        mybtn_2= GetComponent<Button>(); // ¹öÆ° »ö»ó º¯°æÀ» À§ÇÑ ÄÄÆ÷³ÍÆ®
+        //button_value = transform.root.GetComponent<buttonPushing>();   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        myBtn = GetComponent<EventTrigger>(); //realï¿½ï¿½Æ°
+        mybtn_2= GetComponent<Button>(); // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         myBtn.enabled = false;
-        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //°¡°ÝÇ¥
-        Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D; //ÇöÀç °Ç¹° ½ºÇÁ¶óÀÌÆ® ¹Þ¾Æ¿À±â
+        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //ï¿½ï¿½ï¿½ï¿½Ç¥
+        //Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
                 
         iseventstart = false;
-        thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //ÇöÀç °Ç¹° ½ºÇÁ¶óÀÌÆ® ¹Þ¾Æ¿À±â2
+        //thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½2
         SwitchSyntaxBundle("PriceTag");
 
     }
@@ -53,7 +51,7 @@ public class button_SendToCan : MonoBehaviour
         iseventstart = false;
     }
 
-    // ¹öÆ° Å¬¸¯ÀÌ ³¡³µÀ» ¶§
+    // ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public void ButtonUp()
     {
         isClick = false;
@@ -65,11 +63,11 @@ public class button_SendToCan : MonoBehaviour
     {
         SwitchSyntaxBundle("ButtonUpdate");
         money = ArchitectureSystem.build_system.Money;
-        // Å¬¸¯ ÁßÀÌ¶ó¸é
+        // Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
 
         if (isClick)
         {
-            // Å¬¸¯½Ã°£ ÃøÁ¤
+            // Å¬ï¿½ï¿½ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
             clickTime += Time.deltaTime;
 
             if (clickTime >= minClickTime && iseventstart == false)
@@ -80,10 +78,10 @@ public class button_SendToCan : MonoBehaviour
                 iseventstart= true;
             }
         }
-        // Å¬¸¯ ÁßÀÌ ¾Æ´Ï¶ó¸é
+        // Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½
         else
         {
-            // Å¬¸¯½Ã°£ ÃÊ±âÈ­
+            // Å¬ï¿½ï¿½ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
             clickTime = 0;
         }
     }
@@ -93,7 +91,7 @@ public class button_SendToCan : MonoBehaviour
         ArchitectureSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
     }
 
-    //private void MoneyUpdate_Btn()´õ¹Ìµ¥ÀÌÅÍ. »èÁ¦°¡´É
+    //private void MoneyUpdate_Btn()ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //{  
 
     //    ColorBlock Block = mybtn_2.colors;
@@ -133,7 +131,7 @@ public class button_SendToCan : MonoBehaviour
     //            }
     //            break;
     //        default:
-    //            break; //±¸¸Å ºÒ°¡½Ã »ö»óº¯°æ ÄÚµå
+    //            break; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½óº¯°ï¿½ ï¿½Úµï¿½
     //    }
     //}
 
@@ -142,23 +140,23 @@ public class button_SendToCan : MonoBehaviour
         int ForWhatValue = Value[ForWhat];
         ColorBlock Block = mybtn_2.colors;
 
-        /*Switch±¸¹® ¹­À½ ÇÔ¼ö
+        /*Switchï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
          * 
-        µñ¼Å³Ê¸® 'Value' »ç¿ë
-        ÇÔ¼ö ¼±¾ðÇÏ°í »ç¿ëÇÒ ±â´ÉÀ» ¸Å°³º¯¼ö·Î Àü´Þ
-        Switch±¸¹® ¾È¿¡¼­ if¸¦ »ç¿ëÇØ ±â´É ±¸º°
+        ï¿½ï¿½Å³Ê¸ï¿½ 'Value' ï¿½ï¿½ï¿½
+        ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        Switchï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ï¿½ï¿½ ifï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        ***°Ç¹° Ãß°¡ ½Ã ½ÇÁúÀûÀ¸·Î Ãß°¡ÇØ¾ß ÇÏ´Â °÷
+        ***ï¿½Ç¹ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½
         */
 
         switch (this.name)
         {
 
-            case "House":
+            case "ë¹¨ê°„ ì„¤íƒ• ìœ ë¦¬ ê½ƒ":
                 if(ForWhatValue == 1)
                 {
                     myBtn.enabled = true;
-                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["House"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["ë¹¨ê°„ ì„¤íƒ• ìœ ë¦¬ ê½ƒ"].ToString();
                 }
                 else if(ForWhatValue == 2)
                 {
@@ -208,6 +206,32 @@ public class button_SendToCan : MonoBehaviour
                 else if (ForWhatValue == 3)
                 {
                     if (money >= 100)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "ë”¸ê¸°ìš°ìœ  ì—°ëª»":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["ë”¸ê¸°ìš°ìœ  ì—°ëª»"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
                     {
                         myBtn.enabled = true;
                         Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);

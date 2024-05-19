@@ -15,8 +15,8 @@ public abstract class Building_basicSCR : MonoBehaviour
     {
         switch (name)
         {
-            case "House":
-                gameObject.AddComponent<House>();
+            case "빨간 설탕 유리 꽃":
+                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "Cafe":
@@ -26,11 +26,15 @@ public abstract class Building_basicSCR : MonoBehaviour
             case "Grocery":
                 gameObject.AddComponent<Grocery>();
                 break;
+            case "딸기우유 연못":
+                gameObject.AddComponent<Food_Generator>();
+                break;
 
             default:
                 break;
         }
 
+        gameObject.GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
     }
     
 }

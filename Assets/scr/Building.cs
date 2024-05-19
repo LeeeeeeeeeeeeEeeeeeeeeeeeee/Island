@@ -9,6 +9,7 @@ public class Building : Building_basicSCR
         isnotCol = true;
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
+        GetComponent<SpriteRenderer>().sprite = mySprite.sprite;
         WhoAmI(this.name);
     }
 
