@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Food_Generator : MonoBehaviour
 {
+    public bool is_Food;
     public bool day_skip;
     public int max_food_count = 3;
     int current_food_count = 0;
@@ -37,7 +38,7 @@ public class Food_Generator : MonoBehaviour
 
     public void Get_Food()
     {
-        if(current_food_count > 0){
+        if(current_food_count > 0 && is_Food){
             current_food_count--;
             
             GameObject obj;
