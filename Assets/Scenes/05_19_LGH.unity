@@ -30469,6 +30469,12 @@ MonoBehaviour:
   - {fileID: 1953464370}
   - {fileID: 2111735741}
   - {fileID: 1533260915}
+  Generated_Foods:
+  - {fileID: 5565507063138151122, guid: 0201063ee5ec0014d93afbf453b75fbc, type: 3}
+  - {fileID: 5565507063138151122, guid: f7143331a8fc67b4bbf13faff71036ac, type: 3}
+  - {fileID: 4153062102453534683, guid: 55e2878073fa5d0439a515e016d4e4f7, type: 3}
+  - {fileID: 8321037126650414210, guid: b478df3b2b68b9547b635536092cd4d1, type: 3}
+  - {fileID: 5565507063138151122, guid: ef7a75a4815f20246b5ae69be5c886c7, type: 3}
 --- !u!1 &2138172437
 GameObject:
   m_ObjectHideFlags: 0

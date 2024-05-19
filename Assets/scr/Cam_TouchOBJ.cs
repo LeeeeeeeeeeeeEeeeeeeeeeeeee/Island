@@ -44,6 +44,11 @@ public class Cam_TouchOBJ : MonoBehaviour
                             Debug.Log("설치");
                             bb.BuildingMove();
                         }
+                        
+                        if(clickCol.TryGetComponent(out Food_Generator generator))
+                        {
+                            generator.Get_Food();
+                        }
                     }
                     else if(clickCol.tag == "Animal")
                     {
@@ -55,7 +60,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         cook_Ui.SetActive(true);
                     }
-                    else if(clickCol.tag == "Food_Generator")
+                    else if (clickCol.tag == "Food_Generator")
                     {
                         clickCol.GetComponent<Food_Generator>().Get_Food();
                     }
