@@ -8,6 +8,8 @@ TagManager:
   - Building
   - Animal
   - Cook
+  - Interaction
+  - Pat
   layers:
   - Default
   - TransparentFX
