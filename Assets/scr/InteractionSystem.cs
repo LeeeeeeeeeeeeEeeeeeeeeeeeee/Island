@@ -35,7 +35,7 @@ public class InteractionSystem : MonoBehaviour
         
 
         StartCoroutine(AddBuilding_InterActionCell());
-    }
+    } 
 
     private void InputCurrentCell()
     {
