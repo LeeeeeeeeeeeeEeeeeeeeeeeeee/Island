@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -131,22 +132,84 @@ public class InteractionSystem : MonoBehaviour
 
             ArchitectureSystem.build_system.isConstrutMode = false;
             t.tag = "Interaction"; //9
+            t.gameObject.SetActive(false);
+            t.GetComponent<SpriteRenderer>().enabled = true;
+            t.transform.position = new Vector3(t.transform.position.x, t.transform.position.y + 1, t.transform.position.z);
             t.parent.GetComponent<CellCtrl>().InteractionStart = false;
+            
         }
+        
     }
     #endregion
 
 
 
     #region clapclap
+    [SerializeField] private Transform ClapClapButton;
     public void ClapClapInteraction(GameObject _Cell)
     {
-        GameObject Clap = _Cell.transform.GetChild(0).gameObject;
-        Clap.GetComponent<SpriteRenderer>().enabled = false;
-        Clap.GetComponent<BoxCollider2D>().enabled = false;
+        GameObject Clap = _Cell.transform.GetChild(1).gameObject;
+        Clap.SetActive(false);
+        ClapClapButton.position = new Vector2(Screen.width / 2, Screen.height / 2);
+        ClapClapButton.gameObject.SetActive(true);
 
         int[] a = { 1, 2, 3 };
         a = a.OrderBy(x => Random.Range(0.0f, 1.0f)).ToArray();
+
+        GameObject[] b = {ClapClapButton.GetChild(0).gameObject, ClapClapButton.GetChild(1).gameObject};
+        StartCoroutine(ClapClapInteraction2(a, b,Clap));
+    }
+
+    public static WaitForSeconds oneSecond = new WaitForSeconds(3f);
+
+    private IEnumerator ClapClapInteraction2(int[] a, GameObject[] b , GameObject c)
+    {
+        BI = 0;
+        yield return new WaitForSeconds(3);
+
+        for(int i = 0; i <=2; i++) 
+        {
+            switch (a[i])
+            {
+                case 1:
+                    b[0].SetActive(true);
+                    yield return oneSecond;
+                    b[0].SetActive(false);
+                    break;
+
+                case 2:
+                    b[1].SetActive(true);
+                    yield return oneSecond;
+                    b[1].SetActive(false);
+                    break; 
+
+                case 3:
+                    b[0].SetActive(true);
+                    b[1].SetActive(true);
+                    yield return oneSecond;
+                    b[0].SetActive(false);
+                    b[1].SetActive(false);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        if(BI!=4)
+        {
+            Debug.Log("Fail");
+        }
+
+        c.GetComponent<SpriteRenderer>().enabled = false;
+        c.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    int BI = 0;
+    
+    public void ClapClapInteraction_ButtonInput()
+    {
+        BI++;
+        Debug.Log(BI);
     }
     #endregion
 

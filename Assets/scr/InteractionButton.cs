@@ -27,4 +27,6 @@ public class InteractionButton : MonoBehaviour
         _CellCtrl.InteractionGo(k); //5
     }
 
+    
+
 }

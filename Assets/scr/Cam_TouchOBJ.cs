@@ -71,7 +71,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     if (clickCol.tag == "Pat")
                     {
                         Debug.Log(Vector2.Distance(Touch_start_pos, toto.position));
-                        if (Vector2.Distance(Touch_start_pos, toto.position) >= 500)
+                        if (Vector2.Distance(Touch_start_pos, toto.position) >= 300)
                         {
                             Touch_start_pos = toto.position;
                             InteractionSystem.Interaction_system.StartCoroutine(InteractionSystem.Interaction_system.PatInteraction2(clickCol.transform));

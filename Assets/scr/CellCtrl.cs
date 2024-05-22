@@ -43,13 +43,15 @@ public class CellCtrl : MonoBehaviour
     {
         float _Time = 0;
         float T = Random.Range(0,2);
+        int n = Random.Range(0, transform.childCount);
+        Debug.Log(n);
         while (true)
         {
             _Time += Time.deltaTime;
 
             if (T <= _Time && isOn==true)
             {
-                transform.GetChild(0).gameObject.SetActive(true); //2
+                transform.GetChild(n).gameObject.SetActive(true); //2
                 InteractionStart = true; //3
                 break;
             }
