@@ -10,6 +10,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
     private GameObject store_Ui;
 
+    Vector2 Touch_start_pos;
     // Start is called before the first frame update
     private void Start()
     {
@@ -55,6 +56,30 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         cook_Ui.SetActive(true);
                     }
+                    else if(clickCol.tag == "Interaction")
+                    {
+                        clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
+                    }
+                    else if(clickCol.tag=="Pat")
+                    {
+                        Touch_start_pos = toto.position;
+                    }
+                }
+                
+                if (clickCol != null && toto.phase == TouchPhase.Moved)
+                {
+                    if (clickCol.tag == "Pat")
+                    {
+                        Debug.Log(Vector2.Distance(Touch_start_pos, toto.position));
+                        if (Vector2.Distance(Touch_start_pos, toto.position) >= 500)
+                        {
+                            Touch_start_pos = toto.position;
+                            InteractionSystem.Interaction_system.StartCoroutine(InteractionSystem.Interaction_system.PatInteraction2(clickCol.transform));
+                        }
+                    }
+                    
+
+
                 }
             }
         }

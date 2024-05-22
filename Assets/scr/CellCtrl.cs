@@ -9,6 +9,7 @@ public class CellCtrl : MonoBehaviour
     public string cellName;
     public Texture cellImage;
     public Sprite cellSprite;
+    public bool InteractionStart = false;
 
     private LGH_Visit_Cell CellCreate;
 
@@ -27,21 +28,30 @@ public class CellCtrl : MonoBehaviour
             }
         }
 
-        StartCoroutine(InteractionWithPlayer());
+        StartCoroutine(InteractionButtonActive()); //1
     }
 
+    public void InteractionGo(int type)
+    {
+        if (InteractionStart == true)
+        {
+            InteractionSystem.Interaction_system.StartCoroutine(InteractionSystem.Interaction_system.SmoothCameraMove(this.transform, type)); //6
+        }
+    }
 
-    public IEnumerator InteractionWithPlayer()
+    public IEnumerator InteractionButtonActive()
     {
         float _Time = 0;
-
-        while(true)
+        float T = Random.Range(0,2);
+        while (true)
         {
             _Time += Time.deltaTime;
-            float T = Random.Range(10, 16);
-            if (T == _Time)
-            {
 
+            if (T <= _Time && isOn==true)
+            {
+                transform.GetChild(0).gameObject.SetActive(true); //2
+                InteractionStart = true; //3
+                break;
             }
 
 

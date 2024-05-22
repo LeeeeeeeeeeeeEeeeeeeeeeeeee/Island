@@ -17,6 +17,7 @@ public class LGH_Interaction : MonoBehaviour
         }
     }
     void CellInteraction(GameObject obj){
+        //obj.GetComponent<CellCtrl>().InteractionGo();
         Debug.Log(obj.name + "와 상호작용 했습니다.");  //상호작용 시 실행되는 코드
     }
 
