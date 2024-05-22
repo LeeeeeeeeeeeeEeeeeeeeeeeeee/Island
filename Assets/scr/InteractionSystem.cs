@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.ParticleSystem;
@@ -21,7 +22,8 @@ public class InteractionSystem : MonoBehaviour
 
     private void Start()
     {
-        Interaction_system= this;
+        
+        Interaction_system = this;
         CellList = _GameManeger.GetComponent<CellManage>().cells;
         StartCoroutine(AddBuilding_InterActionCell());
     }
@@ -134,12 +136,18 @@ public class InteractionSystem : MonoBehaviour
     }
     #endregion
 
-    #region calpcalp
+
+
+    #region clapclap
     public void ClapClapInteraction(GameObject _Cell)
     {
+        GameObject Clap = _Cell.transform.GetChild(0).gameObject;
+        Clap.GetComponent<SpriteRenderer>().enabled = false;
+        Clap.GetComponent<BoxCollider2D>().enabled = false;
 
+        int[] a = { 1, 2, 3 };
+        a = a.OrderBy(x => Random.Range(0.0f, 1.0f)).ToArray();
     }
-
     #endregion
 
 }
