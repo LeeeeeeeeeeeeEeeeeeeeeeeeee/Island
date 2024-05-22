@@ -26,9 +26,27 @@ public class CellCtrl : MonoBehaviour
                 CellCreate.CellVisit(this.gameObject);
             }
         }
+
+        StartCoroutine(InteractionWithPlayer());
     }
 
 
+    public IEnumerator InteractionWithPlayer()
+    {
+        float _Time = 0;
 
+        while(true)
+        {
+            _Time += Time.deltaTime;
+            float T = Random.Range(10, 16);
+            if (T == _Time)
+            {
+
+            }
+
+
+            yield return null;
+        }
+    }
 
 }
