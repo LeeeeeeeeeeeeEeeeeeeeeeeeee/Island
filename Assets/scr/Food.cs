@@ -19,6 +19,13 @@ public class Food : MonoBehaviour
         CountText.text = (Count - TempCount).ToString();
 
         TempCount = Inventory.Instance.Recipe.FindAll(n => n == Name).Count;
+
+        if (Count == 0)
+        {
+            Inventory.Instance.InvenItems.Remove(gameObject);
+            Inventory.Instance.InvenNames.Remove(gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
     public void ChangeFood()
@@ -31,29 +38,29 @@ public class Food : MonoBehaviour
         }
         else if(Count - TempCount > 0)
         {
-            if (Inventory.Instance.CookUI[0].activeSelf == false)
+            if (Inventory.Instance.PlusButtonImg[0].activeSelf == false)
             {
-                Inventory.Instance.CookUI[0].GetComponent<Image>().sprite = FoodImage;
+                Inventory.Instance.PlusButtonImg[0].GetComponent<Image>().sprite = FoodImage;
 
-                Inventory.Instance.CookUI[0].SetActive(true);
+                Inventory.Instance.PlusButtonImg[0].SetActive(true);
             }
-            else if (Inventory.Instance.CookUI[1].activeSelf == false)
+            else if (Inventory.Instance.PlusButtonImg[1].activeSelf == false)
             {
-                Inventory.Instance.CookUI[1].GetComponent<Image>().sprite = FoodImage;
+                Inventory.Instance.PlusButtonImg[1].GetComponent<Image>().sprite = FoodImage;
 
-                Inventory.Instance.CookUI[1].SetActive(true);
+                Inventory.Instance.PlusButtonImg[1].SetActive(true);
             }
-            else if (Inventory.Instance.CookUI[2].activeSelf == false)
+            else if (Inventory.Instance.PlusButtonImg[2].activeSelf == false)
             {
-                Inventory.Instance.CookUI[2].GetComponent<Image>().sprite = FoodImage;
+                Inventory.Instance.PlusButtonImg[2].GetComponent<Image>().sprite = FoodImage;
 
-                Inventory.Instance.CookUI[2].SetActive(true);
+                Inventory.Instance.PlusButtonImg[2].SetActive(true);
             }
-            else if (Inventory.Instance.CookUI[3].activeSelf == false)
+            else if (Inventory.Instance.PlusButtonImg[3].activeSelf == false)
             {
-                Inventory.Instance.CookUI[3].GetComponent<Image>().sprite = FoodImage;
+                Inventory.Instance.PlusButtonImg[3].GetComponent<Image>().sprite = FoodImage;
 
-                Inventory.Instance.CookUI[3].SetActive(true);
+                Inventory.Instance.PlusButtonImg[3].SetActive(true);
             }
         }
     }

@@ -151,35 +151,18 @@ public class button_SendToCan : MonoBehaviour
 
         switch (this.name)
         {
-
             case "빨간 설탕 유리 꽃":
-                if(ForWhatValue == 1)
-                {
-                    myBtn.enabled = true;
-                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["빨간 설탕 유리 꽃"].ToString();
-                }
-                else if(ForWhatValue == 2)
-                {
-
-                }
-                else if(ForWhatValue == 3)
-                {
-
-                }
-                break;
-
-            case "Cafe":
                 if (ForWhatValue == 1)
                 {
-                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Cafe"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["빨간 설탕 유리 꽃"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {
-                    ArchitectureSystem.build_system.Money -= 100;
+                    ArchitectureSystem.build_system.Money -= 0;
                 }
                 else if (ForWhatValue == 3)
                 {
-                    if (money >= 100)
+                    if (money >= 0)
                     {
                         myBtn.enabled = true;
                         Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
@@ -194,18 +177,148 @@ public class button_SendToCan : MonoBehaviour
                 }
                 break;
 
-            case "Grocery":
+            case "노란 설탕 유리 꽃":
                 if (ForWhatValue == 1)
                 {
-                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["Grocery"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["노란 설탕 유리 꽃"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {
-                    ArchitectureSystem.build_system.Money -= 100;
+                    ArchitectureSystem.build_system.Money -= 0;
                 }
                 else if (ForWhatValue == 3)
                 {
-                    if (money >= 100)
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "파란 설탕 유리 꽃":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["파란 설탕 유리 꽃"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "비스킷 의자":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["비스킷 의자"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "아이스크림 테이블":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["아이스크림 테이블"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "마카롱 쿠션":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["마카롱 쿠션"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "2단 마카롱 쿠션":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["2단 마카롱 쿠션"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
                     {
                         myBtn.enabled = true;
                         Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
@@ -224,6 +337,239 @@ public class button_SendToCan : MonoBehaviour
                 if (ForWhatValue == 1)
                 {
                     HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["딸기우유 연못"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "솜사탕 구름 1":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["솜사탕 구름 1"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "솜사탕 구름 2":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["솜사탕 구름 2"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "캔디 가로등":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["캔디 가로등"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "롤리팝 캔디 나무":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["롤리팝 캔디 나무"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "마카롱 나무":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["마카롱 나무"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "초코 분수":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["초코 분수"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "녹차 푸딩 산":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["녹차 푸딩 산"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+            case "초코 푸딩 산":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["딸초코 푸딩 산"].ToString();
+                }
+                else if (ForWhatValue == 2)
+                {
+                    ArchitectureSystem.build_system.Money -= 0;
+                }
+                else if (ForWhatValue == 3)
+                {
+                    if (money >= 0)
+                    {
+                        myBtn.enabled = true;
+                        Block.pressedColor = new Color(0.784f, 0.784f, 0.784f);
+                        mybtn_2.colors = Block;
+                    }
+                    else
+                    {
+                        myBtn.enabled = false;
+                        Block.pressedColor = Color.red;
+                        mybtn_2.colors = Block;
+                    }
+                }
+                break;
+
+            case "거대한 롤리팝 마시멜로우 언덕":
+                if (ForWhatValue == 1)
+                {
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["거대한 롤리팝 마시멜로우 언덕"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {

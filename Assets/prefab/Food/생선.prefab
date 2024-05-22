@@ -47,6 +47,6 @@ MonoBehaviour:
   Name: "\uC0DD\uC120"
   Count: 0
   TempCount: 0
-  FoodImage: {fileID: 0}
+  FoodImage: {fileID: 21300000, guid: fa39f0532a1d93b47867043a32d197c9, type: 3}
   CountText: {fileID: 0}
   ImageObj: {fileID: 0}

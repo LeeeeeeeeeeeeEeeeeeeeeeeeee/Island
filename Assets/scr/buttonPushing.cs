@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class buttonPushing : MonoBehaviour
 {
-    //´õ¹Ìµ¥ÀÌÅÍ. ÃßÈÄ »èÁ¦ °¡´É
+    //ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -32,7 +32,7 @@ public class buttonPushing : MonoBehaviour
 
     //public void LetsConstructor(String BuildName)
     //{
-    //    storeObject.GetComponent<BoxCollider2D>().enabled = false;
+    //    storeObject.GetComponent<PolygonCollider2D>().enabled = false;
     //    storeUi.SetActive(false);
     //    go = Instantiate(emptyBuilding);
     //    go.name = BuildName;
@@ -53,7 +53,7 @@ public class buttonPushing : MonoBehaviour
     //    co= null;
     //    go = null;
     //    get_Sprite = null;
-    //    storeObject.GetComponent<BoxCollider2D>().enabled = true;
+    //    storeObject.GetComponent<PolygonCollider2D>().enabled = true;
 
     //}
 }
