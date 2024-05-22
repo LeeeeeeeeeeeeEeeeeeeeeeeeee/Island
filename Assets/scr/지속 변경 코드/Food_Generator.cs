@@ -31,6 +31,20 @@ public class Food_Generator : MonoBehaviour
                 food_prefabs[1] = Inventory.Instance.Generated_Foods[1];
                 break;
 
+            case "딸기우유 연못":
+                max_food_count = 3;
+
+                food_generate_Probability = new int[3];
+                food_generate_Probability[0] = 40;
+                food_generate_Probability[1] = 60;
+                food_generate_Probability[2] = 100;
+
+                food_prefabs = new GameObject[3];
+                food_prefabs[0] = Inventory.Instance.Generated_Foods[2];
+                food_prefabs[1] = Inventory.Instance.Generated_Foods[3];
+                food_prefabs[2] = Inventory.Instance.Generated_Foods[4];
+                break;
+
             default:
                 break;
         }
@@ -70,7 +84,7 @@ public class Food_Generator : MonoBehaviour
                             int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
                             
                             Destroy(Box);
-                            Box = Inventory.Instance.InvenUI[num];
+                            Box = Inventory.Instance.InvenItems[num];
                             TempFoodData = Box.GetComponent<Food>();
                         
                             TempFoodData.Name = obj.GetComponent<Food>().Name;
@@ -80,7 +94,7 @@ public class Food_Generator : MonoBehaviour
                         }
                         else
                         {
-                            Inventory.Instance.InvenUI.Add(Box);
+                            Inventory.Instance.InvenItems.Add(Box);
                             Inventory.Instance.InvenNames.Add(Box.gameObject.name);
                             Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
                             TempFoodData = Box.GetComponent<Food>();
@@ -104,7 +118,7 @@ public class Food_Generator : MonoBehaviour
                             int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
                             
                             Destroy(Box);
-                            Box = Inventory.Instance.InvenUI[num];
+                            Box = Inventory.Instance.InvenItems[num];
                             TempFoodData = Box.GetComponent<Food>();
                         
                             TempFoodData.Name = obj.GetComponent<Food>().Name;
@@ -114,7 +128,7 @@ public class Food_Generator : MonoBehaviour
                         }
                         else
                         {
-                            Inventory.Instance.InvenUI.Add(Box);
+                            Inventory.Instance.InvenItems.Add(Box);
                             Inventory.Instance.InvenNames.Add(Box.gameObject.name);
                             Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
                             TempFoodData = Box.GetComponent<Food>();
@@ -140,7 +154,7 @@ public class Food_Generator : MonoBehaviour
                     int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
                     
                     Destroy(Box);
-                    Box = Inventory.Instance.InvenUI[num];
+                    Box = Inventory.Instance.InvenItems[num];
                     TempFoodData = Box.GetComponent<Food>();
                 
                     TempFoodData.Name = obj.GetComponent<Food>().Name;
@@ -150,7 +164,7 @@ public class Food_Generator : MonoBehaviour
                 }
                 else
                 {
-                    Inventory.Instance.InvenUI.Add(Box);
+                    Inventory.Instance.InvenItems.Add(Box);
                     Inventory.Instance.InvenNames.Add(Box.gameObject.name);
                     Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
                     TempFoodData = Box.GetComponent<Food>();

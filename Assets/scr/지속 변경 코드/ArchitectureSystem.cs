@@ -33,10 +33,22 @@ public class ArchitectureSystem : MonoBehaviour
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
         { "빨간 설탕 유리 꽃", 0 },
-        { "Cafe", 100 },
-        { "Grocery", 100 },
-        { "딸기우유 연못", 0 }
-        //����ǥ
+        { "노란 설탕 유리 꽃", 0 },
+        { "파란 설탕 유리 꽃", 0 },
+        { "비스킷 의자", 0 },
+        { "아이스크림 테이블", 0 },
+        { "마카롱 쿠션", 0 },
+        { "2단 마카롱 쿠션", 0 },
+        { "딸기우유 연못", 0 },
+        { "솜사탕 구름 1", 0 },
+        { "솜사탕 구름 2", 0 },
+        { "캔디 가로등", 0 },
+        { "롤리팝 캔디 나무", 0 },
+        { "마카롱 나무", 0 },
+        { "초코 분수", 0 },
+        { "녹차 푸딩 산", 0 },
+        { "초코 푸딩 산", 0 },
+        { "거대한 롤리팝 마시멜로우 언덕", 0 }
     };
 
 
@@ -77,7 +89,7 @@ public class ArchitectureSystem : MonoBehaviour
 
         if (isRearrangeMode == false)
         {
-            Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
+            Store_Obj.GetComponent<PolygonCollider2D>().enabled = false;
             
             foreach (var item in p)
             {
@@ -88,7 +100,7 @@ public class ArchitectureSystem : MonoBehaviour
 
         else if (isRearrangeMode == true)
         {
-            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+            Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
 
             bool[] arr = { };
             foreach (var item in p)
@@ -160,7 +172,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
-        Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
+        Store_Obj.GetComponent<PolygonCollider2D>().enabled = false;
         Store_Ui.SetActive(false);
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
@@ -171,6 +183,8 @@ public class ArchitectureSystem : MonoBehaviour
             go.transform.position = tt.position;
         }
         go.GetComponent<SpriteRenderer>().sprite = Get_Sprite;
+        go.AddComponent<PolygonCollider2D>();
+        go.GetComponent<PolygonCollider2D>().isTrigger = true;
         co = StartCoroutine(FollowMouse(go, 1));
         //����������Ʈ/����ui ��Ȱ��ȭ �� �� �ǹ� ���� �� ��������Ʈ�� �̸� ����
         //��ġ��ġ�� ���󰡴� �ڷ�ƾ ����
@@ -182,7 +196,7 @@ public class ArchitectureSystem : MonoBehaviour
         StopCoroutine(co);
         co = null;
         go = null;
-        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+        Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
         //�±� ���� �� ��ġ��ġ ���󰡱� �ڷ�ƾ ���� �� �ڷ�ƾ����,��ǹ����� null��, ����������Ʈ Ȱ��ȭ
     }
     #endregion
