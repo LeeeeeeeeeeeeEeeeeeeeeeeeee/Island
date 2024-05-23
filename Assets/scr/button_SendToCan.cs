@@ -543,7 +543,7 @@ public class button_SendToCan : MonoBehaviour
             case "초코 푸딩 산":
                 if (ForWhatValue == 1)
                 {
-                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["딸초코 푸딩 산"].ToString();
+                    HowMuch.text = "  <sprite=7> " + ArchitectureSystem.build_system.MoneyValue["초코 푸딩 산"].ToString();
                 }
                 else if (ForWhatValue == 2)
                 {

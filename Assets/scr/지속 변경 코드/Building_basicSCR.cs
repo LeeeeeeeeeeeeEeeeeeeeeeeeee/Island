@@ -31,15 +31,12 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "아이스크림 테이블":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "마카롱 쿠션":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "2단 마카롱 쿠션":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "딸기우유 연못":
@@ -47,39 +44,30 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "솜사탕 구름 1":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "솜사탕 구름 2":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "캔디 가로등":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "롤리팝 캔디 나무":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "마카롱 나무":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "초코 분수":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "녹차 푸딩 산":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "초코 푸딩 산":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             case "거대한 롤리팝 마시멜로우 언덕":
-                gameObject.AddComponent<Food_Generator>();
                 break;
 
             default:

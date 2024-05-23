@@ -9,7 +9,7 @@ public class Food_Generator : MonoBehaviour
 {
     public bool day_skip;
     public int max_food_count = 3;
-    int current_food_count = 0;
+    public int current_food_count = 0;
     
     public int[] food_generate_Probability;
     public GameObject[] food_prefabs;
@@ -20,6 +20,30 @@ public class Food_Generator : MonoBehaviour
 
         switch(gameObject.name){
             case "빨간 설탕 유리 꽃":
+                max_food_count = 3;
+
+                food_generate_Probability = new int[2];
+                food_generate_Probability[0] = 70;
+                food_generate_Probability[1] = 100;
+
+                food_prefabs = new GameObject[2];
+                food_prefabs[0] = Inventory.Instance.Generated_Foods[0];
+                food_prefabs[1] = Inventory.Instance.Generated_Foods[1];
+                break;
+
+            case "노란 설탕 유리 꽃":
+                max_food_count = 3;
+
+                food_generate_Probability = new int[2];
+                food_generate_Probability[0] = 70;
+                food_generate_Probability[1] = 100;
+
+                food_prefabs = new GameObject[2];
+                food_prefabs[0] = Inventory.Instance.Generated_Foods[0];
+                food_prefabs[1] = Inventory.Instance.Generated_Foods[1];
+                break;
+
+            case "파란 설탕 유리 꽃":
                 max_food_count = 3;
 
                 food_generate_Probability = new int[2];

@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class CameraZoomInOut : MonoBehaviour
 {
-    public float speed;      //ÁÜÀÎ,ÁÜ¾Æ¿ôÇÒ¶§ ¼Óµµ 
+    public float speed;      //ï¿½ï¿½ï¿½ï¿½,ï¿½Ü¾Æ¿ï¿½ï¿½Ò¶ï¿½ ï¿½Óµï¿½ 
 
     void Update()
     {
-        if (Input.touchCount == 2) //¼Õ°¡¶ô 2°³°¡ ´­·ÈÀ» ¶§
+        if (Input.touchCount == 2) //ï¿½Õ°ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
             if (Camera.main.orthographicSize > 2 && Camera.main.orthographicSize < 11.8f)
             {
-                Touch touch01 = Input.GetTouch(0); //Ã¹¹øÂ° ¼Õ°¡¶ô ÅÍÄ¡¸¦ ÀúÀå
-                Touch touch02 = Input.GetTouch(1); //µÎ¹øÂ° ¼Õ°¡¶ô ÅÍÄ¡¸¦ ÀúÀå
+                Touch touch01 = Input.GetTouch(0); //Ã¹ï¿½ï¿½Â° ï¿½Õ°ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                Touch touch02 = Input.GetTouch(1); //ï¿½Î¹ï¿½Â° ï¿½Õ°ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-                //ÅÍÄ¡¿¡ ´ëÇÑ ÀÌÀü À§Ä¡°ªÀ» °¢°¢ ÀúÀåÇÔ
-                //Ã³À½ ÅÍÄ¡ÇÑ À§Ä¡(touchZero.position)¿¡¼­ ÀÌÀü ÇÁ·¹ÀÓ¿¡¼­ÀÇ ÅÍÄ¡ À§Ä¡¿Í ÀÌ¹ø ÇÁ·ÎÀÓ¿¡¼­ ÅÍÄ¡ À§Ä¡ÀÇ Â÷ÀÌ¸¦ »­
-                Vector2 touchZeroPrevPos = touch01.position - touch01.deltaPosition; //deltaPosition´Â ÀÌµ¿¹æÇâ ÃßÀûÇÒ ¶§ »ç¿ë
+                //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                //Ã³ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡(touchZero.position)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½
+                Vector2 touchZeroPrevPos = touch01.position - touch01.deltaPosition; //deltaPositionï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
                 Vector2 touchOnePrevPos = touch02.position - touch02.deltaPosition;
 
-                // °¢ ÇÁ·¹ÀÓ¿¡¼­ ÅÍÄ¡ »çÀÌÀÇ º¤ÅÍ °Å¸® ±¸ÇÔ
-                float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude; //magnitude´Â µÎ Á¡°£ÀÇ °Å¸® ºñ±³(º¤ÅÍ)
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+                float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude; //magnitudeï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
                 float touchDeltaMag = (touch01.position - touch02.position).magnitude;
 
-                // °Å¸® Â÷ÀÌ ±¸ÇÔ(°Å¸®°¡ ÀÌÀüº¸´Ù Å©¸é(¸¶ÀÌ³Ê½º°¡ ³ª¿À¸é)¼Õ°¡¶ôÀ» ¹ú¸° »óÅÂ_ÁÜÀÎ »óÅÂ)
+                // ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½(ï¿½ï¿½ï¿½Ì³Ê½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
                 float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
                 Camera.main.orthographicSize += deltaMagnitudeDiff * speed * Time.deltaTime;
@@ -30,13 +30,13 @@ public class CameraZoomInOut : MonoBehaviour
             }
         }
 
-        if (Camera.main.orthographicSize <= 2)
+        if (Camera.main.orthographicSize <= 2f)
         {
-            Camera.main.orthographicSize = 2.1f;
+            Camera.main.orthographicSize = 2f;
         }
-        else if (Camera.main.orthographicSize >= 11.8f)
+        else if (Camera.main.orthographicSize >= 20f)
         {
-            Camera.main.orthographicSize = 11.7f;
+            Camera.main.orthographicSize = 20f;
         }
     }
 }
