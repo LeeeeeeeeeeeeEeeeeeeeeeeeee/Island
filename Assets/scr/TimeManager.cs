@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    private void Start()
+    public static TimeManager TimeSystem;
+
+    public string timeStr;
+    public double offlineTime;
+
+    private void Awake()
     {
-        string timeStr = PlayerPrefs.GetString("stTime_1");
+        TimeSystem = this;
+        timeStr = PlayerPrefs.GetString("stTime_1");
         DateTime startTime = Convert.ToDateTime(timeStr);
 
         double offlineTime = (DateTime.Now - startTime).TotalMinutes;

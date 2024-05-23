@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Cam_TouchOBJ : MonoBehaviour
 {
-    public GameObject Particle;
+    public GameObject[] Particles;
 
     public GameObject cook_Ui;
 
     private GameObject store_Ui;
 
-    // Start is called before the first frame update
+    Vector2 Touch_start_pos;
+
     private void Start()
     {
         store_Ui = ArchitectureSystem.build_system.Store_Ui;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.touchCount > 0)
@@ -31,7 +31,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
             if (ArchitectureSystem.build_system.isCameraMode == false)
             {
-                if (toto.phase == TouchPhase.Began && clickCol != null && Input.mousePosition.y <= 1880)
+                if (toto.phase == TouchPhase.Ended && clickCol != null && Input.mousePosition.y <= 1880)
                 {
                     if (clickCol.tag == "store")
                     {
@@ -44,15 +44,20 @@ public class Cam_TouchOBJ : MonoBehaviour
                             Debug.Log("설치");
                             bb.BuildingMove();
                         }
-                        
-                        if(clickCol.TryGetComponent(out Food_Generator generator))
+
+                        if (clickCol.TryGetComponent(out Food_Generator generator))
                         {
+                            if (generator.current_food_count > 0)
+                            {
+                                Instantiate(Particles[1], clickCol.transform.position, Particles[1].transform.rotation);
+                            }
+
                             generator.Get_Food();
                         }
                     }
                     else if(clickCol.tag == "Animal")
                     {
-                        Instantiate(Particle, clickCol.transform.position, Particle.transform.rotation);
+                        Instantiate(Particles[0], clickCol.transform.position, Particles[0].transform.rotation);
 
                         ArchitectureSystem.build_system.Money += 1;
                     }
@@ -60,9 +65,26 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         cook_Ui.SetActive(true);
                     }
-                    else if (clickCol.tag == "Food_Generator")
+                    else if (clickCol.tag == "Interaction")
                     {
-                        clickCol.GetComponent<Food_Generator>().Get_Food();
+                        clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
+                    }
+                    else if (clickCol.tag == "Pat")
+                    {
+                        Touch_start_pos = toto.position;
+                    }
+                }
+
+                if (clickCol != null && toto.phase == TouchPhase.Moved)
+                {
+                    if (clickCol.tag == "Pat")
+                    {
+                        Debug.Log(Vector2.Distance(Touch_start_pos, toto.position));
+                        if (Vector2.Distance(Touch_start_pos, toto.position) >= 300)
+                        {
+                            Touch_start_pos = toto.position;
+                            InteractionSystem.Interaction_system.StartCoroutine(InteractionSystem.Interaction_system.PatInteraction2(clickCol.transform));
+                        }
                     }
                 }
             }

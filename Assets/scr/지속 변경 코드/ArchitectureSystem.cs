@@ -10,7 +10,7 @@ using UnityEngine.SocialPlatforms;
 
 public class ArchitectureSystem : MonoBehaviour
 {
-    //�ǹ� ��ġ�� ���� ��ũ��Ʈ
+    //Scripts for building installation
     public static ArchitectureSystem build_system;
     public GameObject Store_Ui;
     public event Action touchUp;
@@ -26,8 +26,7 @@ public class ArchitectureSystem : MonoBehaviour
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
     public List<button_SendToCan> ButtonList;
-
-    
+    public List<GameObject> BuildingList;
 
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
@@ -51,10 +50,6 @@ public class ArchitectureSystem : MonoBehaviour
         { "거대한 롤리팝 마시멜로우 언덕", 0 }
     };
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         MoneyText.text = Money.ToString();
@@ -120,8 +115,8 @@ public class ArchitectureSystem : MonoBehaviour
 
     public IEnumerator FollowMouse(GameObject gg, int Where)
     {
-        //int 1 = �ǹ���ġ
-        //int 2 = �ǹ����ġ
+        //int 1 = Build
+        //int 2 = Rearrange
         gg.TryGetComponent(out Building b);
         bool isCol;
         isConstrutMode = true;
@@ -141,7 +136,7 @@ public class ArchitectureSystem : MonoBehaviour
                     isCol = b.isnotCol;
                     if (!isCol)
                     {
-                        Debug.Log("��ġ ������ �ʿ�");
+                        Debug.Log("위치 재지정 필요");
 
                     }
                     else if (isCol)
@@ -154,10 +149,6 @@ public class ArchitectureSystem : MonoBehaviour
                     }
                 }
             }
-            //if (Input.mousePosition.y <= 1880)
-            //{
-            //    gg.transform.localPosition = clickPos;
-            //}
             yield return null;
 
         }
@@ -186,18 +177,19 @@ public class ArchitectureSystem : MonoBehaviour
         go.AddComponent<PolygonCollider2D>();
         go.GetComponent<PolygonCollider2D>().isTrigger = true;
         co = StartCoroutine(FollowMouse(go, 1));
-        //����������Ʈ/����ui ��Ȱ��ȭ �� �� �ǹ� ���� �� ��������Ʈ�� �̸� ����
-        //��ġ��ġ�� ���󰡴� �ڷ�ƾ ����
+        //상점오브젝트/상점ui 비활성화 및 빈 건물 생성 후 스프라이트와 이름 설정
+        //터치위치로 따라가는 코루틴 시작
     }
 
     public void OK_IConstructThere()
     {
         go.tag = "Building";
+        BuildingList.Add(go);
         StopCoroutine(co);
         co = null;
         go = null;
         Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
-        //�±� ���� �� ��ġ��ġ ���󰡱� �ڷ�ƾ ���� �� �ڷ�ƾ����,��ǹ����� null��, ����������Ʈ Ȱ��ȭ
+        //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
     }
     #endregion
 }
