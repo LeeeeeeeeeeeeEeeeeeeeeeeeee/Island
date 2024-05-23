@@ -28,6 +28,7 @@ public class CellCtrl : MonoBehaviour
                 CellCreate.CellVisit(this.gameObject);
             }
         }
+        CellCreate.CellVisit(this.gameObject);
 
         StartCoroutine(InteractionButtonActive()); //1
     }
