@@ -145,7 +145,10 @@ public class InteractionSystem : MonoBehaviour
 
 
     #region clapclap
+
     [SerializeField] private Transform ClapClapButton;
+    bool ButtonFalse = false;
+
     public void ClapClapInteraction(GameObject _Cell)
     {
         GameObject Clap = _Cell.transform.GetChild(1).gameObject;
@@ -173,12 +176,14 @@ public class InteractionSystem : MonoBehaviour
             {
                 case 1:
                     b[0].SetActive(true);
+                    ButtonFalse = true;
                     yield return oneSecond;
                     b[0].SetActive(false);
                     break;
 
                 case 2:
                     b[1].SetActive(true);
+                    ButtonFalse = true;
                     yield return oneSecond;
                     b[1].SetActive(false);
                     break; 
@@ -186,6 +191,7 @@ public class InteractionSystem : MonoBehaviour
                 case 3:
                     b[0].SetActive(true);
                     b[1].SetActive(true);
+                    ButtonFalse = true;
                     yield return oneSecond;
                     b[0].SetActive(false);
                     b[1].SetActive(false);
@@ -208,8 +214,12 @@ public class InteractionSystem : MonoBehaviour
     
     public void ClapClapInteraction_ButtonInput()
     {
-        BI++;
+        if (ButtonFalse == true)
+        {
+            BI++;
+        }
         Debug.Log(BI);
+        ButtonFalse = false;
     }
     #endregion
 
