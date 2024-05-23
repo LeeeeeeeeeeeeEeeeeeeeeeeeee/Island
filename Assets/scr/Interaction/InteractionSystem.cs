@@ -61,8 +61,8 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-    public float smoothSpeed = 0.125f; // 이동 속도
-    public Vector3 offset = Vector3.zero; // 오프셋
+    public float smoothSpeed = 0.125f;
+    public Vector3 offset = Vector3.zero;
     [SerializeField] private Transform _Cam;
 
     public IEnumerator SmoothCameraMove(Transform target, int type)

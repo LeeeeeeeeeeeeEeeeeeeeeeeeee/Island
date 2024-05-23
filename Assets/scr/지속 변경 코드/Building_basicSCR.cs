@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Building_basicSCR : MonoBehaviour
 {
-    public ArchitectureSystem _System = ArchitectureSystem.build_system;
     public bool isnotCol;
     public bool RearrangeNow = false;
 
@@ -13,6 +12,8 @@ public abstract class Building_basicSCR : MonoBehaviour
 
     public void WhoAmI(string name)
     {
+        Debug.Log(name);
+
         switch (name)
         {
             case "빨간 설탕 유리 꽃":
