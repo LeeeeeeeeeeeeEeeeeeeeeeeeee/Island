@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
 public class InteractionSystem : MonoBehaviour
@@ -11,7 +12,7 @@ public class InteractionSystem : MonoBehaviour
 
     public static InteractionSystem Interaction_system;
 
-
+    public bool is_Interaction_Mode = false;
 
     public GameObject _GameManeger;
     public List<GameObject> _BuildingList
@@ -102,11 +103,15 @@ public class InteractionSystem : MonoBehaviour
     }
 
     #region Pat
+
+    [SerializeField] private GameObject InterUI;
+
     public void PatInteraction(GameObject _Cell)
     {
         GameObject Pat = _Cell.transform.GetChild(0).gameObject;
         Pat.tag = "Pat";
         Pat.GetComponent<SpriteRenderer>().enabled = false;
+        InterUI.transform.GetChild(0).gameObject.SetActive(true);
         Pat.transform.position = new Vector3(Pat.transform.position.x,Pat.transform.position.y-1,Pat.transform.position.z);
         Pat.GetComponent<BoxCollider2D>().size = new Vector2(5, 7);
 
@@ -130,13 +135,17 @@ public class InteractionSystem : MonoBehaviour
 
             yield return new WaitForSeconds(2);
 
+            Inventory.Instance.AlertText.text = "성공!!!";
+            Inventory.Instance.AlertText.color = Color.white;
+
             ArchitectureSystem.build_system.isConstrutMode = false;
             t.tag = "Interaction"; //9
             t.gameObject.SetActive(false);
             t.GetComponent<SpriteRenderer>().enabled = true;
+            InterUI.transform.GetChild(0).gameObject.SetActive(false);
             t.transform.position = new Vector3(t.transform.position.x, t.transform.position.y + 1, t.transform.position.z);
             t.parent.GetComponent<CellCtrl>().InteractionStart = false;
-            
+            InteractionSystem.Interaction_system.is_Interaction_Mode = false;
         }
         
     }
@@ -147,13 +156,12 @@ public class InteractionSystem : MonoBehaviour
     #region clapclap
 
     [SerializeField] private Transform ClapClapButton;
-    bool ButtonFalse = false;
 
     public void ClapClapInteraction(GameObject _Cell)
     {
         GameObject Clap = _Cell.transform.GetChild(1).gameObject;
         Clap.SetActive(false);
-        ClapClapButton.position = new Vector2(Screen.width / 2, Screen.height / 2);
+        ClapClapButton.position = new Vector2(Screen.width / 2, Screen.height / 2 - 750);
         ClapClapButton.gameObject.SetActive(true);
 
         int[] a = { 1, 2, 3 };
@@ -168,58 +176,75 @@ public class InteractionSystem : MonoBehaviour
     private IEnumerator ClapClapInteraction2(int[] a, GameObject[] b , GameObject c)
     {
         BI = 0;
+        b[0].SetActive(true);
+        b[1].SetActive(true);
         yield return new WaitForSeconds(3);
 
-        for(int i = 0; i <=2; i++) 
+        for(int i = 0; i <= 2; i++) 
         {
             switch (a[i])
             {
                 case 1:
-                    b[0].SetActive(true);
-                    ButtonFalse = true;
-                    yield return oneSecond;
-                    b[0].SetActive(false);
+                    b[0].GetComponent<Image>().color = Color.yellow;
+                    yield return new WaitForSecondsRealtime(1);
+                    b[0].GetComponent<Image>().color = Color.white;
                     break;
 
                 case 2:
-                    b[1].SetActive(true);
-                    ButtonFalse = true;
-                    yield return oneSecond;
-                    b[1].SetActive(false);
+                    b[1].GetComponent<Image>().color = Color.yellow;
+                    yield return new WaitForSecondsRealtime(1);
+                    b[1].GetComponent<Image>().color = Color.white;
                     break; 
 
                 case 3:
-                    b[0].SetActive(true);
-                    b[1].SetActive(true);
-                    ButtonFalse = true;
-                    yield return oneSecond;
-                    b[0].SetActive(false);
-                    b[1].SetActive(false);
+                    b[0].GetComponent<Image>().color = Color.yellow;
+                    b[1].GetComponent<Image>().color = Color.yellow;
+                    yield return new WaitForSecondsRealtime(1);
+                    b[0].GetComponent<Image>().color = Color.white;
+                    b[1].GetComponent<Image>().color = Color.white;
                     break;
 
                 default:
                     break;
             }
         }
+
         if(BI!=4)
         {
+            Inventory.Instance.AlertText.text = "실패...";
+            Inventory.Instance.AlertText.color = Color.white;
             Debug.Log("Fail");
+        }
+        else
+        {
+            Inventory.Instance.AlertText.text = "성공!!!";
+            Inventory.Instance.AlertText.color = Color.white;
         }
 
         c.GetComponent<SpriteRenderer>().enabled = false;
         c.GetComponent<BoxCollider2D>().enabled = false;
+        b[0].SetActive(false);
+        b[1].SetActive(false);
+        InterUI.transform.GetChild(1).gameObject.SetActive(false);
+        InteractionSystem.Interaction_system.is_Interaction_Mode = false;
     }
 
     int BI = 0;
     
-    public void ClapClapInteraction_ButtonInput()
+    public void ClapClapInteraction_ButtonInput(Image Source)
     {
-        if (ButtonFalse == true)
+        if (Source.color == Color.yellow)
         {
+            Source.color = Color.white;
             BI++;
         }
+        else
+        {
+            Source.color = Color.red;
+            BI--;
+        }
+
         Debug.Log(BI);
-        ButtonFalse = false;
     }
     #endregion
 

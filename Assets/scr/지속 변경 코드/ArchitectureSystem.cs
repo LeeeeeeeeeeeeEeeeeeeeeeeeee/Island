@@ -19,7 +19,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public bool isCameraMode = false;
     public bool isConstrutMode = false;
-    private bool isRearrangeMode = false;
+    public bool isRearrangeMode = false;
 
     public int Money = 0;
     public int MoneyOutput = 0;

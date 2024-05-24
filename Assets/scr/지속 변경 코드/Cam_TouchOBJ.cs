@@ -12,6 +12,8 @@ public class Cam_TouchOBJ : MonoBehaviour
 
     Vector2 Touch_start_pos;
 
+    public Collider2D BeganCol;
+
     private void Start()
     {
         store_Ui = ArchitectureSystem.build_system.Store_Ui;
@@ -31,9 +33,27 @@ public class Cam_TouchOBJ : MonoBehaviour
 
             if (ArchitectureSystem.build_system.isCameraMode == false)
             {
-                if (toto.phase == TouchPhase.Ended && clickCol != null && Input.mousePosition.y <= 1880)
+                if (toto.phase == TouchPhase.Began)
                 {
-                    if (clickCol.tag == "store")
+                    if (clickCol != null)
+                    {
+                        BeganCol = clickCol;
+
+
+                        if (clickCol.tag == "Building")
+                        {
+                            if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                            {
+                                Debug.Log("설치");
+                                bb.BuildingMove();
+                            }
+                        }
+                    }
+                }
+
+                if (toto.phase == TouchPhase.Ended && BeganCol == clickCol && clickCol != null && InteractionSystem.Interaction_system.is_Interaction_Mode == false)
+                {
+                    if (clickCol.tag == "store" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         store_Ui.SetActive(true);
                     }
@@ -55,19 +75,20 @@ public class Cam_TouchOBJ : MonoBehaviour
                             generator.Get_Food();
                         }
                     }
-                    else if(clickCol.tag == "Animal")
+                    else if(clickCol.tag == "Animal" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         Instantiate(Particles[0], clickCol.transform.position, Particles[0].transform.rotation);
 
                         ArchitectureSystem.build_system.Money += 1;
                     }
-                    else if (clickCol.tag == "Cook")
+                    else if (clickCol.tag == "Cook" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         cook_Ui.SetActive(true);
                     }
-                    else if (clickCol.tag == "Interaction")
+                    else if (clickCol.tag == "Interaction" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
+                        InteractionSystem.Interaction_system.is_Interaction_Mode = true;
                     }
                     else if (clickCol.tag == "Pat")
                     {
