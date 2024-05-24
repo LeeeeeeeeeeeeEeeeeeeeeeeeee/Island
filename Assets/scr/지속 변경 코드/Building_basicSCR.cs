@@ -75,7 +75,10 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
         }
 
-        gameObject.GetComponent<Food_Generator>().init();
+        if (gameObject.TryGetComponent(out Food_Generator generator))
+        {
+            generator.init();
+        }
     }
     
 }

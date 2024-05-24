@@ -129,6 +129,8 @@ public class Food_Generator : MonoBehaviour
                             TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
                         }
                         Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
+                        Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
+                        Inventory.Instance.AlertText.color = Color.white;
                         Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
                         break;
                     }
@@ -163,6 +165,8 @@ public class Food_Generator : MonoBehaviour
                             TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
                         }
                         Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
+                        Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
+                        Inventory.Instance.AlertText.color = Color.white;
                         Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
                         break;
                     }
@@ -199,6 +203,8 @@ public class Food_Generator : MonoBehaviour
                     TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
                 }
                 Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
+                Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
+                Inventory.Instance.AlertText.color = Color.white;
                 Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
             }
 

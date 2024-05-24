@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject FoodStorage;
     public GameObject FoodPrefab;
+
+    public TextMeshProUGUI AlertText;
 
     public Image CookImg;
     public TextMeshProUGUI CookText;
@@ -49,6 +52,8 @@ public class Inventory : MonoBehaviour
 
         CookText.text = Cook;
         CookDescriptionText.text = CookDescription;
+
+        AlertText.color -= new Color(0, 0, 0, 0.3f) * Time.deltaTime;
     }
 
     public void SelectButtonChange(GameObject Self)
