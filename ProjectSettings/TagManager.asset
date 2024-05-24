@@ -19,7 +19,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - UI_Player_Property_Info
   - 
   - 
   - 
@@ -45,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2537025023
+    locked: 0
+  - name: UI_Player_Property_Info
+    uniqueID: 3916706181
     locked: 0
