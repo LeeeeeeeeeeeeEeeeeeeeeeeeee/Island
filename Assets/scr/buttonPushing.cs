@@ -32,7 +32,7 @@ public class buttonPushing : MonoBehaviour
 
     //public void LetsConstructor(String BuildName)
     //{
-    //    storeObject.GetComponent<PolygonCollider2D>().enabled = false;
+    //    storeObject.GetComponent<BoxCollider2D>().enabled = false;
     //    storeUi.SetActive(false);
     //    go = Instantiate(emptyBuilding);
     //    go.name = BuildName;
@@ -53,7 +53,7 @@ public class buttonPushing : MonoBehaviour
     //    co= null;
     //    go = null;
     //    get_Sprite = null;
-    //    storeObject.GetComponent<PolygonCollider2D>().enabled = true;
+    //    storeObject.GetComponent<BoxCollider2D>().enabled = true;
 
     //}
 }

@@ -84,7 +84,7 @@ public class ArchitectureSystem : MonoBehaviour
 
         if (isRearrangeMode == false)
         {
-            Store_Obj.GetComponent<PolygonCollider2D>().enabled = false;
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
             
             foreach (var item in p)
             {
@@ -95,7 +95,7 @@ public class ArchitectureSystem : MonoBehaviour
 
         else if (isRearrangeMode == true)
         {
-            Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
 
             bool[] arr = { };
             foreach (var item in p)
@@ -163,7 +163,6 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
-        Store_Obj.GetComponent<PolygonCollider2D>().enabled = false;
         Store_Ui.SetActive(false);
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
@@ -174,8 +173,10 @@ public class ArchitectureSystem : MonoBehaviour
             go.transform.position = tt.position;
         }
         go.GetComponent<SpriteRenderer>().sprite = Get_Sprite;
-        go.AddComponent<PolygonCollider2D>();
-        go.GetComponent<PolygonCollider2D>().isTrigger = true;
+        go.AddComponent<BoxCollider2D>();
+        go.GetComponent<BoxCollider2D>().isTrigger = true;
+        go.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.2f);
+        go.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(go.GetComponent<SpriteRenderer>().size.x, go.GetComponent<SpriteRenderer>().size.y);
         co = StartCoroutine(FollowMouse(go, 1));
         //상점오브젝트/상점ui 비활성화 및 빈 건물 생성 후 스프라이트와 이름 설정
         //터치위치로 따라가는 코루틴 시작
@@ -188,7 +189,6 @@ public class ArchitectureSystem : MonoBehaviour
         StopCoroutine(co);
         co = null;
         go = null;
-        Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
         //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
     }
     #endregion

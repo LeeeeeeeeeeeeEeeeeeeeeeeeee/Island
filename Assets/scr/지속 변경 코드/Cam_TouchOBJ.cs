@@ -28,7 +28,11 @@ public class Cam_TouchOBJ : MonoBehaviour
             #region Currently Clicked Obj in : Collider2D clickCol
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-            Collider2D clickCol = Physics2D.OverlapPoint(clickPos);
+
+            RaycastHit2D hit = Physics2D.Raycast(clickPos, transform.forward, 15f);
+            Debug.DrawRay(clickPos, transform.forward * 10, Color.red, 0.3f);
+            Collider2D clickCol = hit.collider;
+            //Collider2D clickCol = Physics2D.OverlapPoint(clickPos);
             #endregion
 
             if (ArchitectureSystem.build_system.isCameraMode == false)
@@ -42,7 +46,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                         if (clickCol.tag == "Building")
                         {
-                            if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                            if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
                             {
                                 Debug.Log("설치");
                                 bb.BuildingMove();
@@ -53,19 +57,25 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                 if (toto.phase == TouchPhase.Ended && BeganCol == clickCol && clickCol != null && InteractionSystem.Interaction_system.is_Interaction_Mode == false)
                 {
+                    if (clickCol.tag == "Interaction" && ArchitectureSystem.build_system.isRearrangeMode == false)
+                    {
+                        clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
+                        InteractionSystem.Interaction_system.is_Interaction_Mode = true;
+                    }
+
                     if (clickCol.tag == "store" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         store_Ui.SetActive(true);
                     }
                     else if (clickCol.tag == "Building" && clickCol != null)
                     {
-                        if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                        if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
                         {
                             Debug.Log("설치");
                             bb.BuildingMove();
                         }
 
-                        if (clickCol.TryGetComponent(out Food_Generator generator))
+                        if (clickCol.transform.parent.TryGetComponent(out Food_Generator generator))
                         {
                             if (generator.current_food_count > 0)
                             {
@@ -84,11 +94,6 @@ public class Cam_TouchOBJ : MonoBehaviour
                     else if (clickCol.tag == "Cook" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
                         cook_Ui.SetActive(true);
-                    }
-                    else if (clickCol.tag == "Interaction" && ArchitectureSystem.build_system.isRearrangeMode == false)
-                    {
-                        clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
-                        InteractionSystem.Interaction_system.is_Interaction_Mode = true;
                     }
                     else if (clickCol.tag == "Pat")
                     {
