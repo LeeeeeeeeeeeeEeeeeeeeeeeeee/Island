@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 405281569647486956}
   - component: {fileID: 8766602124645229217}
   - component: {fileID: 3244532772829106582}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Clapclap
   m_TagString: Interaction
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 4653406704172296904}
   - component: {fileID: 7190318195126143475}
   - component: {fileID: 1420075161666845761}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Pat
   m_TagString: Interaction
   m_Icon: {fileID: 0}
