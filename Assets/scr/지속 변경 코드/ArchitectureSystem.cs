@@ -29,6 +29,8 @@ public class ArchitectureSystem : MonoBehaviour
     public List<GameObject> BuildingList;
 
     public GameObject Building_BtnObj;
+    public GameObject ReArrangeBuilding_BtnObj2;
+    public GameObject Rearrnge_Btn;
     public GameObject CurrentSelectedBuilding;
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
@@ -81,7 +83,7 @@ public class ArchitectureSystem : MonoBehaviour
     public void Rearrange()
     {
         Building[] p = GetComponentsInChildren<Building>();
-
+        Rearrnge_Btn.SetActive(true);
 
         if (isRearrangeMode == false)
         {
@@ -149,12 +151,11 @@ public class ArchitectureSystem : MonoBehaviour
                         }
                         else if(Where == 2) 
                         {
-                            touchUp();
+                            b.btn_active();
                         }
                     }
                 }
             }
-            Debug.Log("This");
             yield return null;
 
         }
@@ -198,6 +199,7 @@ public class ArchitectureSystem : MonoBehaviour
         Building_BtnObj.SetActive(true);
         co2 = StartCoroutine(FollowBuilding_btn());
     }
+    #endregion
 
     private IEnumerator FollowBuilding_btn()
     {
@@ -210,24 +212,18 @@ public class ArchitectureSystem : MonoBehaviour
         }
     }
 
+    #region First_Build_Btn
     public void btn_OK()
     {
         //StopCoroutine(co);
         //StopCoroutine(co2);
 
+        StopAllCoroutines();
+        co = null;
+        co2 = null;
 
-        if (isRearrangeMode == true)
-        {
-            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
-        }
-        else
-        {
-            StopAllCoroutines();
-            co = null;
-            co2 = null;
+        go = null;
 
-            go = null;
-        }
 
         Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
 
@@ -257,8 +253,63 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void btn_Cancle()
     {
+
+        StopAllCoroutines();
+        co = null;
+        co2 = null;
+        go = null;
+
+        Destroy(CurrentSelectedBuilding);
+
+        Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+    #endregion
+
+    #region Rearrange_Btn
+
+    public void Re_btn_Cancle()
+    {
         //StopCoroutine(co);
         //StopCoroutine(co2);
+
+        if (isRearrangeMode == true)
+        {
+            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
+        }
+
+        Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+
+    public void Re_btn_Flip()
+    {
+        GameObject g = CurrentSelectedBuilding;
+        if (g.TryGetComponent(out SpriteRenderer ren))
+        {
+            if (ren.flipX == true)
+            {
+                ren.flipX = false;
+            }
+            else if (ren.flipX == false)
+            {
+                ren.flipX = true;
+            }
+        }
+    }
+
+    public void Re_btn_Restore()
+    {
         if (isRearrangeMode == true)
         {
             CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
@@ -280,5 +331,6 @@ public class ArchitectureSystem : MonoBehaviour
 
         CurrentSelectedBuilding = null;
     }
+
     #endregion
 }

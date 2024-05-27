@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class buttonPushing : MonoBehaviour
 {
-    //���̵�����. ���� ���� ����
+    //Dummy. Able to delete
 
 
 
