@@ -59,11 +59,11 @@ public class Cam_TouchOBJ : MonoBehaviour
                     }
                     else if (clickCol.tag == "Building" && clickCol != null)
                     {
-                        if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
-                        {
-                            Debug.Log("설치");
-                            bb.BuildingMove();
-                        }
+                        //if (clickCol.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                        //{
+                        //    Debug.Log("설치");
+                        //    bb.BuildingMove();
+                        //}
 
                         if (clickCol.TryGetComponent(out Food_Generator generator))
                         {
