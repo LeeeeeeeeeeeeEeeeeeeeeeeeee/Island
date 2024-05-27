@@ -57,6 +57,7 @@ public class ArchitectureSystem : MonoBehaviour
         MoneyText.text = Money.ToString();
         build_system = this;
         Store_Obj = transform.GetChild(0).gameObject;
+        //touchUp += OK_IConstructThere;
 
         ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
 
@@ -189,7 +190,16 @@ public class ArchitectureSystem : MonoBehaviour
         //터치위치로 따라가는 코루틴 시작
     }
 
-
+    //public void OK_IConstructThere()
+    //{
+    //    go.tag = "Building";
+    //    BuildingList.Add(go);
+    //    StopCoroutine(co);
+    //    co = null;
+    //    go = null;
+    //    Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
+    //    //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
+    //}
 
     public void OK_IConstructThere()
     {
