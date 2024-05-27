@@ -10,8 +10,6 @@ public class Building : Building_basicSCR
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
         GetComponent<SpriteRenderer>().sprite = mySprite.sprite;
-        ArchitectureSystem.build_system.touchUp += btn_active;
-
         WhoAmI(this.name);
     }
 
@@ -66,24 +64,5 @@ public class Building : Building_basicSCR
             yield return null;
         }
     }
-
-    private void btn_active()
-    {
-        ArchitectureSystem.build_system.Building_BtnObj.SetActive(true);
-        StartCoroutine(FollowBuilding_btn());
-    }
-
-    private IEnumerator FollowBuilding_btn()
-    {
-        Transform btnObj = ArchitectureSystem.build_system.Building_BtnObj.transform;
-        //Transform CrtBuilding = ArchitectureSystem.build_system.CurrentSelectedBuilding.transform;
-        Transform CrtBuilding = this.transform;
-        while (true)
-        {
-            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
-            yield return null;
-        }
-    }
-
 }
 
