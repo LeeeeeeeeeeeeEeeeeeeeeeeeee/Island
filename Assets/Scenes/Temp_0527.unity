@@ -3896,6 +3896,7 @@ MonoBehaviour:
   BuildingList:
   - {fileID: 508637185}
   Building_BtnObj: {fileID: 567225055}
+  ReArrangeBuilding_BtnObj2: {fileID: 0}
   Rearrnge_Btn: {fileID: 902514126}
   CurrentSelectedBuilding: {fileID: 0}
   emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
