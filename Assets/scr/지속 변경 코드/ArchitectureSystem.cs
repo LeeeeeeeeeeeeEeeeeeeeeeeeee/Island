@@ -28,8 +28,6 @@ public class ArchitectureSystem : MonoBehaviour
     public List<button_SendToCan> ButtonList;
     public List<GameObject> BuildingList;
 
-    public GameObject Building_BtnObj;
-    public GameObject CurrentSelectedBuilding;
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
@@ -57,7 +55,7 @@ public class ArchitectureSystem : MonoBehaviour
         MoneyText.text = Money.ToString();
         build_system = this;
         Store_Obj = transform.GetChild(0).gameObject;
-        //touchUp += OK_IConstructThere;
+        touchUp += OK_IConstructThere;
 
         ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
 
@@ -113,7 +111,7 @@ public class ArchitectureSystem : MonoBehaviour
                 isRearrangeMode = false;
             }
         }
-    } 
+    }
 
     public IEnumerator FollowMouse(GameObject gg, int Where)
     {
@@ -122,7 +120,6 @@ public class ArchitectureSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         bool isCol;
         isConstrutMode = true;
-        CurrentSelectedBuilding = gg;
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -146,27 +143,21 @@ public class ArchitectureSystem : MonoBehaviour
                     {
                         if (Where == 1)
                         {
-                            OK_IConstructThere();
-                        }
-                        else if(Where == 2) 
-                        {
                             touchUp();
                         }
+                        break;
                     }
                 }
             }
-            Debug.Log("This");
             yield return null;
 
         }
-        
-        
+        isConstrutMode = false;
     }
 
 
     #region purchase and construction
     Coroutine co;
-    Coroutine co2;
     GameObject go;
     public GameObject emptyBuilding;
 
@@ -190,105 +181,15 @@ public class ArchitectureSystem : MonoBehaviour
         //터치위치로 따라가는 코루틴 시작
     }
 
-    //public void OK_IConstructThere()
-    //{
-    //    go.tag = "Building";
-    //    BuildingList.Add(go);
-    //    StopCoroutine(co);
-    //    co = null;
-    //    go = null;
-    //    Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
-    //    //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
-    //}
-
     public void OK_IConstructThere()
     {
         go.tag = "Building";
-
-        Building_BtnObj.SetActive(true);
-        co2 = StartCoroutine(FollowBuilding_btn());
-    }
-
-    private IEnumerator FollowBuilding_btn()
-    {
-        Transform btnObj = Building_BtnObj.transform;
-        Transform CrtBuilding = CurrentSelectedBuilding.transform;
-        while (true)
-        {
-            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
-            yield return null;
-        }
-    }
-
-    public void btn_OK()
-    {
-        //StopCoroutine(co);
-        //StopCoroutine(co2);
-
-
-        if (isRearrangeMode == true)
-        {
-            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
-        }
-        else
-        {
-            StopAllCoroutines();
-            co = null;
-            co2 = null;
-
-            go = null;
-        }
-
+        BuildingList.Add(go);
+        StopCoroutine(co);
+        co = null;
+        go = null;
         Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
-
-
-        isConstrutMode = false;
-
-        Building_BtnObj.SetActive(false);
-
-        CurrentSelectedBuilding = null;
-    }
-
-    public void btn_Flip()
-    {
-        GameObject g = CurrentSelectedBuilding;
-        if (g.TryGetComponent(out SpriteRenderer ren))
-        {
-            if (ren.flipX == true)
-            {
-                ren.flipX = false;
-            }
-            else if (ren.flipX == false)
-            {
-                ren.flipX = true;
-            }
-        }
-    }
-
-    public void btn_Cancle()
-    {
-        //StopCoroutine(co);
-        //StopCoroutine(co2);
-        if (isRearrangeMode == true)
-        {
-            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
-        }
-        else
-        {
-            StopAllCoroutines();
-            co = null;
-            co2 = null;
-            go = null;
-        }
-        Destroy(CurrentSelectedBuilding);
-
-        Store_Obj.GetComponent<PolygonCollider2D>().enabled = true;
-
-        isConstrutMode = false;
-
-        Building_BtnObj.SetActive(false);
-
-        CurrentSelectedBuilding = null;
+        //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
     }
     #endregion
 }
