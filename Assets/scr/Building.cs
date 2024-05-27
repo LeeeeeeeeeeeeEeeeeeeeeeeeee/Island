@@ -15,8 +15,6 @@ public class Building : Building_basicSCR
         WhoAmI(this.name);
     }
 
-
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         isnotCol = true;
@@ -34,11 +32,7 @@ public class Building : Building_basicSCR
 
     public void BuildingMove()
     {
-        GameObject g = ArchitectureSystem.build_system.CurrentSelectedBuilding;
-        if (g == this || g == null)
-        { 
-        StartCoroutine(ArchitectureSystem.build_system.FollowMouse(this.gameObject, 2));
-        }
+        StartCoroutine(ArchitectureSystem.build_system.FollowMouse(this.gameObject,2));
     }
 
     public void Interaction_Building(GameObject cell)
@@ -73,7 +67,7 @@ public class Building : Building_basicSCR
         }
     }
 
-    public void btn_active()
+    private void btn_active()
     {
         ArchitectureSystem.build_system.Building_BtnObj.SetActive(true);
         StartCoroutine(FollowBuilding_btn());
@@ -87,7 +81,6 @@ public class Building : Building_basicSCR
         while (true)
         {
             btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
-            Debug.Log("Why");
             yield return null;
         }
     }
