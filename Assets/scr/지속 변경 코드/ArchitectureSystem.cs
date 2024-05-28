@@ -28,6 +28,11 @@ public class ArchitectureSystem : MonoBehaviour
     public List<button_SendToCan> ButtonList;
     public List<GameObject> BuildingList;
 
+    public GameObject Building_BtnObj;
+    public GameObject ReArrangeBuilding_BtnObj2;
+    public GameObject Rearrnge_Btn;
+    public GameObject CurrentSelectedBuilding;
+
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
@@ -55,7 +60,7 @@ public class ArchitectureSystem : MonoBehaviour
         MoneyText.text = Money.ToString();
         build_system = this;
         Store_Obj = transform.GetChild(0).gameObject;
-        touchUp += OK_IConstructThere;
+        //touchUp += OK_IConstructThere;
 
         ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
 
@@ -80,6 +85,8 @@ public class ArchitectureSystem : MonoBehaviour
     public void Rearrange()
     {
         Building[] p = GetComponentsInChildren<Building>();
+        Rearrnge_Btn.SetActive(true);
+
 
 
         if (isRearrangeMode == false)
@@ -120,11 +127,13 @@ public class ArchitectureSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         bool isCol;
         isConstrutMode = true;
+        CurrentSelectedBuilding = gg;
+
         while (true)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-            if(Input.touchCount== 1 && clickPos.y <= 1880) 
+            if(Input.touchCount == 1) 
             {
                 Touch tt = Input.GetTouch(0);
                 if (tt.phase == TouchPhase.Moved)
@@ -143,21 +152,25 @@ public class ArchitectureSystem : MonoBehaviour
                     {
                         if (Where == 1)
                         {
-                            touchUp();
+                            OK_IConstructThere();
                         }
-                        break;
+                        else if (Where == 2)
+                        {
+                            b.btn_active();
+                        }
                     }
                 }
             }
             yield return null;
 
         }
-        isConstrutMode = false;
+        
     }
 
 
     #region purchase and construction
     Coroutine co;
+    Coroutine co2;
     GameObject go;
     public GameObject emptyBuilding;
 
@@ -186,10 +199,146 @@ public class ArchitectureSystem : MonoBehaviour
     {
         go.tag = "Building";
         BuildingList.Add(go);
-        StopCoroutine(co);
-        co = null;
-        go = null;
+        Building_BtnObj.SetActive(true);
+        co2 = StartCoroutine(FollowBuilding_btn());
         //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
     }
     #endregion
+
+    private IEnumerator FollowBuilding_btn()
+    {
+        Transform btnObj = Building_BtnObj.transform;
+        Transform CrtBuilding = CurrentSelectedBuilding.transform;
+        while (true)
+        {
+            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
+            yield return null;
+        }
+    }
+
+    #region First_Build_Btn
+    public void btn_OK()
+    {
+        //StopCoroutine(co);
+        //StopCoroutine(co2);
+
+        StopAllCoroutines();
+        co = null;
+        co2 = null;
+
+        go = null;
+
+
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+
+    public void btn_Flip()
+    {
+        GameObject g = CurrentSelectedBuilding;
+        if (g.TryGetComponent(out SpriteRenderer ren))
+        {
+            if (ren.flipX == true)
+            {
+                ren.flipX = false;
+            }
+            else if (ren.flipX == false)
+            {
+                ren.flipX = true;
+            }
+        }
+    }
+
+    public void btn_Cancle()
+    {
+
+        StopAllCoroutines();
+        co = null;
+        co2 = null;
+        go = null;
+
+        Destroy(CurrentSelectedBuilding);
+
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+    #endregion
+
+    #region Rearrange_Btn
+
+    public void Re_btn_Cancle()
+    {
+        //StopCoroutine(co);
+        //StopCoroutine(co2);
+
+        if (isRearrangeMode == true)
+        {
+            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
+        }
+
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+
+    public void Re_btn_Flip()
+    {
+        GameObject g = CurrentSelectedBuilding;
+        if (g.TryGetComponent(out SpriteRenderer ren))
+        {
+            if (ren.flipX == true)
+            {
+                ren.flipX = false;
+            }
+            else if (ren.flipX == false)
+            {
+                ren.flipX = true;
+            }
+        }
+    }
+
+    public void Re_btn_Restore()
+    {
+        if (isRearrangeMode == true)
+        {
+            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
+        }
+        else
+        {
+            StopAllCoroutines();
+            co = null;
+            co2 = null;
+            go = null;
+        }
+        Destroy(CurrentSelectedBuilding);
+
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+        isConstrutMode = false;
+
+        Building_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+    }
+
+
+    #endregion
 }
+
+
+

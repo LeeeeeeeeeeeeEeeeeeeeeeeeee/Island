@@ -10,6 +10,7 @@ public class Building : Building_basicSCR
         TryGetComponent(out mySprite);
         TryGetComponent(out myCollider);
         GetComponent<SpriteRenderer>().sprite = mySprite.sprite;
+        ArchitectureSystem.build_system.touchUp += btn_active;
         WhoAmI(this.name);
     }
 
@@ -30,7 +31,12 @@ public class Building : Building_basicSCR
 
     public void BuildingMove()
     {
-        StartCoroutine(ArchitectureSystem.build_system.FollowMouse(this.gameObject,2));
+        GameObject g = ArchitectureSystem.build_system.CurrentSelectedBuilding;
+        if (g == this || g == null)
+        {
+            StartCoroutine(ArchitectureSystem.build_system.FollowMouse(this.gameObject, 2));
+        }
+
     }
 
     public void Interaction_Building(GameObject cell)
@@ -64,5 +70,25 @@ public class Building : Building_basicSCR
             yield return null;
         }
     }
+
+    public void btn_active()
+    {
+        ArchitectureSystem.build_system.Building_BtnObj.SetActive(true);
+        StartCoroutine(FollowBuilding_btn());
+    }
+
+    private IEnumerator FollowBuilding_btn()
+    {
+        Transform btnObj = ArchitectureSystem.build_system.Building_BtnObj.transform;
+        //Transform CrtBuilding = ArchitectureSystem.build_system.CurrentSelectedBuilding.transform;
+        Transform CrtBuilding = this.transform;
+        while (true)
+        {
+            btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
+            Debug.Log("Why");
+            yield return null;
+        }
+    }
+
 }
 
