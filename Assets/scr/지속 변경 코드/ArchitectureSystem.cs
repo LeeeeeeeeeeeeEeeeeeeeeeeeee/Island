@@ -20,6 +20,8 @@ public class ArchitectureSystem : MonoBehaviour
     public bool isCameraMode = false;
     public bool isConstrutMode = false;
     public bool isRearrangeMode = false;
+    
+    private bool isCol;
 
     public int Money = 0;
     public int MoneyOutput = 0;
@@ -30,7 +32,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public GameObject Building_BtnObj;
     public GameObject ReArrangeBuilding_BtnObj2;
-    public GameObject Rearrnge_Btn;
+    public GameObject RearrngeOut_Btn;
     public GameObject CurrentSelectedBuilding;
 
 
@@ -85,9 +87,7 @@ public class ArchitectureSystem : MonoBehaviour
     public void Rearrange()
     {
         Building[] p = GetComponentsInChildren<Building>();
-        Rearrnge_Btn.SetActive(true);
-
-
+        RearrngeOut_Btn.SetActive(true);
 
         if (isRearrangeMode == false)
         {
@@ -125,7 +125,7 @@ public class ArchitectureSystem : MonoBehaviour
         //int 1 = Build
         //int 2 = Rearrange
         gg.TryGetComponent(out Building b);
-        bool isCol;
+        
         isConstrutMode = true;
         CurrentSelectedBuilding = gg;
 
@@ -146,7 +146,6 @@ public class ArchitectureSystem : MonoBehaviour
                     if (!isCol)
                     {
                         Debug.Log("위치 재지정 필요");
-
                     }
                     else if (isCol)
                     {
@@ -216,48 +215,36 @@ public class ArchitectureSystem : MonoBehaviour
         }
     }
 
+
+
     #region First_Build_Btn
     public void btn_OK()
     {
         //StopCoroutine(co);
         //StopCoroutine(co2);
-
-        StopAllCoroutines();
-        co = null;
-        co2 = null;
-
-        go = null;
-
-
-        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
-
-
-        isConstrutMode = false;
-
-        Building_BtnObj.SetActive(false);
-
-        CurrentSelectedBuilding = null;
-    }
-
-    public void btn_Flip()
-    {
-        GameObject g = CurrentSelectedBuilding;
-        if (g.TryGetComponent(out SpriteRenderer ren))
+        isCol = CurrentSelectedBuilding.GetComponent<Building>().isnotCol;
+        if (isCol)
         {
-            if (ren.flipX == true)
-            {
-                ren.flipX = false;
-            }
-            else if (ren.flipX == false)
-            {
-                ren.flipX = true;
-            }
+            StopAllCoroutines();
+            co = null;
+            co2 = null;
+
+            go = null;
+
+
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+
+            isConstrutMode = false;
+
+            Building_BtnObj.SetActive(false);
+
+            CurrentSelectedBuilding = null;
         }
     }
 
     public void btn_Cancle()
     {
-
         StopAllCoroutines();
         co = null;
         co2 = null;
@@ -275,28 +262,7 @@ public class ArchitectureSystem : MonoBehaviour
     }
     #endregion
 
-    #region Rearrange_Btn
-
-    public void Re_btn_Cancle()
-    {
-        //StopCoroutine(co);
-        //StopCoroutine(co2);
-
-        if (isRearrangeMode == true)
-        {
-            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
-        }
-
-        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
-
-        isConstrutMode = false;
-
-        Building_BtnObj.SetActive(false);
-
-        CurrentSelectedBuilding = null;
-    }
-
-    public void Re_btn_Flip()
+    public void btn_Flip()
     {
         GameObject g = CurrentSelectedBuilding;
         if (g.TryGetComponent(out SpriteRenderer ren))
@@ -312,28 +278,55 @@ public class ArchitectureSystem : MonoBehaviour
         }
     }
 
-    public void Re_btn_Restore()
+    #region Rearrange_Btn
+
+    public void Re_btn_Cancle()
     {
-        if (isRearrangeMode == true)
-        {
-            CurrentSelectedBuilding.GetComponent<Building>().StopAllCoroutines();
-        }
-        else
+        //StopCoroutine(co);
+        //StopCoroutine(co2);
+        Building b = CurrentSelectedBuilding.GetComponent<Building>();
+        isCol = b.isnotCol;
+        if (isCol)
         {
             StopAllCoroutines();
-            co = null;
-            co2 = null;
-            go = null;
+
+            b.StopAllCoroutines();
+
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+            isConstrutMode = false;
+
+            ReArrangeBuilding_BtnObj2.SetActive(false);
+
+            CurrentSelectedBuilding = null;
+
+            Rearrange();
         }
-        Destroy(CurrentSelectedBuilding);
 
-        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+    }
 
-        isConstrutMode = false;
+    public void Re_btn_Restore()
+    {
+        Building b = CurrentSelectedBuilding.GetComponent<Building>();
+        isCol = b.isnotCol;
+        if (isCol)
+        {
+            StopAllCoroutines();
+            
+            b.StopAllCoroutines();
 
-        Building_BtnObj.SetActive(false);
+            Destroy(CurrentSelectedBuilding);
 
-        CurrentSelectedBuilding = null;
+            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+            isConstrutMode = false;
+
+            ReArrangeBuilding_BtnObj2.SetActive(false);
+
+            CurrentSelectedBuilding = null;
+
+            Rearrange();
+        }
     }
 
 

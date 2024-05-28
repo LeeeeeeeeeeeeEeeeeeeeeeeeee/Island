@@ -14,7 +14,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
     public Collider2D BeganCol;
 
-    public float ForRearrangeTime = 3f;
+    public float ForRearrangeTime = 2f;
     float Rearrange_Time = 0;
     Coroutine Rearrange_Co;
 
@@ -47,7 +47,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     if (clickCol != null)
                     {
                         BeganCol = clickCol;
-
+                        
 
                         if (clickCol.tag == "Building")
                         {
@@ -56,11 +56,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                                 Debug.Log("설치");
                                 bb.BuildingMove();
                             }
-                            else if (clickCol.TryGetComponent(out Building b) && bb.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
+                            else if (clickCol.transform.parent.TryGetComponent(out Building b) && bb.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
                             {
                                 Rearrange_Co = StartCoroutine(Rearrange_Func(b));
                             }
-
                         }
                     }
                 }
@@ -146,6 +145,7 @@ public class Cam_TouchOBJ : MonoBehaviour
             {
                 ArchitectureSystem.build_system.Rearrange();
                 b.btn_active();
+                b.BuildingMove();
                 break;
             }
             Debug.Log(Rearrange_Time);

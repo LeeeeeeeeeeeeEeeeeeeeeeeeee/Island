@@ -73,19 +73,18 @@ public class Building : Building_basicSCR
 
     public void btn_active()
     {
-        ArchitectureSystem.build_system.Building_BtnObj.SetActive(true);
+        ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj2.SetActive(true);
         StartCoroutine(FollowBuilding_btn());
     }
 
     private IEnumerator FollowBuilding_btn()
     {
-        Transform btnObj = ArchitectureSystem.build_system.Building_BtnObj.transform;
+        Transform btnObj = ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj2.transform;
         //Transform CrtBuilding = ArchitectureSystem.build_system.CurrentSelectedBuilding.transform;
         Transform CrtBuilding = this.transform;
         while (true)
         {
             btnObj.position = Camera.main.WorldToScreenPoint(CrtBuilding.position - Vector3.up);
-            Debug.Log("Why");
             yield return null;
         }
     }
