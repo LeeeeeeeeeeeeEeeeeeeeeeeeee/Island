@@ -31,7 +31,7 @@ public class ArchitectureSystem : MonoBehaviour
     public List<GameObject> BuildingList;
 
     public GameObject Building_BtnObj;
-    public GameObject ReArrangeBuilding_BtnObj2;
+    public GameObject ReArrangeBuilding_BtnObj;
     public GameObject RearrngeOut_Btn;
     public GameObject CurrentSelectedBuilding;
 
@@ -87,7 +87,7 @@ public class ArchitectureSystem : MonoBehaviour
     public void Rearrange()
     {
         Building[] p = GetComponentsInChildren<Building>();
-        RearrngeOut_Btn.SetActive(true);
+        //RearrngeOut_Btn.SetActive(true);
 
         if (isRearrangeMode == false)
         {
@@ -131,6 +131,7 @@ public class ArchitectureSystem : MonoBehaviour
 
         while (true)
         {
+
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
             if(Input.touchCount == 1) 
@@ -296,7 +297,7 @@ public class ArchitectureSystem : MonoBehaviour
 
             isConstrutMode = false;
 
-            ReArrangeBuilding_BtnObj2.SetActive(false);
+            ReArrangeBuilding_BtnObj.SetActive(false);
 
             CurrentSelectedBuilding = null;
 
@@ -321,7 +322,7 @@ public class ArchitectureSystem : MonoBehaviour
 
             isConstrutMode = false;
 
-            ReArrangeBuilding_BtnObj2.SetActive(false);
+            ReArrangeBuilding_BtnObj.SetActive(false);
 
             CurrentSelectedBuilding = null;
 

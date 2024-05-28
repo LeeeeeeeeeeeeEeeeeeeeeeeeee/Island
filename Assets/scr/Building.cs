@@ -73,13 +73,13 @@ public class Building : Building_basicSCR
 
     public void btn_active()
     {
-        ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj2.SetActive(true);
+        ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj.SetActive(true);
         StartCoroutine(FollowBuilding_btn());
     }
 
     private IEnumerator FollowBuilding_btn()
     {
-        Transform btnObj = ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj2.transform;
+        Transform btnObj = ArchitectureSystem.build_system.ReArrangeBuilding_BtnObj.transform;
         //Transform CrtBuilding = ArchitectureSystem.build_system.CurrentSelectedBuilding.transform;
         Transform CrtBuilding = this.transform;
         while (true)
