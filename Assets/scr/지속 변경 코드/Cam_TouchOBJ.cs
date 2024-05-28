@@ -14,6 +14,11 @@ public class Cam_TouchOBJ : MonoBehaviour
 
     public Collider2D BeganCol;
 
+    public float ForRearrangeTime = 2f;
+    float Rearrange_Time = 0;
+    Coroutine Rearrange_Co;
+
+
     private void Start()
     {
         store_Ui = ArchitectureSystem.build_system.Store_Ui;
@@ -42,7 +47,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     if (clickCol != null)
                     {
                         BeganCol = clickCol;
-
+                        
 
                         if (clickCol.tag == "Building")
                         {
@@ -50,6 +55,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                             {
                                 Debug.Log("설치");
                                 bb.BuildingMove();
+                            }
+                            else if (clickCol.transform.parent.TryGetComponent(out Building b) && bb.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
+                            {
+                                Rearrange_Co = StartCoroutine(Rearrange_Func(b));
                             }
                         }
                     }
@@ -69,11 +78,11 @@ public class Cam_TouchOBJ : MonoBehaviour
                     }
                     else if (clickCol.tag == "Building" && clickCol != null)
                     {
-                        if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
-                        {
-                            Debug.Log("설치");
-                            bb.BuildingMove();
-                        }
+                        //if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                        //{
+                        //    Debug.Log("설치");
+                        //    bb.BuildingMove();
+                        //}
 
                         if (clickCol.transform.parent.TryGetComponent(out Food_Generator generator))
                         {
@@ -113,7 +122,36 @@ public class Cam_TouchOBJ : MonoBehaviour
                         }
                     }
                 }
+
+                if (toto.phase == TouchPhase.Ended)
+                {
+                    if (Rearrange_Co != null)
+                    {
+                        StopCoroutine(Rearrange_Co);
+                    }
+                }
+
             }
         }
     }
+
+    private IEnumerator Rearrange_Func(Building b)
+    {
+        Rearrange_Time = 0;
+        while (true)
+        {
+            Rearrange_Time += Time.deltaTime;
+            if (ForRearrangeTime <= Rearrange_Time)
+            {
+                ArchitectureSystem.build_system.Rearrange();
+                b.btn_active();
+                b.BuildingMove();
+                break;
+            }
+            Debug.Log(Rearrange_Time);
+
+            yield return null;
+        }
+    }
+
 }
