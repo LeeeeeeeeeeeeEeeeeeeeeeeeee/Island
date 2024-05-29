@@ -76,6 +76,7 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "롤리팝 캔디 나무":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 1.2f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.62f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.16f, 1.31f);
                 break;

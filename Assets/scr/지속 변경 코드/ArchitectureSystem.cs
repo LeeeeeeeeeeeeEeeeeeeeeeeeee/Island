@@ -198,7 +198,6 @@ public class ArchitectureSystem : MonoBehaviour
     public void OK_IConstructThere()
     {
         go.tag = "Building";
-        BuildingList.Add(go);
         Building_BtnObj.SetActive(true);
         co2 = StartCoroutine(FollowBuilding_btn());
         //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
@@ -232,6 +231,7 @@ public class ArchitectureSystem : MonoBehaviour
 
             go = null;
 
+            BuildingList.Add(CurrentSelectedBuilding);
 
             Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
 
@@ -251,6 +251,7 @@ public class ArchitectureSystem : MonoBehaviour
         co2 = null;
         go = null;
 
+        BuildingList.Remove(CurrentSelectedBuilding);
         Destroy(CurrentSelectedBuilding);
 
         Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
@@ -316,6 +317,7 @@ public class ArchitectureSystem : MonoBehaviour
             
             b.StopAllCoroutines();
 
+            BuildingList.Remove(CurrentSelectedBuilding);
             Destroy(CurrentSelectedBuilding);
 
             Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
