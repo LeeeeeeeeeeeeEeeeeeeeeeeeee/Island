@@ -4068,8 +4068,8 @@ MonoBehaviour:
   BuildingList:
   - {fileID: 508637185}
   Building_BtnObj: {fileID: 68055042}
-  ReArrangeBuilding_BtnObj2: {fileID: 1280577196}
-  RearrngeOut_Btn: {fileID: 0}
+  ReArrangeBuilding_BtnObj: {fileID: 1280577196}
+  RearrngeOut_Btn: {fileID: 902514126}
   CurrentSelectedBuilding: {fileID: 0}
   emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
 --- !u!114 &234263870
@@ -5568,9 +5568,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 234263869}
         m_TargetAssemblyTypeName: ArchitectureSystem, Assembly-CSharp
-        m_MethodName: btn_Cancle
+        m_MethodName: Re_btn_Restore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9061,7 +9061,7 @@ MonoBehaviour:
   - {fileID: 2140115998896960930, guid: 29460bc1c627c7d45ad06817171e3dd2, type: 3}
   cook_Ui: {fileID: 2066806147}
   BeganCol: {fileID: 0}
-  ForRearrangeTime: 3
+  ForRearrangeTime: 1
 --- !u!1 &524579053
 GameObject:
   m_ObjectHideFlags: 0
@@ -23703,9 +23703,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 234263869}
         m_TargetAssemblyTypeName: ArchitectureSystem, Assembly-CSharp
-        m_MethodName: btn_OK
+        m_MethodName: Re_btn_Cancle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26995,7 +26995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 234263869}
         m_TargetAssemblyTypeName: ArchitectureSystem, Assembly-CSharp
         m_MethodName: btn_Flip
         m_Mode: 1
