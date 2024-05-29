@@ -79,6 +79,14 @@ public class Food_Generator : MonoBehaviour
             day_skip = false;
             Generate_Food();
         }
+
+        if(current_food_count > 0)
+        {
+            if (!gameObject.transform.GetChild(1).GetComponent<ParticleSystem>().isPlaying)
+            {
+                gameObject.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            }
+        }
     }
 
     void Generate_Food()
@@ -210,7 +218,10 @@ public class Food_Generator : MonoBehaviour
 
             
         }
-        else{
+        else
+        {
+            Inventory.Instance.AlertText.text = "수확할 수 있는 재료가 없습니다!";
+            Inventory.Instance.AlertText.color = Color.white;
             Debug.Log("수확할 수 있는 재료가 없습니다!");
         }
     }

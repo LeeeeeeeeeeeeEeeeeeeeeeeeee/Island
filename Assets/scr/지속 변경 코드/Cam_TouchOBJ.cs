@@ -125,6 +125,8 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                 if (toto.phase == TouchPhase.Ended)
                 {
+                    Instantiate(Particles[2], clickPos, Particles[2].transform.rotation);
+
                     if (Rearrange_Co != null)
                     {
                         StopCoroutine(Rearrange_Co);
