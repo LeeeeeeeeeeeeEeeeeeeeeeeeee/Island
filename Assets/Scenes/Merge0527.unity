@@ -5570,7 +5570,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 234263869}
         m_TargetAssemblyTypeName: ArchitectureSystem, Assembly-CSharp
-        m_MethodName: Re_btn_Restore
+        m_MethodName: Re_btn_Cancle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23705,7 +23705,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 234263869}
         m_TargetAssemblyTypeName: ArchitectureSystem, Assembly-CSharp
-        m_MethodName: Re_btn_Cancle
+        m_MethodName: Re_btn_Restore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
