@@ -22,7 +22,8 @@ public class UI_Manager : MonoBehaviour
         Character_Information,
         Shop_Furniture_List,
         // 이하 의사 확인 팝업 뎁스
-        Check_Intention_Purchase_Building
+        Check_Intention_Purchase_Building,
+        Check_Intention_Place_Building
     }
 
     public Dictionary<Enum_Popup_Subject, int> Dic_Popup_Code_From_Enum = new Dictionary<Enum_Popup_Subject, int>()
@@ -37,7 +38,8 @@ public class UI_Manager : MonoBehaviour
         {Enum_Popup_Subject.Board,                              7},
         {Enum_Popup_Subject.Character_Information,              8},
         {Enum_Popup_Subject.Shop_Furniture_List,                9},
-        {Enum_Popup_Subject.Check_Intention_Purchase_Building,  10}
+        {Enum_Popup_Subject.Check_Intention_Purchase_Building,  10},
+        {Enum_Popup_Subject.Check_Intention_Place_Building,     11}
     };
     
     public Dictionary<string, Enum_Popup_Subject> Dic_Popup_Enum_From_String = new Dictionary<string, Enum_Popup_Subject>()
@@ -52,7 +54,8 @@ public class UI_Manager : MonoBehaviour
         {"board",                              Enum_Popup_Subject.Board},
         {"character_information",              Enum_Popup_Subject.Character_Information},
         {"shop_furniture_list",                Enum_Popup_Subject.Shop_Furniture_List},
-        {"check_intention_purchase_building",  Enum_Popup_Subject.Check_Intention_Purchase_Building}
+        {"check_intention_purchase_building",  Enum_Popup_Subject.Check_Intention_Purchase_Building},
+        {"check_intention_place_building",     Enum_Popup_Subject.Check_Intention_Place_Building} 
     };
     
     [SerializeField] private GameObject[] arr_popups;
@@ -192,7 +195,7 @@ public class UI_Manager : MonoBehaviour
                 present_popup_code = subject_num;
             }
         }
-        
+        /*
         switch (subject)
         {
             case Enum_Popup_Subject.Collection:
@@ -217,6 +220,7 @@ public class UI_Manager : MonoBehaviour
                 Debug.Log("Exception");
                 break;
         }
+        */
         Debug.Log(subject);
         //Set_Transform_UI_Player_Property_Info(true);
     }
