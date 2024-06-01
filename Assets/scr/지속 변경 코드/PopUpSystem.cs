@@ -1,0 +1,138 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Toolbars;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+using System;
+using System.Linq;
+using TMPro;
+using static UnityEditor.Progress;
+
+[System.Serializable]
+struct GetButtonInfo
+{
+    public enum MyEnum
+    {
+        BuildShop,
+        BuildPlace,
+        CellInfo,
+        CookInfo
+    }
+    [SerializeField] public MyEnum ButtonsType;
+    [SerializeField] public GameObject _Content;
+    [SerializeField] public Button[] BtnS;
+    [SerializeField] public GameObject PopupTarget;
+}
+
+
+public class PopUpSystem : MonoBehaviour, IPointerClickHandler
+{
+    public static PopUpSystem instance;
+    
+    [SerializeField] GetButtonInfo[] _Buttons;
+
+    public GameObject NowPopUp;
+
+    void Start()
+    {
+        instance = this;
+        for (int i = 0; i < _Buttons.Length; i++)
+        {
+            _Buttons[i].BtnS = _Buttons[i]._Content.GetComponentsInChildren<Button>();
+
+            for (int j = 0; j < _Buttons[i].BtnS.Length; j++)
+            {
+                int temp = j;
+                int temp2 = i;
+                _Buttons[temp2].BtnS[temp].onClick.AddListener(() => SendThisBtnObj(_Buttons[temp2].ButtonsType.ToString(), _Buttons[temp2].BtnS[temp].gameObject));
+
+                if(i==1)
+                {
+                    _Buttons[1].BtnS[j].interactable= false;
+                }
+            }
+
+            
+        }
+    }
+
+    public int k = 0;
+    public Button NowBtnList;
+    public void SendThisBtnObj(string type, GameObject j)
+    {
+        GameObject g;
+        j.TryGetComponent(out Button b);
+        
+        switch (type)
+        {
+            case "BuildShop":
+                g = _Buttons[0].PopupTarget.gameObject;
+                
+                foreach (Button item in _Buttons[0].BtnS)
+                {
+                    if(item == b)
+                    {
+                        g.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>().text = item.transform.GetChild(0).GetComponent<TMP_Text>().text;
+                        //price
+
+                        g.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetComponent<TMP_Text>().text;
+                        //deco
+
+                        g.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = item.transform.GetChild(1).GetComponent<Image>().sprite;
+                        //buildimage
+
+                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(1).GetComponent<Image>().sprite.name;
+                        //buildname
+
+                        
+                        break;
+                    }
+                }
+                break;
+
+
+
+            case "BuildPlace":
+                g = _Buttons[1].PopupTarget.gameObject;
+
+                foreach (Button item in _Buttons[1].BtnS)
+                {
+                    if (item == b)
+                    {
+                        g.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = item.transform.GetComponent<Image>().sprite;
+
+                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text =
+                            item.transform.GetComponent<Image>().sprite.name;
+
+                        NowBtnList = item;
+                        break;
+                    }
+                }
+                break;
+
+
+
+            case "CellInfo":
+                break;
+
+
+            default:
+                break;
+        }
+    }
+
+    public void Purchase(GameObject game)
+    {
+        _Buttons[1].BtnS[k].interactable= true;
+        _Buttons[1].BtnS[k].GetComponent<Image>().sprite = game.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite;
+
+        k++;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
+    }
+}

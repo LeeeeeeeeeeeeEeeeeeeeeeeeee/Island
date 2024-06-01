@@ -186,7 +186,8 @@ public class UI_Manager : MonoBehaviour
         if (arr_content_popups[subject_num] == true)
         {
             arr_content_popups[subject_num].SetActive(true);
-            if(present_popup_code == -1)
+
+            if (present_popup_code == -1)
                 present_popup_code = subject_num;
             else
             {
