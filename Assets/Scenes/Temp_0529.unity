@@ -9300,7 +9300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &215505588
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10025,6 +10025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3a801111a48124f84ce43cec0b5a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Particels: {fileID: 0}
   Store_Ui: {fileID: 298456268}
   Store_Obj: {fileID: 0}
   isCameraMode: 0
@@ -19733,7 +19734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &495524453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -89905,6 +89906,7 @@ GameObject:
   - component: {fileID: 2131732742}
   - component: {fileID: 2131732740}
   - component: {fileID: 2131732743}
+  - component: {fileID: 2131732744}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -90197,6 +90199,24 @@ MonoBehaviour:
   present_tab_num_character_information: 0
   present_tab_num_collection: 0
   present_popup_code: 0
+--- !u!114 &2131732744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131732734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95354157c90f6849843c0adcc88c0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Buttons:
+  - ButtonsType: 0
+    _Content: {fileID: 1268279600}
+    BtnS: []
+    PopupTarget: {fileID: 0}
+  NowPopUp: {fileID: 0}
 --- !u!1 &2134087743
 GameObject:
   m_ObjectHideFlags: 0

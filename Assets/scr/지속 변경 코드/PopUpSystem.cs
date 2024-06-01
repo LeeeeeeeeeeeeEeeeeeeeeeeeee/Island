@@ -31,7 +31,6 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 
     public GameObject NowPopUp;
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
@@ -41,27 +40,21 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 
             for (int j = 0; j < _Buttons[i].BtnS.Length; j++)
             {
-                _Buttons[i].BtnS[j].onClick.AddListener(() => SendThisBtnObj(_Buttons[i].ButtonsType.ToString(), _Buttons[i].BtnS[j].gameObject));
+                int temp = j;
+                int temp2 = i;
+                _Buttons[temp2].BtnS[temp].onClick.AddListener(() => SendThisBtnObj(_Buttons[temp2].ButtonsType.ToString(), _Buttons[temp2].BtnS[temp].gameObject));
             }
         }
-
-
     }
 
     public void SendThisBtnObj(string type, GameObject j)
     {
-        switch (type)
-        {
-
-            default:
-                break;
-        }
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("ds");
     }
-
 
 }
