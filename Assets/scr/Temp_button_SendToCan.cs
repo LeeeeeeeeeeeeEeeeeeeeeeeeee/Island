@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class button_SendToCan : MonoBehaviour
+public class Temp_button_SendToCan : MonoBehaviour
 {
     private float clickTime; // Ŭ�� ���� �ð�
     public float minClickTime = 1; // �ּ� Ŭ���ð�
@@ -19,6 +19,9 @@ public class button_SendToCan : MonoBehaviour
     public Sprite thisButtonsSprite;
     EventTrigger myBtn;
     Button mybtn_2;
+    public TMP_Text _Name;
+    public Image _Sprite;
+    
     readonly Dictionary<string, int> Value = new Dictionary<string, int>()
     {
         { "PriceTag", 1 },
@@ -33,18 +36,22 @@ public class button_SendToCan : MonoBehaviour
         myBtn = GetComponent<EventTrigger>(); //real��ư
         mybtn_2= GetComponent<Button>(); // ��ư ���� ������ ���� ������Ʈ
         myBtn.enabled = false;
-        HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //����ǥ
+        //HowMuch = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); //����ǥ
         //Texture2D tex = transform.GetChild(0).GetComponent<RawImage>().mainTexture as Texture2D; //���� �ǹ� ��������Ʈ �޾ƿ���
-                
         iseventstart = false;
         //thisButtonsSprite = Sprite.Create(tex, new Rect(0,0,tex.width ,tex.height) , new Vector2( 0.5f, 0.5f)); //���� �ǹ� ��������Ʈ �޾ƿ���2
-        SwitchSyntaxBundle("PriceTag");
-
+        //SwitchSyntaxBundle("PriceTag");
+        
     }
 
     public void ButtonDown()
     {
         isClick = true;
+
+        if (_Name.text != "UISprite" && _Name!=null)
+        {
+            thisButtonsSprite = _Sprite.sprite;
+        }
 
         iseventstart = false;
     }
@@ -74,6 +81,11 @@ public class button_SendToCan : MonoBehaviour
                 eventStart();
                 ButtonUp();
                 iseventstart= true;
+                UI_Manager.Instance.Close_Popup();
+                UI_Manager.Instance.Close_Popup();
+                PopUpSystem.instance.NowBtnList.GetComponent<Image>().sprite = null;
+                PopUpSystem.instance.NowBtnList.interactable = false;
+                PopUpSystem.instance.k--;
             }
         }
         // Ŭ�� ���� �ƴ϶��
@@ -86,7 +98,7 @@ public class button_SendToCan : MonoBehaviour
 
     private void eventStart()
     {
-        ArchitectureSystem.build_system.LetsConstructor(this.gameObject.name,thisButtonsSprite);
+        ArchitectureSystem.build_system.LetsConstructor(_Name.text,thisButtonsSprite);
     }
 
     //private void MoneyUpdate_Btn()���̵�����. ��������
@@ -139,7 +151,7 @@ public class button_SendToCan : MonoBehaviour
         ColorBlock Block = mybtn_2.colors;
 
 
-        switch (this.name)
+        switch (_Name.text)
         {
             case "빨간 설탕 유리 꽃":
                 if (ForWhatValue == 1)

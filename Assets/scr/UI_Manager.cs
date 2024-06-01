@@ -187,8 +187,6 @@ public class UI_Manager : MonoBehaviour
         {
             arr_content_popups[subject_num].SetActive(true);
 
-            PopUpSystem.instance.NowPopUp = arr_content_popups[subject_num];
-
             if (present_popup_code == -1)
                 present_popup_code = subject_num;
             else
