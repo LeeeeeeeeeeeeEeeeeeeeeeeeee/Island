@@ -12,6 +12,9 @@ public class ArchitectureSystem : MonoBehaviour
 {
     //Scripts for building installation
     public static ArchitectureSystem build_system;
+
+    public GameObject Particels;
+
     public GameObject Store_Ui;
     public event Action touchUp;
 

@@ -20,18 +20,21 @@ public abstract class Building_basicSCR : MonoBehaviour
                 gameObject.AddComponent<Food_Generator>();
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.09f, -0.08f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.11f, 0.287f);
+                Instantiate(ArchitectureSystem.build_system.Particels, gameObject.transform);
                 break;
 
             case "노란 설탕 유리 꽃":
                 gameObject.AddComponent<Food_Generator>();
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.09f, -0.08f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.11f, 0.287f);
+                Instantiate(ArchitectureSystem.build_system.Particels, gameObject.transform);
                 break;
 
             case "파란 설탕 유리 꽃":
                 gameObject.AddComponent<Food_Generator>();
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.09f, -0.08f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.11f, 0.287f);
+                Instantiate(ArchitectureSystem.build_system.Particels, gameObject.transform);
                 break;
 
             case "비스킷 의자":
@@ -58,6 +61,7 @@ public abstract class Building_basicSCR : MonoBehaviour
                 gameObject.AddComponent<Food_Generator>();
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.16f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.26f, 0.89f);
+                Instantiate(ArchitectureSystem.build_system.Particels, gameObject.transform);
                 break;
 
             case "솜사탕 구름 1":
@@ -71,6 +75,7 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "캔디 가로등":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.95f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.28f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.38f, 0.65f);
                 break;
@@ -82,26 +87,36 @@ public abstract class Building_basicSCR : MonoBehaviour
                 break;
 
             case "마카롱 나무":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.75f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(1.1f, 2.1f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, -0.03f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.554f, 0.444f);
                 break;
 
             case "초코 분수":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 1.3f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(2.1f, 3.1f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.01f, 0.572f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.97f, 1.62f);
                 break;
 
             case "녹차 푸딩 산":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.35f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(1.6f, 1.7f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.133f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.6f, 1.26f);
                 break;
 
             case "초코 푸딩 산":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.5f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(2.2f, 2.3f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.03f, 0.01f);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(2.18f, 1.17f);
                 break;
 
             case "거대한 롤리팝 마시멜로우 언덕":
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.9f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(4, 4.1f);
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.01f, -1);
                 gameObject.GetComponent<BoxCollider2D>().size = new Vector2(3.95f, 0.37f);
                 break;
