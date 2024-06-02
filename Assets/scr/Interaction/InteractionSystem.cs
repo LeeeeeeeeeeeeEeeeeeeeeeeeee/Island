@@ -138,6 +138,10 @@ public class InteractionSystem : MonoBehaviour
             Inventory.Instance.AlertText.text = "성공!!!";
             Inventory.Instance.AlertText.color = Color.white;
 
+            yield return new WaitForSeconds(2);
+
+            Camera.main.orthographicSize = 5f;
+
             ArchitectureSystem.build_system.isConstrutMode = false;
             t.tag = "Interaction"; //9
             t.gameObject.SetActive(false);
@@ -220,6 +224,11 @@ public class InteractionSystem : MonoBehaviour
             Inventory.Instance.AlertText.text = "성공!!!";
             Inventory.Instance.AlertText.color = Color.white;
         }
+
+        yield return new WaitForSeconds(2);
+
+        Camera.main.orthographicSize = 5f;
+
 
         c.GetComponent<SpriteRenderer>().enabled = false;
         c.GetComponent<BoxCollider2D>().enabled = false;
