@@ -6,19 +6,21 @@ public class CellCtrl : MonoBehaviour
 {
     public bool isOn = false;
 
+    public Cell_In_Building staying_Building;
     public int Id;
     public string cellName;
     public Texture cellImage;
     public Sprite cellSprite;
     public bool InteractionStart = false;
 
-    public float RandomTimer = 100f;
+    public float RandomTimer;
 
     private LGH_Visit_Cell CellCreate;
 
+    
     private void Start()
     {
-        RandomTimer = Random.Range(180f, 864f);
+        RandomTimer = 30f;
 
         CellCreate = transform.root.GetComponent<LGH_Visit_Cell>();
         if (TimeManager.TimeSystem.offlineTime >= 0.15f)
@@ -35,7 +37,9 @@ public class CellCtrl : MonoBehaviour
 
         Invoke("MakeInteraction", Random.Range(5f, 10f));
     }
-
+    private void OnEnable() {
+        RandomTimer = 30f;
+    }
     private void Update()
     {
         if(RandomTimer > 0)
@@ -43,7 +47,8 @@ public class CellCtrl : MonoBehaviour
             RandomTimer = RandomTimer - 1 * Time.deltaTime;
         }
         else
-        {
+        {   
+            if(CellCreate.left_debug == false)
             Instantiate(gameObject.transform.GetChild(2), gameObject.transform.position, Quaternion.identity);
             CellCreate.debug_id = Id;
             CellCreate.left_debug = true;
