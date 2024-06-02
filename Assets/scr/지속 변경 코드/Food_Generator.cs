@@ -101,42 +101,21 @@ public class Food_Generator : MonoBehaviour
             current_food_count--;
             
             GameObject obj;
-            GameObject Box = Instantiate(Inventory.Instance.FoodPrefab, Inventory.Instance.FoodStorage.transform.position, Quaternion.identity);
+            GameObject Box;
             Food TempFoodData;
             if(food_prefabs.Length > 1){
                 int sum = Random.Range(1,101);
                 for(int i = 0; i < food_prefabs.Length; i++){
                     if(sum <= food_generate_Probability[i]){
                         obj = food_prefabs[i];
+                        
+                        int num = Inventory.Instance.InvenNames.IndexOf(obj.gameObject.name);
 
-                        Box.gameObject.name = obj.gameObject.name;
+                        Box = Inventory.Instance.InvenItems[num];
+                        TempFoodData = Box.GetComponent<Food>();
                         
-                        if(Inventory.Instance.InvenNames.Contains(Box.gameObject.name))
-                        {
-                            int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
-                            
-                            Destroy(Box);
-                            Box = Inventory.Instance.InvenItems[num];
-                            TempFoodData = Box.GetComponent<Food>();
+                        TempFoodData.Count += 1;
                         
-                            TempFoodData.Name = obj.GetComponent<Food>().Name;
-                            TempFoodData.Count += 1;
-                            TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                            TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                        }
-                        else
-                        {
-                            Inventory.Instance.InvenItems.Add(Box);
-                            Inventory.Instance.InvenNames.Add(Box.gameObject.name);
-                            Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
-                            TempFoodData = Box.GetComponent<Food>();
-                        
-                            TempFoodData.Name = obj.GetComponent<Food>().Name;
-                            TempFoodData.Count += 1;
-                            TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                            TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                        }
-                        Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
                         Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
                         Inventory.Instance.AlertText.color = Color.white;
                         Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
@@ -144,35 +123,14 @@ public class Food_Generator : MonoBehaviour
                     }
                     else if(sum > food_generate_Probability[i] && sum <= food_generate_Probability[i+1]){
                         obj = food_prefabs[i+1];
-                        
-                        Box.gameObject.name = obj.gameObject.name;
-                        
-                        if(Inventory.Instance.InvenNames.Contains(Box.gameObject.name))
-                        {
-                            int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
-                            
-                            Destroy(Box);
-                            Box = Inventory.Instance.InvenItems[num];
-                            TempFoodData = Box.GetComponent<Food>();
-                        
-                            TempFoodData.Name = obj.GetComponent<Food>().Name;
-                            TempFoodData.Count += 1;
-                            TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                            TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                        }
-                        else
-                        {
-                            Inventory.Instance.InvenItems.Add(Box);
-                            Inventory.Instance.InvenNames.Add(Box.gameObject.name);
-                            Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
-                            TempFoodData = Box.GetComponent<Food>();
-                        
-                            TempFoodData.Name = obj.GetComponent<Food>().Name;
-                            TempFoodData.Count += 1;
-                            TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                            TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                        }
-                        Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
+
+                        int num = Inventory.Instance.InvenNames.IndexOf(obj.gameObject.name);
+
+                        Box = Inventory.Instance.InvenItems[num];
+                        TempFoodData = Box.GetComponent<Food>();
+
+                        TempFoodData.Count += 1;
+
                         Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
                         Inventory.Instance.AlertText.color = Color.white;
                         Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
@@ -182,41 +140,18 @@ public class Food_Generator : MonoBehaviour
             }
             else{
                 obj = food_prefabs[0];
-                
-                Box.gameObject.name = obj.gameObject.name;
-                
-                if(Inventory.Instance.InvenNames.Contains(Box.gameObject.name))
-                {
-                    int num = Inventory.Instance.InvenNames.IndexOf(Box.gameObject.name);
-                    
-                    Destroy(Box);
-                    Box = Inventory.Instance.InvenItems[num];
-                    TempFoodData = Box.GetComponent<Food>();
-                
-                    TempFoodData.Name = obj.GetComponent<Food>().Name;
-                    TempFoodData.Count += 1;
-                    TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                    TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                }
-                else
-                {
-                    Inventory.Instance.InvenItems.Add(Box);
-                    Inventory.Instance.InvenNames.Add(Box.gameObject.name);
-                    Box.transform.SetParent(Inventory.Instance.FoodStorage.transform);
-                    TempFoodData = Box.GetComponent<Food>();
-                
-                    TempFoodData.Name = obj.GetComponent<Food>().Name;
-                    TempFoodData.Count += 1;
-                    TempFoodData.ImageObj.GetComponent<Image>().sprite = obj.GetComponent<Food>().FoodImage;
-                    TempFoodData.FoodImage = obj.GetComponent<Food>().FoodImage;
-                }
-                Box.GetComponent<RectTransform>().localScale = new Vector3(0.9f,0.8f,1);
+
+                int num = Inventory.Instance.InvenNames.IndexOf(obj.gameObject.name);
+
+                Box = Inventory.Instance.InvenItems[num];
+                TempFoodData = Box.GetComponent<Food>();
+
+                TempFoodData.Count += 1;
+
                 Inventory.Instance.AlertText.text = obj.gameObject.name + " 획득";
                 Inventory.Instance.AlertText.color = Color.white;
                 Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
             }
-
-            
         }
         else
         {

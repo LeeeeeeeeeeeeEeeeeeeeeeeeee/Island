@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using static System.Net.WebRequestMethods;
 
 public class Cam_TouchOBJ : MonoBehaviour
 {
     public GameObject[] Particles;
-
-    public GameObject cook_Ui;
-
-    private GameObject store_Ui;
 
     Vector2 Touch_start_pos;
 
@@ -17,12 +15,6 @@ public class Cam_TouchOBJ : MonoBehaviour
     public float ForRearrangeTime;
     float Rearrange_Time = 0;
     Coroutine Rearrange_Co;
-
-
-    private void Start()
-    {
-        store_Ui = ArchitectureSystem.build_system.Store_Ui;
-    }
 
     void Update()
     {
@@ -34,11 +26,13 @@ public class Cam_TouchOBJ : MonoBehaviour
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
 
-            RaycastHit2D hit = Physics2D.Raycast(clickPos, transform.forward, 15f);
+            RaycastHit2D hit = Physics2D.Raycast(clickPos, transform.forward, 15f, 1 << LayerMask.NameToLayer("TouchLayer"));
             Debug.DrawRay(clickPos, transform.forward * 10, Color.red, 0.3f);
             Collider2D clickCol = hit.collider;
             //Collider2D clickCol = Physics2D.OverlapPoint(clickPos);
             #endregion
+
+            if (EventSystem.current.IsPointerOverGameObject()) return;
 
             if (ArchitectureSystem.build_system.isCameraMode == false)
             {
@@ -62,6 +56,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                             }
                         }
                     }
+                    else
+                    {
+                        BeganCol = null;
+                    }
                 }
 
                 if (toto.phase == TouchPhase.Ended && BeganCol == clickCol && clickCol != null && InteractionSystem.Interaction_system.is_Interaction_Mode == false)
@@ -74,7 +72,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                     if (clickCol.tag == "store" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
-                        store_Ui.SetActive(true);
+                        UI_Manager.Instance.OnClick_Open_Popup_Btn("shop_building");
                     }
                     else if (clickCol.tag == "Building" && clickCol != null)
                     {
@@ -102,7 +100,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                     }
                     else if (clickCol.tag == "Cook" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
-                        cook_Ui.SetActive(true);
+                        UI_Manager.Instance.OnClick_Open_Popup_Btn("cooking");
                     }
                     else if (clickCol.tag == "Pat")
                     {

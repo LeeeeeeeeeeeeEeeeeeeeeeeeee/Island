@@ -20,12 +20,25 @@ public class Food : MonoBehaviour
 
         TempCount = Inventory.Instance.Recipe.FindAll(n => n == Name).Count;
 
+        gameObject.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = TempCount.ToString();
+
+        if (TempCount > 0 )
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
         if (Count == 0)
         {
-            Inventory.Instance.InvenItems.Remove(gameObject);
-            Inventory.Instance.InvenNames.Remove(gameObject.name);
-            Destroy(gameObject);
+            gameObject.GetComponent<Image>().color = Color.gray;
         }
+        else
+        {
+            gameObject.GetComponent<Image>().color = Color.white;
+        }    
     }
 
     public void ChangeFood()
