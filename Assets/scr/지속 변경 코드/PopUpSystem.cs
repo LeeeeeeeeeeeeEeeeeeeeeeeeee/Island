@@ -125,10 +125,21 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 
     public void Purchase(GameObject game)
     {
-        _Buttons[1].BtnS[k].interactable= true;
-        _Buttons[1].BtnS[k].GetComponent<Image>().sprite = game.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite;
+        if (ArchitectureSystem.build_system.Money >= int.Parse(game.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text))
+        {
+            Inventory.Instance.AlertText.text = game.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text + "를 구매하였습니다!";
+            Inventory.Instance.AlertText.color = Color.white;
 
-        k++;
+            _Buttons[1].BtnS[k].interactable = true;
+            _Buttons[1].BtnS[k].GetComponent<Image>().sprite = game.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite;
+
+            k++;
+        }
+        else
+        {
+            Inventory.Instance.AlertText.text = "유미가 부족합니다!";
+            Inventory.Instance.AlertText.color = Color.white;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -38,23 +38,23 @@ public class Temp_ArchitectureSystem : MonoBehaviour
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
-        { "»¡°£ ¼³ÅÁ À¯¸® ²É", 0 },
-        { "³ë¶õ ¼³ÅÁ À¯¸® ²É", 0 },
-        { "ÆÄ¶õ ¼³ÅÁ À¯¸® ²É", 0 },
-        { "ºñ½ºÅ¶ ÀÇÀÚ", 0 },
-        { "¾ÆÀÌ½ºÅ©¸² Å×ÀÌºí", 0 },
-        { "¸¶Ä«·Õ Äí¼Ç", 0 },
-        { "2´Ü ¸¶Ä«·Õ Äí¼Ç", 0 },
-        { "µþ±â¿ìÀ¯ ¿¬¸ø", 0 },
-        { "¼Ø»çÅÁ ±¸¸§ 1", 0 },
-        { "¼Ø»çÅÁ ±¸¸§ 2", 0 },
-        { "Äµµð °¡·Îµî", 0 },
-        { "·Ñ¸®ÆË Äµµð ³ª¹«", 0 },
-        { "¸¶Ä«·Õ ³ª¹«", 0 },
-        { "ÃÊÄÚ ºÐ¼ö", 0 },
-        { "³ìÂ÷ Çªµù »ê", 0 },
-        { "ÃÊÄÚ Çªµù »ê", 0 },
-        { "°Å´ëÇÑ ·Ñ¸®ÆË ¸¶½Ã¸á·Î¿ì ¾ð´ö", 0 }
+        { "ë¹¨ê°„ ì„¤íƒ• ìœ ë¦¬ ê½ƒ", 0 },
+        { "ë…¸ëž€ ì„¤íƒ• ìœ ë¦¬ ê½ƒ", 0 },
+        { "íŒŒëž€ ì„¤íƒ• ìœ ë¦¬ ê½ƒ", 0 },
+        { "ë¹„ìŠ¤í‚· ì˜ìž", 0 },
+        { "ì•„ì´ìŠ¤í¬ë¦¼ í…Œì´ë¸”", 0 },
+        { "ë§ˆì¹´ë¡± ì¿ ì…˜", 0 },
+        { "2ë‹¨ ë§ˆì¹´ë¡± ì¿ ì…˜", 0 },
+        { "ë”¸ê¸°ìš°ìœ  ì—°ëª»", 0 },
+        { "ì†œì‚¬íƒ• êµ¬ë¦„ 1", 0 },
+        { "ì†œì‚¬íƒ• êµ¬ë¦„ 2", 0 },
+        { "ìº”ë”” ê°€ë¡œë“±", 0 },
+        { "ë¡¤ë¦¬íŒ ìº”ë”” ë‚˜ë¬´", 0 },
+        { "ë§ˆì¹´ë¡± ë‚˜ë¬´", 0 },
+        { "ì´ˆì½” ë¶„ìˆ˜", 0 },
+        { "ë…¹ì°¨ í‘¸ë”© ì‚°", 0 },
+        { "ì´ˆì½” í‘¸ë”© ì‚°", 0 },
+        { "ê±°ëŒ€í•œ ë¡¤ë¦¬íŒ ë§ˆì‹œë©œë¡œìš° ì–¸ë•", 0 }
     };
 
     void Start()
@@ -146,7 +146,7 @@ public class Temp_ArchitectureSystem : MonoBehaviour
                     isCol = b.isnotCol;
                     if (!isCol)
                     {
-                        Debug.Log("À§Ä¡ ÀçÁöÁ¤ ÇÊ¿ä");
+                        Debug.Log("ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½");
                     }
                     else if (isCol)
                     {
@@ -191,8 +191,8 @@ public class Temp_ArchitectureSystem : MonoBehaviour
         go.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.2f);
         go.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(go.GetComponent<SpriteRenderer>().size.x, go.GetComponent<SpriteRenderer>().size.y);
         co = StartCoroutine(FollowMouse(go, 1));
-        //»óÁ¡¿ÀºêÁ§Æ®/»óÁ¡ui ºñÈ°¼ºÈ­ ¹× ºó °Ç¹° »ý¼º ÈÄ ½ºÇÁ¶óÀÌÆ®¿Í ÀÌ¸§ ¼³Á¤
-        //ÅÍÄ¡À§Ä¡·Î µû¶ó°¡´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®/ï¿½ï¿½ï¿½ï¿½ui ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
     }
 
     public void OK_IConstructThere()
@@ -200,7 +200,7 @@ public class Temp_ArchitectureSystem : MonoBehaviour
         go.tag = "Building";
         Building_BtnObj.SetActive(true);
         co2 = StartCoroutine(FollowBuilding_btn());
-        //ÅÂ±× º¯°æ ¹× ÅÍÄ¡À§Ä¡ µû¶ó°¡±â ÄÚ·çÆ¾ Á¤Áö ¹× ÄÚ·çÆ¾º¯¼ö,ºó°Ç¹°º¯¼ö null°ª, »óÁ¡¿ÀºêÁ§Æ® È°¼ºÈ­
+        //ï¿½Â±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ó°¡±ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
     }
     #endregion
 

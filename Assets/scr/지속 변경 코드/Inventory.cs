@@ -44,6 +44,14 @@ public class Inventory : MonoBehaviour
         ResetRecipe();
     }
 
+    private void Start()
+    {
+        for(int i = 0; i< InvenItems.Count; i++)
+        {
+            InvenNames.Add(InvenItems[i].GetComponent<Image>().sprite.name);
+        }
+    }
+
     private void Update()
     {
         for (int i = 0; i < 4; i++)
@@ -77,6 +85,7 @@ public class Inventory : MonoBehaviour
         foreach (GameObject img in PlusButtonImg)
         {
             img.GetComponent<Image>().sprite = null;
+            img.SetActive(false);
         }
     }
 
@@ -174,5 +183,11 @@ public class Inventory : MonoBehaviour
         food.GetComponent<Complete_Food>().CookDescription = complete_food.CookDescription;
 
         CompleteFoods.Add(food);
+    }
+
+    public void GetAlert(string Text)
+    {
+        Inventory.Instance.AlertText.text = Text;
+        Inventory.Instance.AlertText.color = Color.white;
     }
 }

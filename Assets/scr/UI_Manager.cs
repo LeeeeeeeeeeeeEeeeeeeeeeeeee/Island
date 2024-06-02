@@ -243,7 +243,14 @@ public class UI_Manager : MonoBehaviour
     public void Close_Popup()
     {
         if (present_popup_code < 8)
+        {
+            if (present_popup_code == 0)
+            {
+                Inventory.Instance.ResetRecipe();
+            }
+
             arr_popup_extended_background[0].SetActive(false);
+        }
         else if (present_popup_code < 10)
             arr_popup_extended_background[1].SetActive(false);
         else

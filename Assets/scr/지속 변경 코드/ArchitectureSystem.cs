@@ -285,7 +285,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     #region Rearrange_Btn
 
-    public void Re_btn_Cancle()
+    public void Re_btn_Restore()
     {
         //StopCoroutine(co);
         //StopCoroutine(co2);
@@ -310,7 +310,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     }
 
-    public void Re_btn_Restore()
+    public void Re_btn_Cancel()
     {
         Building b = CurrentSelectedBuilding.GetComponent<Building>();
         isCol = b.isnotCol;
