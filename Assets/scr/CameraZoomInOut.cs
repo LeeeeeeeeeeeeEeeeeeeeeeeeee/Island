@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class CameraZoomInOut : MonoBehaviour
 {
     public float speed; 
-    public Scrollbar scrollbar;
 
     void Update()
     {
@@ -31,13 +30,6 @@ public class CameraZoomInOut : MonoBehaviour
                 Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize, 0.1f);
             }
         }
-
-        //Mouse Scroll-------------------------------------------------------------------
-        //if (Camera.main.orthographicSize > 2 && Camera.main.orthographicSize < 20f)
-        //{
-            Camera.main.orthographicSize = (scrollbar.value - 0.5f) * 50;
-        //}
-        //Mouse Scroll-------------------------------------------------------------------
 
         if (Camera.main.orthographicSize <= 1.99f)
         {

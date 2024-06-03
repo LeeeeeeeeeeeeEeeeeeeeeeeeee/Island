@@ -99,17 +99,19 @@ public class LGH_Visit_Cell : MonoBehaviour
         if(now_Cell_Count < Max_Cell_Count){
             v_timer += Time.deltaTime;
             if(v_timer >= v_cool_time){
-                int n = Random.Range(0,6);
-                while(true){
-                    n = Random.Range(0,6);
-                    if(now_stay_Cells[n] == false){
+                int n;
+                while (true)
+                {
+                    n = Random.Range(0, 6);
+                    if (now_stay_Cells[n] == false)
+                    {
                         now_stay_Cells[n] = true;
                         CellVisit(cellList[n]);
                         v_timer = 0;
                         break;
                     }
                 }
-                
+
             }
         }
 
