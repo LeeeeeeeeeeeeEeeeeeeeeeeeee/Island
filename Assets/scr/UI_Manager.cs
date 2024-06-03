@@ -58,6 +58,13 @@ public class UI_Manager : MonoBehaviour
         {"check_intention_place_building",     Enum_Popup_Subject.Check_Intention_Place_Building} 
     };
     
+    public enum Enum_Btn_List_Mode
+    {
+        None,
+        Cooking,
+        Building
+    }
+    
     [SerializeField] private GameObject[] arr_popups;
     [SerializeField] private GameObject[] arr_content_popups;
 
@@ -71,10 +78,14 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private int present_tab_num_shop_building;
     [SerializeField] private int present_tab_num_character_information;
     [SerializeField] private int present_tab_num_collection;
-    
+    [SerializeField] private Enum_Btn_List_Mode present_btn_list_mode_main;
+
     [SerializeField] private int present_popup_code = -1; // 현재 팝업 화면을 판단하는 변수, 나중에 이걸 큐로 바꿔야 함
 
     [SerializeField] private Stack<int> stack_present_popup_code = new Stack<int>();
+
+    [SerializeField] private GameObject obj_list_btn_cooking;
+    [SerializeField] private GameObject obj_list_btn_building;
     
     void Awake()
     {
@@ -90,6 +101,10 @@ public class UI_Manager : MonoBehaviour
     // 하이라키 내 각 오브젝트 마다의 설정값을 초기화하는 함수 (모든 팝업 닫기(비활성화)) 
     public void Initialize()
     {
+        present_btn_list_mode_main = Enum_Btn_List_Mode.None;
+        obj_list_btn_cooking.SetActive(false);
+        obj_list_btn_building.SetActive(false);
+        
         foreach (var obj in arr_popup_extended_background)
         {
             obj.SetActive(false);
@@ -191,39 +206,12 @@ public class UI_Manager : MonoBehaviour
                 present_popup_code = subject_num;
             else
             {
-                Debug.Log("PUSH " + present_popup_code);
+                Debug.Log("PUSH_Popup_Code " + present_popup_code);
                 stack_present_popup_code.Push(present_popup_code);
                 present_popup_code = subject_num;
             }
         }
-        /*
-        switch (subject)
-        {
-            case Enum_Popup_Subject.Collection:
-                Debug.Log("screen : 1");
-                break;
-            case Enum_Popup_Subject.Cooking:
-                Debug.Log("screen : 2");
-                break;
-            case Enum_Popup_Subject.Mission:
-                Debug.Log("screen : 3");
-                break;
-            case Enum_Popup_Subject.Shop_Building:
-                Debug.Log("screen : 4");
-                break;
-            case Enum_Popup_Subject.Storage_Building:
-                Debug.Log("screen : 5");
-                break;
-            case Enum_Popup_Subject.Storage_Cooking:
-                Debug.Log("screen : 6");
-                break;
-            default:
-                Debug.Log("Exception");
-                break;
-        }
-        */
-        Debug.Log(subject);
-        //Set_Transform_UI_Player_Property_Info(true);
+        Debug.Log("Open Popup : " + subject);
     }
 
     public void Set_Transform_UI_Player_Property_Info(bool state)
@@ -277,11 +265,61 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public void Show_Btn()
+    public void OnClick_Show_Btn_List_Btn(string subject)
     {
-        
+        if (present_btn_list_mode_main == Enum_Btn_List_Mode.Building && subject == "building" 
+            || present_btn_list_mode_main == Enum_Btn_List_Mode.Cooking && subject == "cooking")
+        {
+            Close_Btn_List_Main(subject);
+        }
+        else
+        {
+            Open_Btn_List_Main(subject);
+        }
     }
 
+    public void Open_Btn_List_Main(string subject)
+    {
+        switch (subject)
+        {
+            case "cooking" :
+                obj_list_btn_cooking.SetActive(true);
+                obj_list_btn_building.SetActive(false);
+                present_btn_list_mode_main = Enum_Btn_List_Mode.Cooking;
+                break;
+            case "building" :
+                obj_list_btn_cooking.SetActive(false);
+                obj_list_btn_building.SetActive(true);
+                present_btn_list_mode_main = Enum_Btn_List_Mode.Building;
+                break;
+            default:
+                Debug.Log("Error - Can't Open List - List didn't exists : " + subject);
+                break;
+        }
+    }
+    
+    public void Close_Btn_List_Main(string subject = "all")
+    {
+        switch (subject)
+        {
+            case "all":
+                obj_list_btn_building.SetActive(false);
+                obj_list_btn_cooking.SetActive(false);
+                break;
+            case "building":
+                obj_list_btn_building.SetActive(false);
+                break;
+            case "cooking":
+                obj_list_btn_cooking.SetActive(false);
+                break;
+            default:
+                Debug.Log("Didn't Exist (Btn_list_name) : " + subject);
+                break;
+        }
+        present_btn_list_mode_main = Enum_Btn_List_Mode.None;
+    }
+    
+    
     public void Exchange_Tab(int tab)
     {
         if (present_popup_code == 3)
