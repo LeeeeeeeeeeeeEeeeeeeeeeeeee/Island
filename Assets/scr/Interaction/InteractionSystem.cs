@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -98,6 +99,10 @@ public class InteractionSystem : MonoBehaviour
         if(type == 2) 
         {
             ClapClapInteraction(target.gameObject);
+        }
+        if(type == 3) 
+        { 
+            SnackInteraction(target.gameObject);
         }
 
     }
@@ -257,6 +262,39 @@ public class InteractionSystem : MonoBehaviour
     }
     #endregion
 
+
+    #region Snack
+
+    public Transform SnackUi;
+    public void SnackInteraction(GameObject _Cell)
+    {
+        Transform Snack = SnackUi;
+        Slider Scissors = SnackUi.GetComponent<Slider>();
+        _Cell.transform.GetChild(3).gameObject.SetActive(false);
+
+        Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,Snack); });
+
+        Snack.gameObject.SetActive(true);
+    }
+
+    public void SnackInteraction2(Slider Sciss, Transform Snack)
+    {
+        Transform SnackHead = SnackUi.GetChild(3);
+        Transform SnackBody = SnackUi.GetChild(2);
+        if (Sciss.value >= 100)
+        {
+            
+
+
+        }
+        
+    }
+    
+
+    
+
+
+    #endregion
 }
 
 

@@ -74,7 +74,7 @@ public class CellCtrl : MonoBehaviour
     {
         float _Time = 0;
         float T = Random.Range(0, 2);
-        int n = Random.Range(0, transform.childCount - 1); //now 2
+        int n = Random.Range(0, transform.childCount); //now 2
         Debug.Log(n);
         while (true)
         {
