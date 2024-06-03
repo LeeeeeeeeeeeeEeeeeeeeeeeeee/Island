@@ -15,7 +15,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public GameObject Particels;
 
-    public GameObject Store_Ui;
+    
     public event Action touchUp;
 
     [HideInInspector] public GameObject Store_Obj;
@@ -30,7 +30,7 @@ public class ArchitectureSystem : MonoBehaviour
     public int MoneyOutput = 0;
     public TextMeshProUGUI MoneyText;
     public TextMeshProUGUI MoneyText2;
-    public List<button_SendToCan> ButtonList;
+    //public List<button_SendToCan> ButtonList;
     public List<GameObject> BuildingList;
 
     public GameObject Building_BtnObj;
@@ -67,7 +67,7 @@ public class ArchitectureSystem : MonoBehaviour
         Store_Obj = transform.GetChild(0).gameObject;
         //touchUp += OK_IConstructThere;
 
-        ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
+        //ButtonList = new List<button_SendToCan>(Store_Ui.transform.GetChild(1).GetComponentsInChildren<button_SendToCan>());
 
     }
 
@@ -179,7 +179,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
-        Store_Ui.SetActive(false);
+        
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
         go.transform.SetParent(transform, true);

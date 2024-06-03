@@ -15,7 +15,7 @@ public class CellManage : MonoBehaviour
         {
             if (cells[i].GetComponent<CellCtrl>().isOn)
             {
-                cellButtons[i].GetComponentInChildren<RawImage>().texture = cells[i].GetComponent<CellCtrl>().cellImage;
+                cellButtons[i].GetComponent<Image>().sprite = cells[i].GetComponent<CellCtrl>().cellSprite;
             }
         }
     }

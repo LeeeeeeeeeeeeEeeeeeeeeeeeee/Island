@@ -26,7 +26,7 @@ public class InteractionSystem : MonoBehaviour
     {
         
         Interaction_system = this;
-        CellList = _GameManeger.GetComponent<CellManage>().cells;
+        //CellList = _GameManeger.GetComponent<CellManage>().cells;
         StartCoroutine(AddBuilding_InterActionCell());
     }
 
