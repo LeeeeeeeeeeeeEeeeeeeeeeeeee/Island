@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Toolbars;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -8,7 +7,7 @@ using Unity.VisualScripting;
 using System;
 using System.Linq;
 using TMPro;
-using static UnityEditor.Progress;
+
 
 [System.Serializable]
 struct GetButtonInfo
@@ -26,12 +25,20 @@ struct GetButtonInfo
     [SerializeField] public GameObject PopupTarget;
 }
 
+[System.Serializable]
+struct CellSimplifyInfo
+{
+    int CellID;
+    List<Sprite> Favorite_Building;
+    List<Sprite> Favorite_Food;
+}
 
 public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 {
     public static PopUpSystem instance;
     
     [SerializeField] GetButtonInfo[] _Buttons;
+    [SerializeField] CellSimplifyInfo[] _SimplifyInfos;
 
     public GameObject NowPopUp;
 
@@ -63,16 +70,39 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
     public void SendThisBtnObj(string type, GameObject j)
     {
         GameObject g;
+        GameObject z;
         j.TryGetComponent(out Button b);
         
         switch (type)
         {
             case "BuildShop":
                 g = _Buttons[0].PopupTarget.gameObject;
+                z = _Buttons[2].PopupTarget.gameObject;
                 
                 foreach (Button item in _Buttons[0].BtnS)
                 {
                     if(item == b)
+                    {
+                        g.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text;
+                        //price
+
+                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text;
+                        //deco
+
+                        g.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite;
+                        //buildimage
+
+                        g.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite.name;
+                        //buildname
+
+
+                        break;
+                    }
+                }
+
+                foreach (Button item in _Buttons[2].BtnS)
+                {
+                    if (item == b)
                     {
                         g.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text;
                         //price
@@ -115,6 +145,19 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 
 
             case "CellInfo":
+                g = _Buttons[3].PopupTarget.gameObject;
+
+                foreach (Button item in _Buttons[3].BtnS)
+                {
+                    if(item==b)
+                    {
+                        if(item == _Buttons[3].BtnS[0])
+                        {
+                            Debug.Log("Hi");
+                        }
+                    }
+                }
+
                 break;
 
 
