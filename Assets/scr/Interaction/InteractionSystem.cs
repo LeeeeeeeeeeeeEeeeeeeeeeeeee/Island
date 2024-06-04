@@ -272,6 +272,8 @@ public class InteractionSystem : MonoBehaviour
         Slider Scissors = SnackUi.GetComponent<Slider>();
         _Cell.transform.GetChild(3).gameObject.SetActive(false);
 
+        ArchitectureSystem.build_system.isConstrutMode = true;
+
         Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,Snack); });
 
         Snack.gameObject.SetActive(true);
@@ -279,18 +281,19 @@ public class InteractionSystem : MonoBehaviour
 
     public void SnackInteraction2(Slider Sciss, Transform Snack)
     {
-        Transform SnackHead = SnackUi.GetChild(3);
-        Transform SnackBody = SnackUi.GetChild(2);
-        if (Sciss.value >= 100)
+        Transform SnackHead = Snack.GetChild(3);
+        Transform SnackBody = Snack.GetChild(2);
+        if (Sciss.value >= 1)
         {
-            
-
-
+            StartCoroutine(SnackInteraction3());
         }
-        
     }
     
+    private IEnumerator SnackInteraction3()
+    {
 
+        yield return null;
+    }
     
 
 
