@@ -14,9 +14,19 @@ public class InteractionButton : MonoBehaviour
             case "Pat":
                 k = 1;
                 break;
+
             case "Clapclap":
                 k = 2;
                 break;
+
+            case "Snack":
+                k = 3;
+                break;
+
+            case "HideAndSeek":
+                k=4;
+                break;
+
             default:
                 break;
         }

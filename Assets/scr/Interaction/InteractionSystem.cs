@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -99,8 +100,20 @@ public class InteractionSystem : MonoBehaviour
         {
             ClapClapInteraction(target.gameObject);
         }
+        if(type == 3) 
+        { 
+            SnackInteraction(target.gameObject);
+        }
+        if(type==4) 
+        { 
+            HideAndSeekInteraction(target.gameObject);
+        }
 
     }
+
+
+
+    public static WaitForSeconds oneSecond = new WaitForSeconds(3f);
 
     #region Pat
 
@@ -149,12 +162,11 @@ public class InteractionSystem : MonoBehaviour
             InterUI.transform.GetChild(0).gameObject.SetActive(false);
             t.transform.position = new Vector3(t.transform.position.x, t.transform.position.y + 1, t.transform.position.z);
             t.parent.GetComponent<CellCtrl>().InteractionStart = false;
-            InteractionSystem.Interaction_system.is_Interaction_Mode = false;
+            is_Interaction_Mode = false;
         }
         
     }
     #endregion
-
 
 
     #region clapclap
@@ -175,7 +187,7 @@ public class InteractionSystem : MonoBehaviour
         StartCoroutine(ClapClapInteraction2(a, b,Clap));
     }
 
-    public static WaitForSeconds oneSecond = new WaitForSeconds(3f);
+    
 
     private IEnumerator ClapClapInteraction2(int[] a, GameObject[] b , GameObject c)
     {
@@ -235,7 +247,7 @@ public class InteractionSystem : MonoBehaviour
         b[0].SetActive(false);
         b[1].SetActive(false);
         InterUI.transform.GetChild(1).gameObject.SetActive(false);
-        InteractionSystem.Interaction_system.is_Interaction_Mode = false;
+        is_Interaction_Mode = false;
     }
 
     int BI = 0;
@@ -257,6 +269,89 @@ public class InteractionSystem : MonoBehaviour
     }
     #endregion
 
+
+    #region Snack
+
+    public Transform SnackUi;
+    public void SnackInteraction(GameObject _Cell)
+    {
+        Slider Scissors = SnackUi.GetComponent<Slider>();
+        Animator SuccesAnimation = SnackUi.GetComponent<Animator>();
+        _Cell.transform.GetChild(3).gameObject.SetActive(false);
+
+        ArchitectureSystem.build_system.isConstrutMode = true;
+
+        Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,SuccesAnimation); });
+
+        SnackUi.gameObject.SetActive(true);
+    }
+
+    public void SnackInteraction2(Slider Sciss, Animator Snack)
+    {
+        if (Sciss.value >= 1)
+        {
+            Sciss.interactable = false;
+            Snack.SetTrigger("InteractionOk");
+            is_Interaction_Mode = false;
+            Sciss.onValueChanged.RemoveAllListeners();
+            Inventory.Instance.AlertText.text = "성공!!!";
+            Invoke(nameof(SnackInteraction3_End),3);
+        }
+    }
+
+    private void SnackInteraction3_End()
+    {
+        ArchitectureSystem.build_system.isConstrutMode = false;
+        SnackUi.gameObject.SetActive(false);
+    }
+
+
+
+
+
+    #endregion
+
+    #region HideAndSeek
+
+    //Transform InitPosition;
+    Transform Init;
+    Transform TargetBuilding;
+    public bool IsSeeking = false;
+
+    public void HideAndSeekInteraction(GameObject _Cell)
+    {
+        Init = _Cell.transform;
+
+        _Cell.transform.GetChild(4).gameObject.SetActive(false);
+        _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        _Cell.GetComponent<PolygonCollider2D>().enabled = true;
+        IsSeeking = true;
+
+        Inventory.Instance.AlertText.text = "나를 찾아봐요!";
+
+        int k = Random.Range(0, ArchitectureSystem.build_system.BuildingList.Count);
+        TargetBuilding = ArchitectureSystem.build_system.BuildingList[k].transform;
+
+        float j = Random.Range(0, 1);
+        if (j >= 0.5)
+        {
+            _Cell.transform.position = TargetBuilding.position + Vector3.left * 0.8f;
+        }else if(j<0.5)
+        {
+            _Cell.transform.position = TargetBuilding.position + Vector3.right * 0.8f;
+        }
+
+        Camera.main.orthographicSize = 5f;
+    }
+
+    public void HideAndSeekInteraction2(GameObject _Cell)
+    {
+        _Cell.transform.position = Init.transform.position;
+        _Cell.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        IsSeeking = false;
+    }
+
+    #endregion
 }
 
 
