@@ -74,19 +74,19 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
                 {
                     if(item == b)
                     {
-                        g.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>().text = item.transform.GetChild(0).GetComponent<TMP_Text>().text;
+                        g.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text;
                         //price
 
-                        g.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetComponent<TMP_Text>().text;
+                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text;
                         //deco
 
-                        g.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = item.transform.GetChild(1).GetComponent<Image>().sprite;
+                        g.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite;
                         //buildimage
 
-                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(1).GetComponent<Image>().sprite.name;
+                        g.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite.name;
                         //buildname
 
-                        
+
                         break;
                     }
                 }
@@ -101,9 +101,9 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
                 {
                     if (item == b)
                     {
-                        g.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = item.transform.GetComponent<Image>().sprite;
+                        g.transform.GetChild(1).GetChild(1).GetComponent<Image>().sprite = item.transform.GetComponent<Image>().sprite;
 
-                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text =
+                        g.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>().text =
                             item.transform.GetComponent<Image>().sprite.name;
 
                         NowBtnList = item;
@@ -125,13 +125,13 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
 
     public void Purchase(GameObject game)
     {
-        if (ArchitectureSystem.build_system.Money >= int.Parse(game.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text))
+        if (ArchitectureSystem.build_system.Money >= int.Parse(game.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text))
         {
-            Inventory.Instance.AlertText.text = game.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text + "를 구매하였습니다!";
+            Inventory.Instance.AlertText.text = game.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text + "를 구매하였습니다!";
             Inventory.Instance.AlertText.color = Color.white;
 
             _Buttons[1].BtnS[k].interactable = true;
-            _Buttons[1].BtnS[k].GetComponent<Image>().sprite = game.transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite;
+            _Buttons[1].BtnS[k].GetComponent<Image>().sprite = game.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite;
 
             k++;
         }
