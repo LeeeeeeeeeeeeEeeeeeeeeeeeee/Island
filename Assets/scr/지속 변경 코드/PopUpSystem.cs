@@ -153,7 +153,7 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
                     {
                         if(item == _Buttons[3].BtnS[0])
                         {
-                            Image[] = g.transform.GetChild(0).GetChild(1).GetComponentsInChildren<Image>();
+                            Image[] dd = g.transform.GetChild(0).GetChild(1).GetComponentsInChildren<Image>();
                         }
                     }
                 }
