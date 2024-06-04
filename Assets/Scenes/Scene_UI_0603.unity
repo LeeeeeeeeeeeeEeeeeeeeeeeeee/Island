@@ -2778,6 +2778,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1494383200657614622, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 3806210274150224311, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2789,6 +2793,10 @@ PrefabInstance:
     - target: {fileID: 4049276956376893152, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClick_Open_Popup_Btn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488164133184260143, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7823199913654349529, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_Name
@@ -3743,6 +3751,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1494383200657614622, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3806210274150224311, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3754,6 +3766,10 @@ PrefabInstance:
     - target: {fileID: 4049276956376893152, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClick_Open_Popup_Btn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488164133184260143, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7823199913654349529, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_Name
@@ -36775,8 +36791,8 @@ MonoBehaviour:
   minClickTime: 0
   HowMuch: {fileID: 0}
   thisButtonsSprite: {fileID: 0}
-  _Name: {fileID: 0}
-  _Sprite: {fileID: 0}
+  _Name: {fileID: 2011551501}
+  _Sprite: {fileID: 1494215836}
 --- !u!114 &877866056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55702,7 +55718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43965825, g: 0.9811321, b: 0.4930661, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -65513,10 +65529,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1494383200657614622, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4049276956376893152, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2131732743}
+    - target: {fileID: 6488164133184260143, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7823199913654349529, guid: 2328139f278775143bdfadee4a98ccc6, type: 3}
       propertyPath: m_Name
       value: Btn_Open_Building_Information
@@ -83249,6 +83273,9 @@ MonoBehaviour:
   InterUI: {fileID: 631502569}
   _Particle: {fileID: 8367736357089567468, guid: 725105221b6a2ef4883226190066d3eb, type: 3}
   ClapClapButton: {fileID: 182325959}
+  SnackUi: {fileID: 0}
+  IsSeeking: 0
+  SeekTimer: {fileID: 0}
 --- !u!114 &1919062124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88884,7 +88911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2595296, g: 1, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
