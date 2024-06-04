@@ -107,6 +107,10 @@ public class InteractionSystem : MonoBehaviour
 
     }
 
+
+
+    public static WaitForSeconds oneSecond = new WaitForSeconds(3f);
+
     #region Pat
 
     [SerializeField] private GameObject InterUI;
@@ -161,7 +165,6 @@ public class InteractionSystem : MonoBehaviour
     #endregion
 
 
-
     #region clapclap
 
     [SerializeField] private Transform ClapClapButton;
@@ -180,7 +183,7 @@ public class InteractionSystem : MonoBehaviour
         StartCoroutine(ClapClapInteraction2(a, b,Clap));
     }
 
-    public static WaitForSeconds oneSecond = new WaitForSeconds(3f);
+    
 
     private IEnumerator ClapClapInteraction2(int[] a, GameObject[] b , GameObject c)
     {
@@ -268,32 +271,38 @@ public class InteractionSystem : MonoBehaviour
     public Transform SnackUi;
     public void SnackInteraction(GameObject _Cell)
     {
-        Transform Snack = SnackUi;
         Slider Scissors = SnackUi.GetComponent<Slider>();
+        Animator SuccesAnimation = SnackUi.GetComponent<Animator>();
         _Cell.transform.GetChild(3).gameObject.SetActive(false);
 
         ArchitectureSystem.build_system.isConstrutMode = true;
 
-        Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,Snack); });
 
-        Snack.gameObject.SetActive(true);
+        Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,SuccesAnimation); });
+
+        SnackUi.gameObject.SetActive(true);
     }
 
-    public void SnackInteraction2(Slider Sciss, Transform Snack)
+    public void SnackInteraction2(Slider Sciss, Animator Snack)
     {
-        Transform SnackHead = Snack.GetChild(3);
-        Transform SnackBody = Snack.GetChild(2);
         if (Sciss.value >= 1)
         {
-            StartCoroutine(SnackInteraction3());
+            Sciss.interactable = false;
+            Snack.SetTrigger("InteractionOk");
+            is_Interaction_Mode = false;
+            Sciss.onValueChanged.RemoveAllListeners();
+            Inventory.Instance.AlertText.text = "성공!!!";
+            Invoke(nameof(SnackInteraction3_End),3);
         }
     }
-    
-    private IEnumerator SnackInteraction3()
-    {
 
-        yield return null;
+    private void SnackInteraction3_End()
+    {
+        ArchitectureSystem.build_system.isConstrutMode = false;
+        SnackUi.gameObject.SetActive(false);
     }
+    
+
     
 
 
