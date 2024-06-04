@@ -63,16 +63,39 @@ public class PopUpSystem : MonoBehaviour, IPointerClickHandler
     public void SendThisBtnObj(string type, GameObject j)
     {
         GameObject g;
+        GameObject z;
         j.TryGetComponent(out Button b);
         
         switch (type)
         {
             case "BuildShop":
                 g = _Buttons[0].PopupTarget.gameObject;
+                z = _Buttons[2].PopupTarget.gameObject;
                 
                 foreach (Button item in _Buttons[0].BtnS)
                 {
                     if(item == b)
+                    {
+                        g.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text;
+                        //price
+
+                        g.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text;
+                        //deco
+
+                        g.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite;
+                        //buildimage
+
+                        g.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite.name;
+                        //buildname
+
+
+                        break;
+                    }
+                }
+
+                foreach (Button item in _Buttons[2].BtnS)
+                {
+                    if (item == b)
                     {
                         g.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = item.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text;
                         //price
