@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -23,7 +25,9 @@ public class UI_Manager : MonoBehaviour
         Shop_Furniture_List,
         // 이하 의사 확인 팝업 뎁스
         Check_Intention_Purchase_Building,
-        Check_Intention_Place_Building
+        Check_Intention_Place_Building,
+        // 이하 알림 팝업 (의사 확인 팝업과 뎁스 같음)
+        Notice_Theme_Locked
     }
 
     public Dictionary<Enum_Popup_Subject, int> Dic_Popup_Code_From_Enum = new Dictionary<Enum_Popup_Subject, int>()
@@ -39,7 +43,8 @@ public class UI_Manager : MonoBehaviour
         {Enum_Popup_Subject.Character_Information,              8},
         {Enum_Popup_Subject.Shop_Furniture_List,                9},
         {Enum_Popup_Subject.Check_Intention_Purchase_Building,  10},
-        {Enum_Popup_Subject.Check_Intention_Place_Building,     11}
+        {Enum_Popup_Subject.Check_Intention_Place_Building,     11},
+        {Enum_Popup_Subject.Notice_Theme_Locked,                12}
     };
     
     public Dictionary<string, Enum_Popup_Subject> Dic_Popup_Enum_From_String = new Dictionary<string, Enum_Popup_Subject>()
@@ -55,7 +60,8 @@ public class UI_Manager : MonoBehaviour
         {"character_information",              Enum_Popup_Subject.Character_Information},
         {"shop_furniture_list",                Enum_Popup_Subject.Shop_Furniture_List},
         {"check_intention_purchase_building",  Enum_Popup_Subject.Check_Intention_Purchase_Building},
-        {"check_intention_place_building",     Enum_Popup_Subject.Check_Intention_Place_Building} 
+        {"check_intention_place_building",     Enum_Popup_Subject.Check_Intention_Place_Building},
+        {"notice_theme_locked",                Enum_Popup_Subject.Notice_Theme_Locked}
     };
     
     public enum Enum_Btn_List_Mode
@@ -64,13 +70,21 @@ public class UI_Manager : MonoBehaviour
         Cooking,
         Building
     }
-    
+
+    [SerializeField] private Sprite[] arr_sprite_2_tab_state;
+    [SerializeField] private Sprite[] arr_sprite_3_tab_state;
+    [SerializeField] private Material[] arr_mat_tmp_btn_tab; 
+
     [SerializeField] private GameObject[] arr_popups;
     [SerializeField] private GameObject[] arr_content_popups;
 
-    [SerializeField] private GameObject[] arr_tab_shop_building;
-    [SerializeField] private GameObject[] arr_tab_character_information;
-    [SerializeField] private GameObject[] arr_tab_collection;
+    [SerializeField] private GameObject[] arr_tab_btn_shop_building;
+    [SerializeField] private GameObject[] arr_tab_btn_character_information;
+    [SerializeField] private GameObject[] arr_tab_btn_collection;
+    
+    [SerializeField] private GameObject[] arr_tab_content_shop_building;
+    [SerializeField] private GameObject[] arr_tab_content_character_information;
+    [SerializeField] private GameObject[] arr_tab_content_collection;
 
     [SerializeField] private GameObject[] arr_popup_extended_background;
     [SerializeField] private GameObject ui_main_player_property_info;
@@ -86,10 +100,46 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private GameObject obj_list_btn_cooking;
     [SerializeField] private GameObject obj_list_btn_building;
+
+    [SerializeField] private Image[] arr_img_btn_tab_shop_building;
+    [SerializeField] private Image[] arr_img_btn_tab_character_information;
+    [SerializeField] private Image[] arr_img_btn_tab_collection;
+
+    [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_shop_building;
+    [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_character_information;
+    [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_collection;
+
     
     void Awake()
     {
         Instance = this;
+        
+        arr_img_btn_tab_shop_building = new Image[arr_tab_btn_shop_building.Length];
+        arr_img_btn_tab_character_information = new Image[arr_tab_btn_character_information.Length];
+        arr_img_btn_tab_collection = new Image[arr_tab_btn_collection.Length];
+        
+        arr_tmp_btn_tab_shop_building = new TextMeshProUGUI[arr_tab_btn_shop_building.Length];
+        arr_tmp_btn_tab_character_information = new TextMeshProUGUI[arr_img_btn_tab_character_information.Length];
+        arr_tmp_btn_tab_collection = new TextMeshProUGUI[arr_tab_btn_collection.Length];
+        
+        for (int i = 0; i < arr_tab_btn_shop_building.Length; i++)
+        {
+            arr_img_btn_tab_shop_building[i] = arr_tab_btn_shop_building[i].GetComponent<Image>();
+            arr_tmp_btn_tab_shop_building[i] = arr_tab_btn_shop_building[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+        
+        for (int i = 0; i < arr_tab_btn_character_information.Length; i++)
+        {
+            arr_img_btn_tab_character_information[i] = arr_tab_btn_character_information[i].GetComponent<Image>();
+            arr_tmp_btn_tab_character_information[i] = arr_tab_btn_character_information[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+        
+        for (int i = 0; i < arr_img_btn_tab_collection.Length; i++)
+        {
+            arr_img_btn_tab_collection[i] = arr_tab_btn_collection[i].GetComponent<Image>();
+            arr_tmp_btn_tab_collection[i] = arr_tab_btn_collection[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+
     }
     
     void Start()
@@ -122,52 +172,72 @@ public class UI_Manager : MonoBehaviour
     {
         if (num == -2)
         {
-            foreach (var obj in arr_tab_shop_building)
+            for (int i = 0; i < arr_tab_content_shop_building.Length; i++)
             {
-                obj.SetActive(false);
+                arr_tab_content_shop_building[i].SetActive(false);
+                arr_img_btn_tab_shop_building[i].sprite = arr_sprite_2_tab_state[1];
+                arr_tmp_btn_tab_shop_building[i].fontMaterial = arr_mat_tmp_btn_tab[1];
             }
-        
-            foreach (var obj in arr_tab_character_information)
+
+            for (int i = 0; i < arr_tab_content_character_information.Length; i++)
             {
-                obj.SetActive(false);
+                arr_tab_content_character_information[i].SetActive(false);
+                arr_img_btn_tab_character_information[i].sprite = arr_sprite_2_tab_state[1];
+                arr_tmp_btn_tab_character_information[i].fontMaterial = arr_mat_tmp_btn_tab[1];
             }
-        
-            foreach (var obj in arr_tab_collection)
+
+            for (int i = 0; i < arr_tab_content_collection.Length; i++)
             {
-                obj.SetActive(false);
+                arr_tab_content_collection[i].SetActive(false);
+                arr_img_btn_tab_collection[i].sprite = arr_sprite_3_tab_state[1];
+                arr_tmp_btn_tab_collection[i].fontMaterial = arr_mat_tmp_btn_tab[1];
             }
-        
-            arr_tab_shop_building[0].SetActive(true);
-            arr_tab_character_information[0].SetActive(true);
-            arr_tab_collection[0].SetActive(true);
+            
+            arr_tab_content_shop_building[0].SetActive(true);
+            arr_tab_content_character_information[0].SetActive(true);
+            arr_tab_content_collection[0].SetActive(true);
             
             present_tab_num_shop_building = 0;
             present_tab_num_character_information = 0;
             present_tab_num_collection = 0;
+
+            arr_img_btn_tab_shop_building[0].sprite = arr_sprite_2_tab_state[0];
+            arr_img_btn_tab_character_information[0].sprite = arr_sprite_2_tab_state[0];
+            arr_img_btn_tab_collection[0].sprite = arr_sprite_3_tab_state[0];
+
+            arr_tmp_btn_tab_shop_building[0].fontMaterial = arr_mat_tmp_btn_tab[0];
+            arr_tmp_btn_tab_character_information[0].fontMaterial = arr_mat_tmp_btn_tab[0];
+            arr_tmp_btn_tab_collection[0].fontMaterial = arr_mat_tmp_btn_tab[0];
         } else
         {
             switch (num)
             {
                 case 3:
-                    foreach (var obj in arr_tab_collection)
+                    foreach (var obj in arr_tab_content_collection)
                     {
                         obj.SetActive(false);
                     }
-                    arr_tab_collection[0].SetActive(true);
+                    arr_tab_content_collection[0].SetActive(true);
+                    arr_img_btn_tab_collection[0].sprite = arr_sprite_3_tab_state[0];
+                    present_tab_num_collection = 0;
                     break;
                 case 5:
-                    foreach (var obj in arr_tab_shop_building)
+                    foreach (var obj in arr_tab_content_shop_building)
                     {
                         obj.SetActive(false);
                     }
-                    arr_tab_shop_building[0].SetActive(true);
+                    arr_tab_content_shop_building[0].SetActive(true);
+                    arr_img_btn_tab_shop_building[0].sprite = arr_sprite_2_tab_state[0];
+                    present_tab_num_shop_building = 0;
                     break;
                 case 8:
-                    foreach (var obj in arr_tab_character_information)
+                    foreach (var obj in arr_tab_content_character_information)
                     {
                         obj.SetActive(false);
                     }
-                    arr_tab_character_information[0].SetActive(true);
+                    arr_tab_content_character_information[0].SetActive(true);
+                    present_tab_num_character_information = 0;
+                    arr_img_btn_tab_character_information[0].sprite = arr_sprite_2_tab_state[0];
                     break;
                 default:
                     break;
@@ -180,7 +250,23 @@ public class UI_Manager : MonoBehaviour
     // string 매개변수의 값 가이드는 'Dic_Popup_Enum_From_String' 딕셔너리 참조
     public void OnClick_Open_Popup_Btn(string popup)
     {
-        Open_Popup(Dic_Popup_Enum_From_String[popup]);
+
+        if (popup.Contains("/"))
+        {
+            string[] content = popup.Split("/");
+            
+            if (content[0] == "move")
+            {
+                Close_Popup();
+                Debug.Log(content[0] + " " + content[1]);
+            }
+            Open_Popup(Dic_Popup_Enum_From_String[content[1]]);
+        }
+        else
+        {
+            Open_Popup(Dic_Popup_Enum_From_String[popup]);
+        }
+
     }
     
     // 콘텐츠 팝업을 표시하는 함수
@@ -324,21 +410,67 @@ public class UI_Manager : MonoBehaviour
     {
         if (present_popup_code == 3)
         {
-            arr_tab_collection[present_tab_num_collection].SetActive(false);
-            arr_tab_collection[tab].SetActive(true);
-            present_tab_num_collection = tab;
+            if (present_tab_num_collection != tab)
+            {
+                arr_tab_content_collection[present_tab_num_collection].SetActive(false);
+                arr_tab_content_collection[tab].SetActive(true);
+
+                arr_img_btn_tab_collection[present_tab_num_collection].sprite = arr_sprite_3_tab_state[1];
+                arr_tmp_btn_tab_collection[present_tab_num_collection].fontMaterial = arr_mat_tmp_btn_tab[1];
+                arr_img_btn_tab_collection[tab].sprite = arr_sprite_3_tab_state[0];
+                arr_tmp_btn_tab_collection[tab].fontMaterial = arr_mat_tmp_btn_tab[0];
+                
+                present_tab_num_collection = tab;
+            }
         }
         if (present_popup_code == 5)
         {
-            arr_tab_shop_building[present_tab_num_shop_building].SetActive(false);
-            arr_tab_shop_building[tab].SetActive(true);
-            present_tab_num_shop_building = tab;
+            if (present_tab_num_shop_building != tab)
+            {
+                arr_tab_content_shop_building[present_tab_num_shop_building].SetActive(false);
+                arr_tab_content_shop_building[tab].SetActive(true);
+
+                arr_img_btn_tab_shop_building[present_tab_num_shop_building].sprite = arr_sprite_2_tab_state[1];
+                arr_tmp_btn_tab_shop_building[present_tab_num_shop_building].fontMaterial = arr_mat_tmp_btn_tab[1];
+                arr_img_btn_tab_shop_building[tab].sprite = arr_sprite_2_tab_state[0];
+                arr_tmp_btn_tab_shop_building[tab].fontMaterial = arr_mat_tmp_btn_tab[0];
+
+                present_tab_num_shop_building = tab;
+            }
         }
         if (present_popup_code == 8)
         {
-            arr_tab_character_information[present_tab_num_character_information].SetActive(false);
-            arr_tab_character_information[tab].SetActive(true);
-            present_tab_num_character_information = tab;
+            if (present_tab_num_character_information != tab)
+            {
+                arr_tab_content_character_information[present_tab_num_character_information].SetActive(false);
+                arr_tab_content_character_information[tab].SetActive(true);
+
+                arr_img_btn_tab_character_information[present_tab_num_character_information].sprite =
+                    arr_sprite_2_tab_state[1];
+                arr_tmp_btn_tab_character_information[present_tab_num_character_information].fontMaterial =
+                    arr_mat_tmp_btn_tab[1];
+                arr_img_btn_tab_character_information[tab].sprite =
+                    arr_sprite_2_tab_state[0];
+                arr_tmp_btn_tab_character_information[tab].fontMaterial =
+                    arr_mat_tmp_btn_tab[0];
+                
+                present_tab_num_character_information = tab;
+            }
+        }
+        if (present_popup_code == 9)
+        {
+            if (present_tab_num_shop_building != tab)
+            {
+                arr_tab_content_shop_building[present_tab_num_shop_building].SetActive(false);
+                arr_tab_content_shop_building[tab].SetActive(true);
+
+                arr_img_btn_tab_shop_building[present_tab_num_shop_building].sprite = arr_sprite_2_tab_state[1];
+                arr_tmp_btn_tab_shop_building[present_tab_num_shop_building].fontMaterial = arr_mat_tmp_btn_tab[1];
+                arr_img_btn_tab_shop_building[tab].sprite = arr_sprite_2_tab_state[0];
+                arr_tmp_btn_tab_shop_building[tab].fontMaterial = arr_mat_tmp_btn_tab[0];
+
+                present_tab_num_shop_building = tab;
+            }
         }
     }
 }
