@@ -794,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &25276005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -901,7 +901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &26474364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19862,7 +19862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &441260731
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20167,8 +20167,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 884675260}
   m_HandleRect: {fileID: 884675259}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.42433834
+  m_Value: 1
+  m_Size: 0.4243384
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -83851,7 +83851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1870595824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -96881,11 +96881,6 @@ MonoBehaviour:
     _Content: {fileID: 1277704838}
     BtnS: []
     PopupTarget: {fileID: 1773451275}
-  - ButtonsType: 0
-    _Content: {fileID: 1299200856}
-    BtnS: []
-    PopupTarget: {fileID: 1386911048}
-  _SimplifyInfos: []
   NowPopUp: {fileID: 0}
   k: 0
   NowBtnList: {fileID: 0}
