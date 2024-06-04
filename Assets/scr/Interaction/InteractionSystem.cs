@@ -296,14 +296,19 @@ public class InteractionSystem : MonoBehaviour
             is_Interaction_Mode = false;
             Sciss.onValueChanged.RemoveAllListeners();
             Inventory.Instance.AlertText.text = "성공!!!";
-            Invoke(nameof(SnackInteraction3_End),3);
+            StartCoroutine(SnackInteraction3_End(Sciss));
         }
     }
 
-    private void SnackInteraction3_End()
+    private IEnumerator SnackInteraction3_End(Slider Sciss)
     {
+        yield return oneSecond;
         ArchitectureSystem.build_system.isConstrutMode = false;
         SnackUi.gameObject.SetActive(false);
+        Sciss.value = 0;
+        Sciss.interactable = true;
+
+
     }
 
 
