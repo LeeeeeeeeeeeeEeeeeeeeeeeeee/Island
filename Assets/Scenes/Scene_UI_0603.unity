@@ -38279,8 +38279,8 @@ MonoBehaviour:
   minClickTime: 0
   HowMuch: {fileID: 0}
   thisButtonsSprite: {fileID: 0}
-  _Name: {fileID: 0}
-  _Sprite: {fileID: 0}
+  _Name: {fileID: 2011551501}
+  _Sprite: {fileID: 1494215836}
 --- !u!114 &877866056
 MonoBehaviour:
   m_ObjectHideFlags: 0
