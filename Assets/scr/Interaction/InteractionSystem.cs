@@ -355,7 +355,7 @@ public class InteractionSystem : MonoBehaviour
         while (true)
         {
             t += Time.deltaTime;
-            SeekTimer.text = t.ToString();
+            SeekTimer.text = Mathf.Floor(t).ToString();
             if (t >= 30)
             {
                 Inventory.Instance.AlertText.text = "실패";
