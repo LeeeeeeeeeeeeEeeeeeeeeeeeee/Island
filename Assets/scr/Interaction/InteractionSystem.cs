@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -106,7 +107,7 @@ public class InteractionSystem : MonoBehaviour
         }
         if(type==4) 
         { 
-            HideAndSeekInteraction(target.gameObject);
+            StartCoroutine(HideAndSeekInteraction(target.gameObject));
         }
 
     }
@@ -313,21 +314,27 @@ public class InteractionSystem : MonoBehaviour
 
     #region HideAndSeek
 
-    //Transform InitPosition;
-    Transform Init;
+    Vector2 Init;
     Transform TargetBuilding;
-    public bool IsSeeking = false;
+    [HideInInspector] public bool IsSeeking = false;
+    public TMP_Text SeekTimer;
 
-    public void HideAndSeekInteraction(GameObject _Cell)
+    public IEnumerator HideAndSeekInteraction(GameObject _Cell)
     {
-        Init = _Cell.transform;
+        Inventory.Instance.AlertText.text = "나를 찾아봐요!";
 
+        yield return oneSecond;
+        //Add effect here
+        SeekTimer.gameObject.SetActive(true);
+
+
+        Init = _Cell.transform.position;
         _Cell.transform.GetChild(4).gameObject.SetActive(false);
         _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
         _Cell.GetComponent<PolygonCollider2D>().enabled = true;
         IsSeeking = true;
 
-        Inventory.Instance.AlertText.text = "나를 찾아봐요!";
+        
 
         int k = Random.Range(0, ArchitectureSystem.build_system.BuildingList.Count);
         TargetBuilding = ArchitectureSystem.build_system.BuildingList[k].transform;
@@ -342,13 +349,35 @@ public class InteractionSystem : MonoBehaviour
         }
 
         Camera.main.orthographicSize = 5f;
+
+
+        float t = 0;
+        while (true)
+        {
+            t += Time.deltaTime;
+            SeekTimer.text = t.ToString();
+            if (t >= 30)
+            {
+                Inventory.Instance.AlertText.text = "실패";
+                HideAndSeekInteraction2(_Cell);
+                break;
+            }else if(IsSeeking == false)
+            {
+                Inventory.Instance.AlertText.text = "성공!";
+            }
+            yield return null;
+        }
+
     }
 
     public void HideAndSeekInteraction2(GameObject _Cell)
     {
-        _Cell.transform.position = Init.transform.position;
+        _Cell.transform.position = Init;
         _Cell.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        _Cell.GetComponent<PolygonCollider2D>().enabled = false;
+        is_Interaction_Mode = false;
         IsSeeking = false;
+        SeekTimer.gameObject.SetActive(false);
     }
 
     #endregion
