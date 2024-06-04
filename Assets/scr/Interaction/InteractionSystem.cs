@@ -104,6 +104,10 @@ public class InteractionSystem : MonoBehaviour
         { 
             SnackInteraction(target.gameObject);
         }
+        if(type==4) 
+        { 
+            HideAndSeekInteraction(target.gameObject);
+        }
 
     }
 
@@ -158,7 +162,7 @@ public class InteractionSystem : MonoBehaviour
             InterUI.transform.GetChild(0).gameObject.SetActive(false);
             t.transform.position = new Vector3(t.transform.position.x, t.transform.position.y + 1, t.transform.position.z);
             t.parent.GetComponent<CellCtrl>().InteractionStart = false;
-            InteractionSystem.Interaction_system.is_Interaction_Mode = false;
+            is_Interaction_Mode = false;
         }
         
     }
@@ -243,7 +247,7 @@ public class InteractionSystem : MonoBehaviour
         b[0].SetActive(false);
         b[1].SetActive(false);
         InterUI.transform.GetChild(1).gameObject.SetActive(false);
-        InteractionSystem.Interaction_system.is_Interaction_Mode = false;
+        is_Interaction_Mode = false;
     }
 
     int BI = 0;
@@ -277,7 +281,6 @@ public class InteractionSystem : MonoBehaviour
 
         ArchitectureSystem.build_system.isConstrutMode = true;
 
-
         Scissors.onValueChanged.AddListener(delegate { SnackInteraction2(Scissors,SuccesAnimation); });
 
         SnackUi.gameObject.SetActive(true);
@@ -301,10 +304,37 @@ public class InteractionSystem : MonoBehaviour
         ArchitectureSystem.build_system.isConstrutMode = false;
         SnackUi.gameObject.SetActive(false);
     }
-    
 
-    
 
+
+
+
+    #endregion
+
+    #region HideAndSeek
+
+    Transform InitPosition;
+    Transform TargetBuilding;
+    public void HideAndSeekInteraction(GameObject _Cell)
+    {
+        InitPosition = _Cell.transform;
+        _Cell.transform.GetChild(4).gameObject.SetActive(false);
+        _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
+
+        int k = Random.Range(0, ArchitectureSystem.build_system.BuildingList.Count);
+        TargetBuilding = ArchitectureSystem.build_system.BuildingList[k].transform;
+
+        float j = Random.Range(0, 1);
+        if (j >= 0.5)
+        {
+            _Cell.transform.position = TargetBuilding.position + Vector3.left * 0.8f;
+        }else if(j<0.5)
+        {
+            _Cell.transform.position = TargetBuilding.position + Vector3.right * 0.8f;
+        }
+
+        Camera.main.orthographicSize = 5f;
+    }
 
     #endregion
 }
