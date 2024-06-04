@@ -73,6 +73,7 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private Sprite[] arr_sprite_2_tab_state;
     [SerializeField] private Sprite[] arr_sprite_3_tab_state;
+    [SerializeField] private Sprite[] arr_sprite_4_tab_state;
     [SerializeField] private Material[] arr_mat_tmp_btn_tab; 
 
     [SerializeField] private GameObject[] arr_popups;
@@ -182,7 +183,7 @@ public class UI_Manager : MonoBehaviour
             for (int i = 0; i < arr_tab_content_character_information.Length; i++)
             {
                 arr_tab_content_character_information[i].SetActive(false);
-                arr_img_btn_tab_character_information[i].sprite = arr_sprite_2_tab_state[1];
+                arr_img_btn_tab_character_information[i].sprite = arr_sprite_4_tab_state[1];
                 arr_tmp_btn_tab_character_information[i].fontMaterial = arr_mat_tmp_btn_tab[1];
             }
 
@@ -202,7 +203,7 @@ public class UI_Manager : MonoBehaviour
             present_tab_num_collection = 0;
 
             arr_img_btn_tab_shop_building[0].sprite = arr_sprite_2_tab_state[0];
-            arr_img_btn_tab_character_information[0].sprite = arr_sprite_2_tab_state[0];
+            arr_img_btn_tab_character_information[0].sprite = arr_sprite_4_tab_state[0];
             arr_img_btn_tab_collection[0].sprite = arr_sprite_3_tab_state[0];
 
             arr_tmp_btn_tab_shop_building[0].fontMaterial = arr_mat_tmp_btn_tab[0];
@@ -237,7 +238,7 @@ public class UI_Manager : MonoBehaviour
                     }
                     arr_tab_content_character_information[0].SetActive(true);
                     present_tab_num_character_information = 0;
-                    arr_img_btn_tab_character_information[0].sprite = arr_sprite_2_tab_state[0];
+                    arr_img_btn_tab_character_information[0].sprite = arr_sprite_4_tab_state[0];
                     break;
                 default:
                     break;
@@ -446,11 +447,11 @@ public class UI_Manager : MonoBehaviour
                 arr_tab_content_character_information[tab].SetActive(true);
 
                 arr_img_btn_tab_character_information[present_tab_num_character_information].sprite =
-                    arr_sprite_2_tab_state[1];
+                    arr_sprite_4_tab_state[1];
                 arr_tmp_btn_tab_character_information[present_tab_num_character_information].fontMaterial =
                     arr_mat_tmp_btn_tab[1];
                 arr_img_btn_tab_character_information[tab].sprite =
-                    arr_sprite_2_tab_state[0];
+                    arr_sprite_4_tab_state[0];
                 arr_tmp_btn_tab_character_information[tab].fontMaterial =
                     arr_mat_tmp_btn_tab[0];
                 
