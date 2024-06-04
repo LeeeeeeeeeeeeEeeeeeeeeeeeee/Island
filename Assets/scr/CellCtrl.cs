@@ -44,6 +44,7 @@ public class CellCtrl : MonoBehaviour
     {
         if(RandomTimer > 0)
         {
+            if (InteractionSystem.Interaction_system.is_Interaction_Mode == false)
             RandomTimer = RandomTimer - 1 * Time.deltaTime;
         }
         else
