@@ -313,13 +313,21 @@ public class InteractionSystem : MonoBehaviour
 
     #region HideAndSeek
 
-    Transform InitPosition;
+    //Transform InitPosition;
+    Transform Init;
     Transform TargetBuilding;
+    public bool IsSeeking = false;
+
     public void HideAndSeekInteraction(GameObject _Cell)
     {
-        InitPosition = _Cell.transform;
+        Init = _Cell.transform;
+
         _Cell.transform.GetChild(4).gameObject.SetActive(false);
         _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        _Cell.GetComponent<PolygonCollider2D>().enabled = true;
+        IsSeeking = true;
+
+        Inventory.Instance.AlertText.text = "나를 찾아봐요!";
 
         int k = Random.Range(0, ArchitectureSystem.build_system.BuildingList.Count);
         TargetBuilding = ArchitectureSystem.build_system.BuildingList[k].transform;
@@ -334,6 +342,13 @@ public class InteractionSystem : MonoBehaviour
         }
 
         Camera.main.orthographicSize = 5f;
+    }
+
+    public void HideAndSeekInteraction2(GameObject _Cell)
+    {
+        _Cell.transform.position = Init.transform.position;
+        _Cell.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        IsSeeking = false;
     }
 
     #endregion

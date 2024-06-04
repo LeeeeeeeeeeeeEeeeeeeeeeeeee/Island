@@ -97,6 +97,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                         Instantiate(Particles[0], clickCol.transform.position, Particles[0].transform.rotation);
 
                         ArchitectureSystem.build_system.Money += 1;
+                        
                     }
                     else if (clickCol.tag == "Cook" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
@@ -105,6 +106,14 @@ public class Cam_TouchOBJ : MonoBehaviour
                     else if (clickCol.tag == "Pat")
                     {
                         Touch_start_pos = toto.position;
+                    }
+                }
+
+                if (toto.phase == TouchPhase.Ended && clickCol != null)
+                {
+                    if(InteractionSystem.Interaction_system.IsSeeking==true && clickCol.tag == "Animal")
+                    {
+                        InteractionSystem.Interaction_system.HideAndSeekInteraction2(clickCol.gameObject);
                     }
                 }
 
