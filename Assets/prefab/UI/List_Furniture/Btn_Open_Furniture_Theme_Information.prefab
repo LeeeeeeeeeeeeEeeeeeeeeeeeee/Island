@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 2516964719985212223}
   - component: {fileID: 526184332255995759}
   - component: {fileID: 1167197175349299167}
+  - component: {fileID: 395735764893752221}
   m_Layer: 5
   m_Name: Img_Theme_Furniture
   m_TagString: Untagged
@@ -421,6 +422,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &395735764893752221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210708274452979818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.50980395, g: 0.29803923, b: 0.027450982, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7114416471553945650
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class CameraMovement : MonoBehaviour
 
     void LimitCameraArea()
     {
-            if (transform.position.x > 7f || transform.position.x < -7f || transform.position.y > 13f || transform.position.y < -13f)
+            if (transform.position.x > 16f || transform.position.x < -16f || transform.position.y > 16f || transform.position.y < -16f)
             {
                 transform.position = Vector3.Lerp(transform.position,
                                               movePos,

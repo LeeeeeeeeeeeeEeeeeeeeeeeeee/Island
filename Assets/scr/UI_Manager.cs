@@ -251,6 +251,7 @@ public class UI_Manager : MonoBehaviour
     // string 매개변수의 값 가이드는 'Dic_Popup_Enum_From_String' 딕셔너리 참조
     public void OnClick_Open_Popup_Btn(string popup)
     {
+        SoundManager.instance.PlaySound("UI");
 
         if (popup.Contains("/"))
         {
@@ -350,6 +351,8 @@ public class UI_Manager : MonoBehaviour
         {
             Initialize_Tap(-2);
         }
+
+        SoundManager.instance.PlaySound("UI");
     }
 
     public void OnClick_Show_Btn_List_Btn(string subject)

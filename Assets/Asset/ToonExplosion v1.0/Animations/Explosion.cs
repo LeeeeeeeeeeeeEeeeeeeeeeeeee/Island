@@ -7,7 +7,8 @@ public class Explosion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(transform.parent == null){
+        SoundManager.instance.PlaySound("Boom");
+        if (transform.parent == null){
             Destroy(gameObject, 1f);
         }
         

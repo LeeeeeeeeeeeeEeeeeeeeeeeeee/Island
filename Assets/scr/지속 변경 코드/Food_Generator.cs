@@ -99,7 +99,7 @@ public class Food_Generator : MonoBehaviour
     {
         if(current_food_count > 0){
             current_food_count--;
-            
+
             GameObject obj;
             GameObject Box;
             Food TempFoodData;
@@ -152,6 +152,17 @@ public class Food_Generator : MonoBehaviour
                 Inventory.Instance.AlertText.color = Color.white;
                 Debug.Log(obj.gameObject.name + "를 획득 하였습니다.");
             }
+
+            if (gameObject.name == "딸기우유 연못")
+            {
+                SoundManager.instance.PlaySound("Milk");
+            }
+            else if (gameObject.name == "빨간 설탕 유리 꽃" || gameObject.name == "노란 설탕 유리 꽃" || gameObject.name == "파란 설탕 유리 꽃")
+            {
+                SoundManager.instance.PlaySound("Sugar");
+            }
+
+
         }
         else
         {

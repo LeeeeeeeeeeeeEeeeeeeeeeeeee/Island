@@ -20,24 +20,24 @@ public class Food : MonoBehaviour
 
         TempCount = Inventory.Instance.Recipe.FindAll(n => n == Name).Count;
 
-        gameObject.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = TempCount.ToString();
+        gameObject.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = TempCount.ToString();
 
         if (TempCount > 0 )
         {
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.transform.GetChild(2).gameObject.SetActive(true);
         }
         else
         {
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            gameObject.transform.GetChild(2).gameObject.SetActive(false);
         }
 
         if (Count == 0)
         {
-            gameObject.GetComponent<Image>().color = Color.gray;
+            ImageObj.GetComponent<Image>().color = Color.gray;
         }
         else
         {
-            gameObject.GetComponent<Image>().color = Color.white;
+            ImageObj.GetComponent<Image>().color = Color.white;
         }    
     }
 
@@ -45,12 +45,16 @@ public class Food : MonoBehaviour
     {
         if (Count - TempCount > 0 && Inventory.Instance.SelectButton != null && Inventory.Instance.SelectButton.GetComponent<Image>().sprite != FoodImage)
         {
+            SoundManager.instance.PlaySound("Food");
+
             Inventory.Instance.SelectButton.GetComponent<Image>().sprite = FoodImage;
 
             Inventory.Instance.SelectButton.SetActive(true);
         }
         else if(Count - TempCount > 0)
         {
+            SoundManager.instance.PlaySound("Food");
+
             if (Inventory.Instance.PlusButtonImg[0].activeSelf == false)
             {
                 Inventory.Instance.PlusButtonImg[0].GetComponent<Image>().sprite = FoodImage;

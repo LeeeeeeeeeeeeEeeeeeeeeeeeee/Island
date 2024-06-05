@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
     {
         for(int i = 0; i< InvenItems.Count; i++)
         {
-            InvenNames.Add(InvenItems[i].GetComponent<Image>().sprite.name);
+            InvenNames.Add(InvenItems[i].transform.GetChild(0).GetComponent<Image>().sprite.name);
         }
     }
 
