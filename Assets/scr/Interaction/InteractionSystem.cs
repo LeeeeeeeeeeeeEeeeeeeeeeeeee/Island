@@ -373,6 +373,7 @@ public class InteractionSystem : MonoBehaviour
             {
                 Inventory.Instance.AlertText.text = "성공!";
                 Inventory.Instance.AlertText.color = Color.white;
+                break;
             }
             yield return null;
         }
