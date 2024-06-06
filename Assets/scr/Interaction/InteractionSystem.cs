@@ -327,6 +327,7 @@ public class InteractionSystem : MonoBehaviour
     public IEnumerator HideAndSeekInteraction(GameObject _Cell)
     {
         Inventory.Instance.AlertText.text = "나를 찾아봐요!";
+        Inventory.Instance.AlertText.color = Color.white;
 
         yield return oneSecond;
         //Add effect here
@@ -364,11 +365,13 @@ public class InteractionSystem : MonoBehaviour
             if (t >= 30)
             {
                 Inventory.Instance.AlertText.text = "실패";
+                Inventory.Instance.AlertText.color = Color.white;
                 HideAndSeekInteraction2(_Cell);
                 break;
             }else if(IsSeeking == false)
             {
                 Inventory.Instance.AlertText.text = "성공!";
+                Inventory.Instance.AlertText.color = Color.white;
             }
             yield return null;
         }

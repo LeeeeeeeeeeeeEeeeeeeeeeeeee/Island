@@ -16,6 +16,25 @@ public abstract class Building_basicSCR : MonoBehaviour
 
         switch (name)
         {
+            case "맷돌":
+                gameObject.tag = "Untagged";
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, -0.01f);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(0.89f, 1.066f);
+                gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, -0.214f);
+                gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.9f, 0.664f);
+                gameObject.transform.localScale = new Vector3(2, 2, 2);
+                break;
+
+            case "요리 솥":
+                gameObject.tag = "Cook";
+                gameObject.transform.GetChild(0).tag = "Cook";
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
+                gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(0.74f, 0.876f);
+                gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, -0.157f);
+                gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.75f, 0.567f);
+                gameObject.transform.localScale = new Vector3(2, 2, 2);
+                break;
+
             case "빨간 설탕 유리 꽃":
                 gameObject.AddComponent<Food_Generator>();
                 gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.09f, -0.08f);

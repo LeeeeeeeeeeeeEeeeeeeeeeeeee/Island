@@ -16,13 +16,18 @@ public class Building : Building_basicSCR
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isnotCol = true;
-        mySprite.color = Color.white;
+        isnotCol = false;
+        mySprite.color = Color.magenta;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag != "Animal")
+        if (collision.tag == "Map")
+        {
+            isnotCol = true;
+            mySprite.color = Color.white;
+        }
+        else
         {
             isnotCol = false;
             mySprite.color = Color.magenta;

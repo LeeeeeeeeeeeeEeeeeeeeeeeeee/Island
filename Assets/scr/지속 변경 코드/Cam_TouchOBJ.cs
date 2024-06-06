@@ -16,6 +16,15 @@ public class Cam_TouchOBJ : MonoBehaviour
     float Rearrange_Time = 0;
     Coroutine Rearrange_Co;
 
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
     void Update()
     {
         if (Input.touchCount > 0)
@@ -43,7 +52,7 @@ public class Cam_TouchOBJ : MonoBehaviour
                         BeganCol = clickCol;
                         
 
-                        if (clickCol.tag == "Building")
+                        if (clickCol.tag == "Building" || clickCol.tag == "Cook")
                         {
                             if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
                             {
@@ -68,11 +77,13 @@ public class Cam_TouchOBJ : MonoBehaviour
                     {
                         clickCol.GetComponent<InteractionButton>().InteractionStart(); //4
                         InteractionSystem.Interaction_system.is_Interaction_Mode = true;
+                        SoundManager.instance.PlaySound("Inter");
                     }
 
                     if (clickCol.tag == "store" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
-                        UI_Manager.Instance.OnClick_Open_Popup_Btn("shop_building");
+                        //UI_Manager.Instance.OnClick_Open_Popup_Btn("shop_building");
+                        SoundManager.instance.PlaySound("Shop");
                     }
                     else if (clickCol.tag == "Building" && clickCol != null)
                     {
@@ -101,11 +112,13 @@ public class Cam_TouchOBJ : MonoBehaviour
                     }
                     else if (clickCol.tag == "Cook" && ArchitectureSystem.build_system.isRearrangeMode == false)
                     {
-                        UI_Manager.Instance.OnClick_Open_Popup_Btn("cooking");
+                        //UI_Manager.Instance.OnClick_Open_Popup_Btn("cooking");
+                        SoundManager.instance.PlaySound("Cook");
                     }
                     else if (clickCol.tag == "Pat")
                     {
                         Touch_start_pos = toto.position;
+                        SoundManager.instance.PlaySound("Inter");
                     }
                 }
 
@@ -132,6 +145,7 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                 if (toto.phase == TouchPhase.Ended)
                 {
+                    SoundManager.instance.PlaySound("Touch");
                     Instantiate(Particles[2], clickPos, Particles[2].transform.rotation);
 
                     if (Rearrange_Co != null)

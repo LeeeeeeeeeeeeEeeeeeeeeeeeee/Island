@@ -49,9 +49,16 @@ public class LGH_Visit_Cell : MonoBehaviour
             if(Select.GetComponent<Cell_In_Building>().isVisit == false){
                 Select.GetComponent<Cell_In_Building>().isVisit = true;
 
-                
-                Vector2 pos = Select.transform.position + new Vector3(0, Position_Set(Select), 0);
+                Vector2 pos;
 
+                if (cell.name == "출출이")
+                {
+                    pos = Select.transform.position + new Vector3(0, 0.5f, 0);
+                }
+                else
+                {
+                    pos = Select.transform.position + new Vector3(0, Position_Set(Select), 0);
+                }
 
                 cell.transform.position = pos;
                 cell.GetComponent<CellCtrl>().staying_Building = Select.GetComponent<Cell_In_Building>();

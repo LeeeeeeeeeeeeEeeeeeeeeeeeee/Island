@@ -28,8 +28,10 @@ public class ArchitectureSystem : MonoBehaviour
 
     public int Money = 0;
     public int MoneyOutput = 0;
+    public int Deco = 0;
+
     public TextMeshProUGUI MoneyText;
-    public TextMeshProUGUI MoneyText2;
+    public TextMeshProUGUI DecoText;
     //public List<button_SendToCan> ButtonList;
     public List<GameObject> BuildingList;
 
@@ -41,23 +43,48 @@ public class ArchitectureSystem : MonoBehaviour
 
     public Dictionary<string, int> MoneyValue = new Dictionary<string, int>()
     {
-        { "빨간 설탕 유리 꽃", 0 },
-        { "노란 설탕 유리 꽃", 0 },
-        { "파란 설탕 유리 꽃", 0 },
-        { "비스킷 의자", 0 },
-        { "아이스크림 테이블", 0 },
-        { "마카롱 쿠션", 0 },
-        { "2단 마카롱 쿠션", 0 },
-        { "딸기우유 연못", 0 },
-        { "솜사탕 구름 1", 0 },
-        { "솜사탕 구름 2", 0 },
-        { "캔디 가로등", 0 },
-        { "롤리팝 캔디 나무", 0 },
-        { "마카롱 나무", 0 },
-        { "초코 분수", 0 },
-        { "녹차 푸딩 산", 0 },
-        { "초코 푸딩 산", 0 },
-        { "거대한 롤리팝 마시멜로우 언덕", 0 }
+        { "맷돌", 10 },
+        { "요리 솥", 10 },
+        { "빨간 설탕 유리 꽃", 20 },
+        { "노란 설탕 유리 꽃", 20 },
+        { "파란 설탕 유리 꽃", 20 },
+        { "비스킷 의자", 70 },
+        { "아이스크림 테이블", 150 },
+        { "마카롱 쿠션", 30 },
+        { "2단 마카롱 쿠션", 50 },
+        { "딸기우유 연못", 150 },
+        { "솜사탕 구름 1", 70 },
+        { "솜사탕 구름 2", 70 },
+        { "캔디 가로등", 100 },
+        { "롤리팝 캔디 나무", 150 },
+        { "마카롱 나무", 200 },
+        { "초코 분수", 250 },
+        { "녹차 푸딩 산", 300 },
+        { "초코 푸딩 산", 300 },
+        { "거대한 롤리팝 마시멜로우 언덕", 450 }
+    };
+
+    public Dictionary<string, int> DecoValue = new Dictionary<string, int>()
+    {
+        { "맷돌", 5 },
+        { "요리 솥", 10 },
+        { "빨간 설탕 유리 꽃", 1 },
+        { "노란 설탕 유리 꽃", 1 },
+        { "파란 설탕 유리 꽃", 1 },
+        { "비스킷 의자", 1 },
+        { "아이스크림 테이블", 1 },
+        { "마카롱 쿠션", 2 },
+        { "2단 마카롱 쿠션", 2 },
+        { "딸기우유 연못", 2 },
+        { "솜사탕 구름 1", 1 },
+        { "솜사탕 구름 2", 1 },
+        { "캔디 가로등", 3 },
+        { "롤리팝 캔디 나무", 3 },
+        { "마카롱 나무", 3 },
+        { "초코 분수", 3 },
+        { "녹차 푸딩 산", 4 },
+        { "초코 푸딩 산", 4 },
+        { "거대한 롤리팝 마시멜로우 언덕", 5 }
     };
 
     void Start()
@@ -77,7 +104,7 @@ public class ArchitectureSystem : MonoBehaviour
     void Update()
     {
         MoneyText.text = Money.ToString();
-        MoneyText2.text = Money.ToString();
+        DecoText.text = Deco.ToString();
 
         timer += Time.deltaTime;
         if (timer >= interval)
@@ -200,7 +227,6 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void OK_IConstructThere()
     {
-        go.tag = "Building";
         Building_BtnObj.SetActive(true);
         co2 = StartCoroutine(FollowBuilding_btn());
         //태그 변경 및 터치위치 따라가기 코루틴 정지 및 코루틴변수,빈건물변수 null값, 상점오브젝트 활성화
@@ -234,6 +260,8 @@ public class ArchitectureSystem : MonoBehaviour
 
             go = null;
 
+            Deco += DecoValue[CurrentSelectedBuilding.name];
+
             BuildingList.Add(CurrentSelectedBuilding);
 
             Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
@@ -258,6 +286,8 @@ public class ArchitectureSystem : MonoBehaviour
         Destroy(CurrentSelectedBuilding);
 
         Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+
+        PopUpSystem.instance.ReStroage(CurrentSelectedBuilding);
 
         isConstrutMode = false;
 
@@ -320,6 +350,10 @@ public class ArchitectureSystem : MonoBehaviour
             
             b.StopAllCoroutines();
 
+            Deco -= DecoValue[CurrentSelectedBuilding.name];
+
+            PopUpSystem.instance.ReStroage(CurrentSelectedBuilding);
+
             BuildingList.Remove(CurrentSelectedBuilding);
             Destroy(CurrentSelectedBuilding);
 
@@ -337,6 +371,11 @@ public class ArchitectureSystem : MonoBehaviour
 
 
     #endregion
+
+    public void CoinCheat()
+    {
+        Money += 100;
+    }
 }
 
 
