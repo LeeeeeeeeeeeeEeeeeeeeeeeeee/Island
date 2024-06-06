@@ -296,6 +296,7 @@ public class InteractionSystem : MonoBehaviour
             is_Interaction_Mode = false;
             Sciss.onValueChanged.RemoveAllListeners();
             Inventory.Instance.AlertText.text = "성공!!!";
+            Inventory.Instance.AlertText.color = Color.white;
             StartCoroutine(SnackInteraction3_End(Sciss));
         }
     }
@@ -349,21 +350,21 @@ public class InteractionSystem : MonoBehaviour
         float j = Random.Range(0, 1);
         if (j >= 0.5)
         {
-            _Cell.transform.position = TargetBuilding.position + Vector3.left * 0.8f;
+            _Cell.transform.position = TargetBuilding.position + Vector3.left + new Vector3(TargetBuilding.GetComponent<SpriteRenderer>().size.x/4, 0, 0);
         }else if(j<0.5)
         {
-            _Cell.transform.position = TargetBuilding.position + Vector3.right * 0.8f;
+            _Cell.transform.position = TargetBuilding.position + Vector3.right + new Vector3(TargetBuilding.GetComponent<SpriteRenderer>().size.x/4, 0, 0);
         }
 
         Camera.main.orthographicSize = 5f;
 
 
-        float t = 0;
+        float t = 30;
         while (true)
         {
-            t += Time.deltaTime;
+            t -= Time.deltaTime;
             SeekTimer.text = Mathf.Floor(t).ToString();
-            if (t >= 30)
+            if (t <= 0)
             {
                 Inventory.Instance.AlertText.text = "실패";
                 Inventory.Instance.AlertText.color = Color.white;

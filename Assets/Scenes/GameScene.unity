@@ -10776,9 +10776,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 645e30108c82db64a822a03f5f80f25d, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10842,7 +10842,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &201945189
@@ -97882,7 +97882,7 @@ MonoBehaviour:
   isCameraMode: 0
   isConstrutMode: 0
   isRearrangeMode: 0
-  Money: 500
+  Money: 1000
   MoneyOutput: 0
   Deco: 0
   MoneyText: {fileID: 1175434372}
@@ -97892,7 +97892,7 @@ MonoBehaviour:
   ReArrangeBuilding_BtnObj: {fileID: 1244697223}
   RearrngeOut_Btn: {fileID: 0}
   CurrentSelectedBuilding: {fileID: 0}
-  Delay: 0.1
+  Delay: 0.5
   emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
 --- !u!4 &1919062125
 Transform:

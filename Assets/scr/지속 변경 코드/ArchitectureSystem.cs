@@ -157,10 +157,12 @@ public class ArchitectureSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         float DelayTime = 0f;
         
-        isConstrutMode = true;
+        //isConstrutMode = true;
         CurrentSelectedBuilding = gg;
 
-        gg.transform.localPosition = this.transform.position + Vector3.down;
+        gg.transform.localPosition = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
+        OK_IConstructThere();
+        
         while (true)
         {
 
@@ -174,7 +176,12 @@ public class ArchitectureSystem : MonoBehaviour
                     DelayTime += Time.deltaTime;
                     if (DelayTime >= Delay)
                     {
+                        isConstrutMode = true;
                         gg.transform.localPosition = clickPos;
+                    }
+                    else 
+                    {
+                        isConstrutMode = false;
                     }
                 }
                 if (tt.phase == TouchPhase.Ended)

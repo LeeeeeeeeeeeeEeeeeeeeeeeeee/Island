@@ -22,7 +22,7 @@ public class Building : Building_basicSCR
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Map")
+        if (collision.tag == "Map" || collision.tag == "Animal")
         {
             isnotCol = true;
             mySprite.color = Color.white;
