@@ -397,7 +397,7 @@ public class InteractionSystem : MonoBehaviour
     public void HideAndSeekInteraction2(GameObject _Cell)
     {
         _Cell.transform.position = Init;
-        _Cell.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        _Cell.GetComponent<SpriteRenderer>().sortingOrder = 0;
         _Cell.GetComponent<PolygonCollider2D>().enabled = false;
         is_Interaction_Mode = false;
         IsSeeking = false;

@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4754915782216808943}
   - component: {fileID: 3946706932028485688}
   - component: {fileID: 6304280412021827192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\uC774\uC131\uC138\uD3EC"
   m_TagString: Animal
   m_Icon: {fileID: 0}

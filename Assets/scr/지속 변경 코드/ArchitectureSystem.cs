@@ -180,9 +180,21 @@ public class ArchitectureSystem : MonoBehaviour
             if(Input.touchCount == 1) 
             {
                 Touch tt = Input.GetTouch(0);
-                if (tt.phase == TouchPhase.Moved)
+                if(tt.phase == TouchPhase.Stationary)
                 {
                     DelayTime += Time.deltaTime;
+                    if (DelayTime >= Delay)
+                    {
+                        isConstrutMode = true;
+                        gg.transform.localPosition = clickPos;
+                    }
+                    else
+                    {
+                        isConstrutMode = false;
+                    }
+                }
+                if (tt.phase == TouchPhase.Moved)
+                {
                     if (DelayTime >= Delay)
                     {
                         isConstrutMode = true;
