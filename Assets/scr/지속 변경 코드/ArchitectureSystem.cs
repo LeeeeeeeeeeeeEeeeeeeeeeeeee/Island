@@ -155,6 +155,7 @@ public class ArchitectureSystem : MonoBehaviour
         //int 1 = Build
         //int 2 = Rearrange
         gg.TryGetComponent(out Building b);
+        float DelayTime = 0f;
         
         isConstrutMode = true;
         CurrentSelectedBuilding = gg;
@@ -170,7 +171,11 @@ public class ArchitectureSystem : MonoBehaviour
                 Touch tt = Input.GetTouch(0);
                 if (tt.phase == TouchPhase.Moved)
                 {
-                    gg.transform.localPosition = clickPos;
+                    DelayTime += Time.deltaTime;
+                    if (DelayTime >= 0.5f)
+                    {
+                        gg.transform.localPosition = clickPos;
+                    }
                 }
                 if (tt.phase == TouchPhase.Ended)
                 {
@@ -189,6 +194,7 @@ public class ArchitectureSystem : MonoBehaviour
                         {
                             b.btn_active();
                         }
+                        DelayTime = 0;
                     }
                 }
             }
