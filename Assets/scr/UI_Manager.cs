@@ -29,6 +29,7 @@ public class UI_Manager : MonoBehaviour
         Check_Intention_Place_Building,
         // 이하 알림 팝업 (의사 확인 팝업과 뎁스 같음)
         Notice_Theme_Locked,
+        Notice_Didnt_Exist_Popup,
         // 이하 튜토리얼 팝업 
         Tutorial
     }
@@ -48,6 +49,7 @@ public class UI_Manager : MonoBehaviour
         {Enum_Popup_Subject.Check_Intention_Purchase_Building,  10},
         {Enum_Popup_Subject.Check_Intention_Place_Building,     11},
         {Enum_Popup_Subject.Notice_Theme_Locked,                12},
+        {Enum_Popup_Subject.Notice_Didnt_Exist_Popup,           13},
         {Enum_Popup_Subject.Tutorial,                           15}
     };
     
@@ -318,9 +320,32 @@ public class UI_Manager : MonoBehaviour
         }
         else
         {
-            Open_Popup(Dic_Popup_Enum_From_String[popup]);
+            try
+            {
+                Open_Popup(Dic_Popup_Enum_From_String[popup]);
+            }
+            catch (Exception e)
+            {
+                Open_Popup_Notice_Didnt_Exist();
+            }
         }
 
+    }
+
+    public void Open_Popup_Notice_Didnt_Exist()
+    {
+        int temp_popup_code = Dic_Popup_Code_From_Enum[Enum_Popup_Subject.Notice_Didnt_Exist_Popup];
+        arr_content_popups[temp_popup_code].SetActive(true);
+        arr_popup_extended_background[2].SetActive(true);
+        
+        if (present_popup_code == -1)
+            present_popup_code = temp_popup_code;
+        else
+        {
+            Debug.Log("PUSH_Popup_Code " + present_popup_code);
+            stack_present_popup_code.Push(present_popup_code);
+            present_popup_code = temp_popup_code;
+        }
     }
     
     // 콘텐츠 팝업을 표시하는 함수
@@ -330,6 +355,12 @@ public class UI_Manager : MonoBehaviour
     {
         
         int subject_num = Dic_Popup_Code_From_Enum[subject];
+
+        if (!arr_content_popups[subject_num])
+        {
+            subject_num = Dic_Popup_Code_From_Enum[Enum_Popup_Subject.Notice_Didnt_Exist_Popup];
+            arr_content_popups[subject_num].SetActive(true);
+        }
         
         if (subject_num < 8)
             arr_popup_extended_background[0].SetActive(true);
