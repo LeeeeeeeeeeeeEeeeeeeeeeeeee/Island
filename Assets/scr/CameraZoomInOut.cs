@@ -10,7 +10,7 @@ public class CameraZoomInOut : MonoBehaviour
 
         if (Input.touchCount == 2)
         {
-            if (Camera.main.orthographicSize > 2 && Camera.main.orthographicSize < 11.8f)
+            if (Camera.main.orthographicSize > 2 && Camera.main.orthographicSize < 20)
             {
                 Touch touch01 = Input.GetTouch(0);
                 Touch touch02 = Input.GetTouch(1);
@@ -31,11 +31,11 @@ public class CameraZoomInOut : MonoBehaviour
             }
         }
 
-        if (Camera.main.orthographicSize <= 1.8f)
+        if (Camera.main.orthographicSize <= 2f)
         {
             Camera.main.orthographicSize = 2f;
         }
-        else if (Camera.main.orthographicSize >= 20.2f)
+        else if (Camera.main.orthographicSize >= 20f)
         {
             Camera.main.orthographicSize = 20f;
         }
