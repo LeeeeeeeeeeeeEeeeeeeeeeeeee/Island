@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,7 +28,9 @@ public class UI_Manager : MonoBehaviour
         Check_Intention_Purchase_Building,
         Check_Intention_Place_Building,
         // 이하 알림 팝업 (의사 확인 팝업과 뎁스 같음)
-        Notice_Theme_Locked
+        Notice_Theme_Locked,
+        // 이하 튜토리얼 팝업 
+        Tutorial
     }
 
     public Dictionary<Enum_Popup_Subject, int> Dic_Popup_Code_From_Enum = new Dictionary<Enum_Popup_Subject, int>()
@@ -44,7 +47,8 @@ public class UI_Manager : MonoBehaviour
         {Enum_Popup_Subject.Shop_Furniture_List,                9},
         {Enum_Popup_Subject.Check_Intention_Purchase_Building,  10},
         {Enum_Popup_Subject.Check_Intention_Place_Building,     11},
-        {Enum_Popup_Subject.Notice_Theme_Locked,                12}
+        {Enum_Popup_Subject.Notice_Theme_Locked,                12},
+        {Enum_Popup_Subject.Tutorial,                           15}
     };
     
     public Dictionary<string, Enum_Popup_Subject> Dic_Popup_Enum_From_String = new Dictionary<string, Enum_Popup_Subject>()
@@ -61,7 +65,8 @@ public class UI_Manager : MonoBehaviour
         {"shop_furniture_list",                Enum_Popup_Subject.Shop_Furniture_List},
         {"check_intention_purchase_building",  Enum_Popup_Subject.Check_Intention_Purchase_Building},
         {"check_intention_place_building",     Enum_Popup_Subject.Check_Intention_Place_Building},
-        {"notice_theme_locked",                Enum_Popup_Subject.Notice_Theme_Locked}
+        {"notice_theme_locked",                Enum_Popup_Subject.Notice_Theme_Locked},
+        {"tutorial",                           Enum_Popup_Subject.Tutorial}
     };
     
     public enum Enum_Btn_List_Mode
@@ -70,46 +75,66 @@ public class UI_Manager : MonoBehaviour
         Cooking,
         Building
     }
-
+    [Header("탭 전환 버튼 관리 - 스프라이트")]
     [SerializeField] private Sprite[] arr_sprite_2_tab_state;
     [SerializeField] private Sprite[] arr_sprite_3_tab_state;
     [SerializeField] private Sprite[] arr_sprite_4_tab_state;
+    
+    [Header("탭 전환 버튼 관리 - 텍스트 메터리얼")]
     [SerializeField] private Material[] arr_mat_tmp_btn_tab; 
 
+    [Header("팝업 목록")]
     [SerializeField] private GameObject[] arr_popups;
     [SerializeField] private GameObject[] arr_content_popups;
 
+    [Header("탭 전환 버튼 관리 - 오브젝트")]
     [SerializeField] private GameObject[] arr_tab_btn_shop_building;
     [SerializeField] private GameObject[] arr_tab_btn_character_information;
     [SerializeField] private GameObject[] arr_tab_btn_collection;
-    
+    [SerializeField] private GameObject[] arr_tab_btn_tutorial;
+
+    [Header("탭 전환 내용 관리 - 오브젝트")]
     [SerializeField] private GameObject[] arr_tab_content_shop_building;
     [SerializeField] private GameObject[] arr_tab_content_character_information;
     [SerializeField] private GameObject[] arr_tab_content_collection;
-
+    [SerializeField] private GameObject[] arr_tab_tutorial;
+    
+    [Header("팝업 외부 배경 목록")]
     [SerializeField] private GameObject[] arr_popup_extended_background;
+
+    [Header("팝업 전용 재화 알림 표시")]
     [SerializeField] private GameObject ui_main_player_property_info;
 
+    [Header("탭 전환 관리 - 현재 표시 탭 번호")]
     [SerializeField] private int present_tab_num_shop_building;
     [SerializeField] private int present_tab_num_character_information;
     [SerializeField] private int present_tab_num_collection;
+    [SerializeField] private int present_tab_num_tutorial;
+
+    [Header("버튼 리스트 탭 관리 : 현재 열린 버튼 목록")]
     [SerializeField] private Enum_Btn_List_Mode present_btn_list_mode_main;
 
+    [Header("현재 열린 팝업 번호")]
     [SerializeField] private int present_popup_code = -1; // 현재 팝업 화면을 판단하는 변수, 나중에 이걸 큐로 바꿔야 함
 
     [SerializeField] private Stack<int> stack_present_popup_code = new Stack<int>();
 
+    [Header("목록 내 버튼 오브젝트")]
     [SerializeField] private GameObject obj_list_btn_cooking;
     [SerializeField] private GameObject obj_list_btn_building;
 
+    [Header("탭 전환 관리 - 콘텐츠별 버튼 이미지")]
     [SerializeField] private Image[] arr_img_btn_tab_shop_building;
     [SerializeField] private Image[] arr_img_btn_tab_character_information;
     [SerializeField] private Image[] arr_img_btn_tab_collection;
-
+    
+    [Header("탭 전환 관리 - 콘텐츠별 텍스트 머테리얼")]
     [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_shop_building;
     [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_character_information;
     [SerializeField] private TextMeshProUGUI[] arr_tmp_btn_tab_collection;
 
+    [Header("튜토리얼 - 현재 탭 번호 표시 텍스트")] 
+    [SerializeField] private TextMeshProUGUI tmp_present_tab_num_tutorial;
     
     void Awake()
     {
@@ -147,6 +172,7 @@ public class UI_Manager : MonoBehaviour
     {
         Initialize();
         Initialize_Tap(-2);
+        Open_Popup(Enum_Popup_Subject.Tutorial);
     }
     
     // 하이라키 내 각 오브젝트 마다의 설정값을 초기화하는 함수 (모든 팝업 닫기(비활성화)) 
@@ -194,13 +220,20 @@ public class UI_Manager : MonoBehaviour
                 arr_tmp_btn_tab_collection[i].fontMaterial = arr_mat_tmp_btn_tab[1];
             }
             
+            foreach (var obj in arr_tab_tutorial)
+            {
+                obj.SetActive(false);
+            }
+
             arr_tab_content_shop_building[0].SetActive(true);
             arr_tab_content_character_information[0].SetActive(true);
             arr_tab_content_collection[0].SetActive(true);
+            arr_tab_tutorial[0].SetActive(true);
             
             present_tab_num_shop_building = 0;
             present_tab_num_character_information = 0;
             present_tab_num_collection = 0;
+            present_tab_num_tutorial = 0;
 
             arr_img_btn_tab_shop_building[0].sprite = arr_sprite_2_tab_state[0];
             arr_img_btn_tab_character_information[0].sprite = arr_sprite_4_tab_state[0];
@@ -209,6 +242,12 @@ public class UI_Manager : MonoBehaviour
             arr_tmp_btn_tab_shop_building[0].fontMaterial = arr_mat_tmp_btn_tab[0];
             arr_tmp_btn_tab_character_information[0].fontMaterial = arr_mat_tmp_btn_tab[0];
             arr_tmp_btn_tab_collection[0].fontMaterial = arr_mat_tmp_btn_tab[0];
+            
+            arr_tab_btn_tutorial[0].SetActive(false);
+            arr_tab_btn_tutorial[1].SetActive(true);
+            arr_tab_btn_tutorial[2].SetActive(false);
+            tmp_present_tab_num_tutorial.text = 1 + present_tab_num_tutorial + " / " + arr_tab_tutorial.Length;
+
         } else
         {
             switch (num)
@@ -239,6 +278,19 @@ public class UI_Manager : MonoBehaviour
                     arr_tab_content_character_information[0].SetActive(true);
                     present_tab_num_character_information = 0;
                     arr_img_btn_tab_character_information[0].sprite = arr_sprite_4_tab_state[0];
+                    break;
+                case 15:
+                    foreach (var obj in arr_tab_tutorial)
+                    {
+                        obj.SetActive(false);
+                    }
+                    arr_tab_tutorial[0].SetActive(true);
+                    present_tab_num_tutorial = 0;
+
+                    arr_tab_btn_tutorial[0].SetActive(false);
+                    arr_tab_btn_tutorial[1].SetActive(true);
+                    arr_tab_btn_tutorial[2].SetActive(false);
+                    tmp_present_tab_num_tutorial.text = 1 + present_tab_num_tutorial + " / " + arr_tab_tutorial.Length;
                     break;
                 default:
                     break;
@@ -283,8 +335,10 @@ public class UI_Manager : MonoBehaviour
             arr_popup_extended_background[0].SetActive(true);
         else if (subject_num < 10)
             arr_popup_extended_background[1].SetActive(true);
-        else
+        else if (subject_num < 15)
             arr_popup_extended_background[2].SetActive(true);
+        else
+            arr_popup_extended_background[3].SetActive(true);
         
         if (arr_content_popups[subject_num] == true)
         {
@@ -329,8 +383,10 @@ public class UI_Manager : MonoBehaviour
         }
         else if (present_popup_code < 10)
             arr_popup_extended_background[1].SetActive(false);
-        else
+        else if (present_popup_code < 15)
             arr_popup_extended_background[2].SetActive(false);
+        else
+            arr_popup_extended_background[3].SetActive(false);
 
         arr_content_popups[present_popup_code].SetActive(false);
 
@@ -475,6 +531,41 @@ public class UI_Manager : MonoBehaviour
 
                 present_tab_num_shop_building = tab;
             }
+        }
+    }
+    
+    public void OnClick_Change_Tutorial_Content_Btn(int direction)
+    {
+        try
+        {
+            arr_tab_tutorial[present_tab_num_tutorial].SetActive(false);
+            present_tab_num_tutorial += direction;
+            arr_tab_tutorial[present_tab_num_tutorial].SetActive(true);
+
+            if (present_tab_num_tutorial != 0)
+            {
+                arr_tab_btn_tutorial[0].SetActive(true);
+                if (present_tab_num_tutorial == arr_tab_tutorial.Length - 1)
+                {
+                    arr_tab_btn_tutorial[1].SetActive(false);
+                    arr_tab_btn_tutorial[2].SetActive(true);
+                }
+                else
+                {
+                    arr_tab_btn_tutorial[2].SetActive(false);
+                }
+            }
+            else
+            {
+                arr_tab_btn_tutorial[0].SetActive(false);
+                arr_tab_btn_tutorial[1].SetActive(true);
+            }
+            tmp_present_tab_num_tutorial.text = 1 + present_tab_num_tutorial + " / " + arr_tab_tutorial.Length;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Error to chage tab : tutorial");
+            Close_Popup();
         }
     }
 }
