@@ -24,7 +24,7 @@ public class ArchitectureSystem : MonoBehaviour
     public bool isConstrutMode = false;
     public bool isRearrangeMode = false;
     
-    private bool isCol;
+    private bool isntCol;
 
     public int Money = 0;
     public int MoneyOutput = 0;
@@ -119,6 +119,7 @@ public class ArchitectureSystem : MonoBehaviour
         Building[] p = GetComponentsInChildren<Building>();
         //RearrngeOut_Btn.SetActive(true);
 
+
         if (isRearrangeMode == false)
         {
             Store_Obj.GetComponent<BoxCollider2D>().enabled = false;
@@ -128,6 +129,8 @@ public class ArchitectureSystem : MonoBehaviour
                 item.RearrangeNow = true;
             }
             isRearrangeMode = true;
+
+
         }
 
         else if (isRearrangeMode == true)
@@ -157,15 +160,21 @@ public class ArchitectureSystem : MonoBehaviour
         gg.TryGetComponent(out Building b);
         float DelayTime = 0f;
         
-        //isConstrutMode = true;
+        
         CurrentSelectedBuilding = gg;
 
-        gg.transform.localPosition = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
-        OK_IConstructThere();
-        
+        if(Where==2 && BuildingList.Contains(CurrentSelectedBuilding))
+        {
+            BuildingList.Remove(CurrentSelectedBuilding);
+        }
+
+        if (Where == 1)
+        {
+            gg.transform.localPosition = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
+        }
+
         while (true)
         {
-
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
             if(Input.touchCount == 1) 
@@ -186,15 +195,16 @@ public class ArchitectureSystem : MonoBehaviour
                 }
                 if (tt.phase == TouchPhase.Ended)
                 {
-                    isCol = b.isnotCol;
-                    if (!isCol)
+                    isntCol = b.isnotCol;
+                    if (!isntCol)
                     {
                         Debug.Log("위치 재지정 필요");
                     }
-                    else if (isCol)
+                    else if (isntCol)
                     {
                         if (Where == 1)
                         {
+                            Building_BtnObj.SetActive(false);
                             OK_IConstructThere();
                         }
                         else if (Where == 2)
@@ -220,7 +230,7 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
-        
+        isConstrutMode = true;
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
         go.transform.SetParent(transform, true);
@@ -234,7 +244,10 @@ public class ArchitectureSystem : MonoBehaviour
         go.GetComponent<BoxCollider2D>().isTrigger = true;
         go.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.2f);
         go.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(go.GetComponent<SpriteRenderer>().size.x, go.GetComponent<SpriteRenderer>().size.y);
+        
         co = StartCoroutine(FollowMouse(go, 1));
+        OK_IConstructThere();
+
         //상점오브젝트/상점ui 비활성화 및 빈 건물 생성 후 스프라이트와 이름 설정
         //터치위치로 따라가는 코루틴 시작
     }
@@ -265,8 +278,8 @@ public class ArchitectureSystem : MonoBehaviour
     {
         //StopCoroutine(co);
         //StopCoroutine(co2);
-        isCol = CurrentSelectedBuilding.GetComponent<Building>().isnotCol;
-        if (isCol)
+        isntCol = CurrentSelectedBuilding.GetComponent<Building>().isnotCol;
+        if (isntCol)
         {
             StopAllCoroutines();
             co = null;
@@ -291,13 +304,13 @@ public class ArchitectureSystem : MonoBehaviour
 
     public void btn_Cancle()
     {
+
         StopAllCoroutines();
         co = null;
         co2 = null;
         go = null;
 
-        BuildingList.Remove(CurrentSelectedBuilding);
-        Destroy(CurrentSelectedBuilding);
+        
 
         Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
 
@@ -306,7 +319,8 @@ public class ArchitectureSystem : MonoBehaviour
         isConstrutMode = false;
 
         Building_BtnObj.SetActive(false);
-
+        BuildingList.Remove(CurrentSelectedBuilding);
+        Destroy(CurrentSelectedBuilding);
         CurrentSelectedBuilding = null;
     }
     #endregion
@@ -334,8 +348,8 @@ public class ArchitectureSystem : MonoBehaviour
         //StopCoroutine(co);
         //StopCoroutine(co2);
         Building b = CurrentSelectedBuilding.GetComponent<Building>();
-        isCol = b.isnotCol;
-        if (isCol)
+        isntCol = b.isnotCol;
+        if (isntCol)
         {
             StopAllCoroutines();
 
@@ -346,6 +360,10 @@ public class ArchitectureSystem : MonoBehaviour
             isConstrutMode = false;
 
             ReArrangeBuilding_BtnObj.SetActive(false);
+
+            
+            BuildingList.Add(CurrentSelectedBuilding);
+            
 
             CurrentSelectedBuilding = null;
 
@@ -357,30 +375,28 @@ public class ArchitectureSystem : MonoBehaviour
     public void Re_btn_Cancel()
     {
         Building b = CurrentSelectedBuilding.GetComponent<Building>();
-        isCol = b.isnotCol;
-        if (isCol)
-        {
-            StopAllCoroutines();
-            
-            b.StopAllCoroutines();
 
-            Deco -= DecoValue[CurrentSelectedBuilding.name];
+        StopAllCoroutines();
 
-            PopUpSystem.instance.ReStroage(CurrentSelectedBuilding);
+        b.StopAllCoroutines();
 
-            BuildingList.Remove(CurrentSelectedBuilding);
-            Destroy(CurrentSelectedBuilding);
+        Deco -= DecoValue[CurrentSelectedBuilding.name];
 
-            Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
+        PopUpSystem.instance.ReStroage(CurrentSelectedBuilding);
 
-            isConstrutMode = false;
+        BuildingList.Remove(CurrentSelectedBuilding);
+        Destroy(CurrentSelectedBuilding);
 
-            ReArrangeBuilding_BtnObj.SetActive(false);
+        Store_Obj.GetComponent<BoxCollider2D>().enabled = true;
 
-            CurrentSelectedBuilding = null;
+        isConstrutMode = false;
 
-            Rearrange();
-        }
+        ReArrangeBuilding_BtnObj.SetActive(false);
+
+        CurrentSelectedBuilding = null;
+
+        Rearrange();
+
     }
 
 

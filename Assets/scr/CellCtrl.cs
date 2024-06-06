@@ -48,11 +48,24 @@ public class CellCtrl : MonoBehaviour
             RandomTimer = RandomTimer - 1 * Time.deltaTime;
         }
         else
-        {   
-            if(CellCreate.left_debug == false)
-            Instantiate(gameObject.transform.GetChild(2), gameObject.transform.position, Quaternion.identity);
+        {
+            if (CellCreate.left_debug == false)
+            {
+                Instantiate(gameObject.transform.GetChild(4), gameObject.transform.position, Quaternion.identity);
+            }
             CellCreate.debug_id = Id;
             CellCreate.left_debug = true;
+        }
+
+        if(staying_Building.gameObject.GetComponent<Building>().RearrangeNow==true)
+        {
+            if (CellCreate.left_debug == false)
+            {
+                Instantiate(gameObject.transform.GetChild(4), gameObject.transform.position, Quaternion.identity);
+            }
+            CellCreate.debug_id = Id;
+            CellCreate.left_debug = true;
+                
         }
     }
 
@@ -60,7 +73,7 @@ public class CellCtrl : MonoBehaviour
     {
         StartCoroutine(InteractionButtonActive()); //1
 
-        Invoke("MakeInteraction", Random.Range(300f, 600f));
+        Invoke("MakeInteraction", Random.Range(30f, 60f));
     }
 
     public void InteractionGo(int type)

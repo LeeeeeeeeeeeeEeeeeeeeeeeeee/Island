@@ -31,11 +31,11 @@ public class CameraZoomInOut : MonoBehaviour
             }
         }
 
-        if (Camera.main.orthographicSize <= 1.99f)
+        if (Camera.main.orthographicSize <= 1.8f)
         {
             Camera.main.orthographicSize = 2f;
         }
-        else if (Camera.main.orthographicSize >= 20.01f)
+        else if (Camera.main.orthographicSize >= 20.2f)
         {
             Camera.main.orthographicSize = 20f;
         }

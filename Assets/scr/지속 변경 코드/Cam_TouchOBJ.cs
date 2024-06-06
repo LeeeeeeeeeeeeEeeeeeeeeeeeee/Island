@@ -54,12 +54,13 @@ public class Cam_TouchOBJ : MonoBehaviour
 
                         if (clickCol.tag == "Building" || clickCol.tag == "Cook")
                         {
-                            if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
-                            {
-                                Debug.Log("설치");
-                                bb.BuildingMove();
-                            }
-                            else if (clickCol.transform.parent.TryGetComponent(out Building b) && bb.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
+                            //if (clickCol.transform.parent.TryGetComponent(out Building bb) && bb.RearrangeNow == true)
+                            //{
+                            //    Debug.Log("설치");
+                            //    bb.BuildingMove();
+                            //}
+                            //else 
+                            if (clickCol.transform.parent.TryGetComponent(out Building b) && b.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
                             {
                                 Rearrange_Co = StartCoroutine(Rearrange_Func(b));
                             }

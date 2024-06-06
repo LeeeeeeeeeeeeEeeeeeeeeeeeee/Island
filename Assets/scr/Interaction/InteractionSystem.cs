@@ -72,9 +72,7 @@ public class InteractionSystem : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log((_Cam.transform.position - target.position).magnitude);
-
-            Vector3 newPosition = target.position + offset + new Vector3(0,0,-10);
+            Vector3 newPosition = target.position + new Vector3(0,0,-10);
             _Cam.transform.position = Vector3.Lerp(_Cam.transform.position, newPosition, smoothSpeed);
 
 
@@ -83,10 +81,11 @@ public class InteractionSystem : MonoBehaviour
                 Debug.Log("End");
                 Debug.Log((_Cam.transform.position - target.position).magnitude);
                 break;
-            }else if (_Cam.transform.position.x > 4f || _Cam.transform.position.x < -4f || _Cam.transform.position.y > 4f || _Cam.transform.position.y < -4f)
-            {
-                break;
             }
+            //else if (_Cam.transform.position.x > 4f || _Cam.transform.position.x < -4f || _Cam.transform.position.y > 4f || _Cam.transform.position.y < -4f)
+            //{
+            //    break;
+            //}
 
             
             yield return null;
@@ -168,7 +167,6 @@ public class InteractionSystem : MonoBehaviour
         
     }
     #endregion
-
 
     #region clapclap
 
@@ -270,12 +268,13 @@ public class InteractionSystem : MonoBehaviour
     }
     #endregion
 
-
     #region Snack
 
     public Transform SnackUi;
     public void SnackInteraction(GameObject _Cell)
     {
+        Inventory.Instance.AlertText.text = "세포에게 간식을 주세요!";
+        Inventory.Instance.AlertText.color = Color.white;
         Slider Scissors = SnackUi.GetComponent<Slider>();
         Animator SuccesAnimation = SnackUi.GetComponent<Animator>();
         _Cell.transform.GetChild(2).gameObject.SetActive(false);
@@ -308,8 +307,7 @@ public class InteractionSystem : MonoBehaviour
         SnackUi.gameObject.SetActive(false);
         Sciss.value = 0;
         Sciss.interactable = true;
-
-
+        Camera.main.orthographicSize = 5f;
     }
 
 
@@ -339,7 +337,22 @@ public class InteractionSystem : MonoBehaviour
         Init = _Cell.transform.position;
         
         _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
-        _Cell.GetComponent<PolygonCollider2D>().enabled = true;
+
+        if (_Cell.name == "출출이")
+        {
+            if (!_Cell.TryGetComponent(out PolygonCollider2D p))
+            {
+                _Cell.AddComponent<PolygonCollider2D>();
+            }
+            else
+            {
+                _Cell.GetComponent<PolygonCollider2D>().enabled = true;
+            }
+        }
+        else
+        {
+            _Cell.GetComponent<PolygonCollider2D>().enabled = true;
+        }
         IsSeeking = true;
 
         

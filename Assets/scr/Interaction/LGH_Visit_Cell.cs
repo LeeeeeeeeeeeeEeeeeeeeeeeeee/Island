@@ -48,12 +48,12 @@ public class LGH_Visit_Cell : MonoBehaviour
 
             if(Select.GetComponent<Cell_In_Building>().isVisit == false){
                 Select.GetComponent<Cell_In_Building>().isVisit = true;
-
+                
                 Vector2 pos;
 
                 if (cell.name == "출출이")
                 {
-                    pos = Select.transform.position + new Vector3(0, 0.5f, 0);
+                    pos = Select.transform.position + new Vector3(0, Select.GetComponent<SpriteRenderer>().size.y/3 + 0.5f, 0);
                 }
                 else
                 {
