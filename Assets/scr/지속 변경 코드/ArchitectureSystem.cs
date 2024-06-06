@@ -149,7 +149,7 @@ public class ArchitectureSystem : MonoBehaviour
             }
         }
     }
-
+    public float Delay = 0.1f;
     public IEnumerator FollowMouse(GameObject gg, int Where)
     {
         //int 1 = Build
@@ -172,7 +172,7 @@ public class ArchitectureSystem : MonoBehaviour
                 if (tt.phase == TouchPhase.Moved)
                 {
                     DelayTime += Time.deltaTime;
-                    if (DelayTime >= 0.5f)
+                    if (DelayTime >= Delay)
                     {
                         gg.transform.localPosition = clickPos;
                     }
