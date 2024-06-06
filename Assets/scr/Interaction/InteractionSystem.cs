@@ -278,7 +278,7 @@ public class InteractionSystem : MonoBehaviour
     {
         Slider Scissors = SnackUi.GetComponent<Slider>();
         Animator SuccesAnimation = SnackUi.GetComponent<Animator>();
-        _Cell.transform.GetChild(3).gameObject.SetActive(false);
+        _Cell.transform.GetChild(2).gameObject.SetActive(false);
 
         ArchitectureSystem.build_system.isConstrutMode = true;
 
@@ -329,13 +329,14 @@ public class InteractionSystem : MonoBehaviour
         Inventory.Instance.AlertText.text = "나를 찾아봐요!";
         Inventory.Instance.AlertText.color = Color.white;
 
+        _Cell.transform.GetChild(3).gameObject.SetActive(false);
         yield return oneSecond;
         //Add effect here
         SeekTimer.gameObject.SetActive(true);
 
 
         Init = _Cell.transform.position;
-        _Cell.transform.GetChild(4).gameObject.SetActive(false);
+        
         _Cell.GetComponent<SpriteRenderer>().sortingOrder = -1;
         _Cell.GetComponent<PolygonCollider2D>().enabled = true;
         IsSeeking = true;

@@ -159,6 +159,7 @@ public class ArchitectureSystem : MonoBehaviour
         isConstrutMode = true;
         CurrentSelectedBuilding = gg;
 
+        gg.transform.localPosition = this.transform.position + Vector3.down;
         while (true)
         {
 
