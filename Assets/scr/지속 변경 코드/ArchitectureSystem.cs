@@ -239,9 +239,11 @@ public class ArchitectureSystem : MonoBehaviour
     Coroutine co2;
     GameObject go;
     public GameObject emptyBuilding;
+    public GameObject MainUI; 
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
+        MainUI.SetActive(false);
         isConstrutMode = true;
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
@@ -311,6 +313,9 @@ public class ArchitectureSystem : MonoBehaviour
             Building_BtnObj.SetActive(false);
 
             CurrentSelectedBuilding = null;
+
+            MainUI.SetActive(true);
+
         }
     }
 
@@ -334,6 +339,9 @@ public class ArchitectureSystem : MonoBehaviour
         BuildingList.Remove(CurrentSelectedBuilding);
         Destroy(CurrentSelectedBuilding);
         CurrentSelectedBuilding = null;
+
+        MainUI.SetActive(true);
+
     }
     #endregion
 
