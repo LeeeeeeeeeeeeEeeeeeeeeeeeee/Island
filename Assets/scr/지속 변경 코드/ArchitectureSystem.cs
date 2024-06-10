@@ -244,6 +244,10 @@ public class ArchitectureSystem : MonoBehaviour
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
         MainUI.SetActive(false);
+
+        Inventory.Instance.AlertText.text = "꾹 눌러서 건물 위치를 정해보세요!";
+        Inventory.Instance.AlertText.color = Color.white;
+
         isConstrutMode = true;
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
