@@ -239,9 +239,15 @@ public class ArchitectureSystem : MonoBehaviour
     Coroutine co2;
     GameObject go;
     public GameObject emptyBuilding;
+    public GameObject MainUI; 
 
     public void LetsConstructor(String BuildName , Sprite Get_Sprite)
     {
+        MainUI.SetActive(false);
+
+        Inventory.Instance.AlertText.text = "꾹 눌러서 건물 위치를 정해보세요!";
+        Inventory.Instance.AlertText.color = Color.white;
+
         isConstrutMode = true;
         go = Instantiate(emptyBuilding);
         go.name = BuildName;
@@ -311,6 +317,9 @@ public class ArchitectureSystem : MonoBehaviour
             Building_BtnObj.SetActive(false);
 
             CurrentSelectedBuilding = null;
+
+            MainUI.SetActive(true);
+
         }
     }
 
@@ -334,6 +343,9 @@ public class ArchitectureSystem : MonoBehaviour
         BuildingList.Remove(CurrentSelectedBuilding);
         Destroy(CurrentSelectedBuilding);
         CurrentSelectedBuilding = null;
+
+        MainUI.SetActive(true);
+
     }
     #endregion
 
@@ -380,6 +392,8 @@ public class ArchitectureSystem : MonoBehaviour
             CurrentSelectedBuilding = null;
 
             Rearrange();
+
+            MainUI.SetActive(true);
         }
 
     }
@@ -408,6 +422,8 @@ public class ArchitectureSystem : MonoBehaviour
         CurrentSelectedBuilding = null;
 
         Rearrange();
+
+        MainUI.SetActive(true);
 
     }
 

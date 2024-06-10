@@ -97992,6 +97992,7 @@ MonoBehaviour:
   CurrentSelectedBuilding: {fileID: 0}
   Delay: 0.5
   emptyBuilding: {fileID: 6459251824493145519, guid: df669618d113eef4faebe5fe123c407c, type: 3}
+  MainUI: {fileID: 1102148797}
 --- !u!4 &1919062125
 Transform:
   m_ObjectHideFlags: 0

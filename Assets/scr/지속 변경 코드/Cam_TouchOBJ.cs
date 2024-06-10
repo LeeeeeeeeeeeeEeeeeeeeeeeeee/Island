@@ -62,7 +62,10 @@ public class Cam_TouchOBJ : MonoBehaviour
                             //else 
                             if (clickCol.transform.parent.TryGetComponent(out Building b) && b.RearrangeNow == false && !ArchitectureSystem.build_system.isConstrutMode)
                             {
-                                Rearrange_Co = StartCoroutine(Rearrange_Func(b));
+                                if (ArchitectureSystem.build_system.Building_BtnObj.activeSelf == false)
+                                {
+                                    Rearrange_Co = StartCoroutine(Rearrange_Func(b));
+                                }
                             }
                         }
                     }

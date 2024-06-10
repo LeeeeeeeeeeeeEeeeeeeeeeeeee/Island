@@ -43,6 +43,9 @@ public class Building : Building_basicSCR
     public void BuildingMove()
     {
         GameObject g = ArchitectureSystem.build_system.CurrentSelectedBuilding;
+        ArchitectureSystem.build_system.MainUI.SetActive(false);
+        Inventory.Instance.AlertText.text = "꾹 눌러서 건물 위치를 정해보세요!";
+        Inventory.Instance.AlertText.color = Color.white;
         if (g == this || g == null)
         {
             StartCoroutine(ArchitectureSystem.build_system.FollowMouse(this.gameObject, 2));
