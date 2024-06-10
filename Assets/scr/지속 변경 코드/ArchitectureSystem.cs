@@ -392,6 +392,8 @@ public class ArchitectureSystem : MonoBehaviour
             CurrentSelectedBuilding = null;
 
             Rearrange();
+
+            MainUI.SetActive(true);
         }
 
     }
@@ -420,6 +422,8 @@ public class ArchitectureSystem : MonoBehaviour
         CurrentSelectedBuilding = null;
 
         Rearrange();
+
+        MainUI.SetActive(true);
 
     }
 
